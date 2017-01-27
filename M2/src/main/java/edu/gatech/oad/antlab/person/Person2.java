@@ -35,12 +35,12 @@ public class Person2 {
 	  //Person 2 put your implementation here
 	  List<Character> chars = new ArrayList<Character>();
 	  String toReturn = "";
-	  for (int i = 0; i < input.length(); i++) {
-	  	chars.add(input.charAt(i));
+	  for (char c : input.toCharArray()) {
+	  	chars.add(c);
 	  }
-	  while (chars.size() > 0) {
-
-	  	toReturn += chars.remove((int) Math.random() * chars.size());
+	  while (chars.size() != 0) {
+	  	int index = (int) (Math.random()*chars.size());
+	  	toReturn += chars.remove(index);
 	  }
 	  return toReturn;
 	}
