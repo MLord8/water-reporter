@@ -31,20 +31,20 @@ public class Person1 {
 	 */
 	private String calc(String input) {
 	  //Person 1 put your implementation here
-      String toReturn = "";
-      int count = 0;
-      int curr = 2;
-      if (input.length() <= 2) {
-          curr = input.length() - 1;
-      }
-      while (count < input.length()) {
-          toReturn += input.charAt(curr);
-          curr++;
-          count++;
-          if (curr == input.length()) {
-              curr = 0;
+            String toReturn = "";
+            int count = 0;
+            int curr = 2;
+            if (input.length() <= 2) {
+              curr = input.length() - 1;
+            }
+            while (count < input.length()) {
+              toReturn += input.charAt(curr);
+              curr++;
+              count++;
+              if (curr == input.length()) {
+                curr = 0;
+              }
           }
-      }
 
 	  return toReturn;
 	}

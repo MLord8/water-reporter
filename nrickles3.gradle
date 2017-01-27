@@ -1,0 +1,14 @@
+defaultTasks 'compileJava'
+
+apply plugin: 'java'
+
+task hello <<{
+    println 'Hello World'
+}
+
+repositories {
+}
+
+dependencies {
+
+}
