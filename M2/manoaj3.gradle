@@ -1,13 +1,17 @@
-defaultTasks
+defaultTasks 'clean', 'jar', 'build'
 
-apply plugin
+apply plugin: 'java'
 
 dependencies {
-
+    runtime files('lib/resources.jar')
+    runtime fileTree(dir: 'lib', include: '*.jar')
+    compile files('lib/resources.jar')
 }
 
 jar {
-	manifest {
-		attributes
-	}
+    manifest {
+        attributes 'Main-Class': 'edu.gatech.oad.antlab.pkg1.AntLabMain',
+                   'Class-Path': '../../lib/resources.jar ../'
+    }
+    archiveName = 'manoaj3.jar'
 }
