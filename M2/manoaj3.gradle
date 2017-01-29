@@ -1,0 +1,13 @@
+defaultTasks
+
+apply plugin
+
+dependencies {
+
+}
+
+jar {
+	manifest {
+		attributes
+	}
+}
