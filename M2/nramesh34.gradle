@@ -1,9 +1,17 @@
+defaultTasks 'clean', 'jar', 'build'
+
 apply plugin: 'java'
 
-dependencies {
-
+jar {
+    manifest {
+        attributes 'Main-Class': 'edu.gatech.oad.antlab.pkg1.AntLabMain',
+                   'Class-Path': '../../lib/resources.jar ../'
+    }
+    archiveName = 'nramesh34.jar'
 }
 
-repositories {
-
+dependencies {
+    runtime files('lib/resources.jar')
+    runtime fileTree(dir: 'lib', include: '*.jar')
+    compile files('lib/resources.jar')
 }
