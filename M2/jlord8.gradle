@@ -1,0 +1,17 @@
+defaultTasks 'clean', 'jar', 'build'
+
+apply plugin: 'java'
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'edu.gatech.oad.antlab.pkg1.AntLabMain',
+                   'Class-Path': '../../lib/resources.jar ../'
+    }
+    archiveName = 'nrickles3.jar'
+}
+
+dependencies {
+    runtime files('lib/resources.jar')
+    runtime fileTree(dir: 'lib', include: '*.jar')
+    compile files('lib/resources.jar')
+}
