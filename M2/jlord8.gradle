@@ -7,7 +7,7 @@ jar {
         attributes 'Main-Class': 'edu.gatech.oad.antlab.pkg1.AntLabMain',
                    'Class-Path': '../../lib/resources.jar ../'
     }
-    archiveName = 'nrickles3.jar'
+    archiveName = 'jlord8.jar'
 }
 
 dependencies {
