@@ -30,14 +30,14 @@
         app:srcCompat="@android:drawable/ic_dialog_email" />
 
     <Button
-        android:text="Button"
+        android:text="Logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/logout_button"
         app:layout_anchor="@+id/include"
         app:layout_anchorGravity="top|left"
         android:layout_gravity="bottom|right"
-        android:onClick="logout()" />
+        android:onClick="logout" />
 
     <include layout="@layout/content_main"
         android:id="@+id/include" />
