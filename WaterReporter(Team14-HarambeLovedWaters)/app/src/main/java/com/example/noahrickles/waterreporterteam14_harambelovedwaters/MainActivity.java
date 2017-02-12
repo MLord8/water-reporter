@@ -1,5 +1,6 @@
 package com.example.noahrickles.waterreporterteam14_harambelovedwaters;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -24,6 +25,12 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    public void logout() {
+        //Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+        //startActivity(intent);
+        finish();
     }
 
 }
