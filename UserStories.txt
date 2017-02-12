@@ -2,19 +2,9 @@
 2) As a registered user, I want to be able to log in with my credentials, so that I can have access to the application.
 3) As a registered user, I want to submit a report, so that I can add a water source to the database of water sources.
 4) As a registered user, I want to view a water source, so that I can check the details of a given water source.
-5) As a worker, I want to be able to log in with my credentials, so that I can have access to the application.
-6) As a worker, I want to submit a report, so that I can add a water source to the database of water sources.
-7) As a worker, I want to view a water source, so that I can check the details of a given water source.
-8) As a worker, I want to report a water purity level, so that I can ensure that the data in the application is up-to-date.
-9) As a manager, I want to be able to log in with my credentials, so that I can have access to the application.
-10) As a manager, I want to submit a report, so that I can add a water source to the database of water sources.
-11) As a manager, I want to view a water source, so that I can check the details of a given water source.
-12) As a manager, I want to report a water purity level, so that I can ensure that the data in the application is up-to-date.
-13) As a manager, I want to delete a report, so that bad reports are no longer part of the database of water sources.
-14) As a manager, I want to view water purity trends, so that I can predict the contamination level of a given water source.
-15) As a manager, I want to view historical reports, so that I can analyze water purity trends over long periods of time.
-16) As an admin, I want to be able to log in with my credentials, so that I can have access to the application.
-17) As an admin, I want to view the security log, so that I can monitor user activity in the application.
-18) As an admin, I want to ban an account, so that I can prevent malicious users from submitting reports.
-19) As an admin, I want to unblock an account, so that I can reinstate a good user whose incorrect logins have prevented that user from logging in.
-20) As an admin, I want to delete an account, so that I can remove the accounts of users that have repeatedly been malicious.
+5) As a worker, I want to report a water purity level, so that I can ensure that the data in the application is up-to-date.
+6) As a manager, I want to delete a report, so that bad reports are no longer part of the database of water sources.
+7) As a manager, I want to view water purity trends and historical reports, so that I can predict the contamination level of a given water source and analyze trends over long periods of time.
+8) As an admin, I want to view the security log, so that I can monitor user activity in the application.
+9) As an admin, I want to ban or delete an account, so that I can prevent malicious users from submitting reports or using the application whatsoever.
+10) As an admin, I want to unblock an account, so that I can reinstate a good user whose incorrect logins have prevented that user from logging in.
