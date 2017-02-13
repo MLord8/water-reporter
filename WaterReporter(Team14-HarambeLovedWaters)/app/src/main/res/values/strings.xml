@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WaterReporter (Team 14 - Harambe Loved Waters)</string>
+    <string name="app_name">Water Reporter</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -15,4 +15,5 @@
         completions."
     </string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="cancel">Cancel</string>
 </resources>

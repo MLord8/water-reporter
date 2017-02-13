@@ -202,6 +202,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         return password.length() >= 4;
     }
 
+    public void cancel(View view) {
+        finish();
+    }
+
     /**
      * Shows the progress UI and hides the login form.
      */
@@ -341,7 +345,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 startActivity(intent);
                 mEmailView.setText("");
                 mPasswordView.setText("");
-                //finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
