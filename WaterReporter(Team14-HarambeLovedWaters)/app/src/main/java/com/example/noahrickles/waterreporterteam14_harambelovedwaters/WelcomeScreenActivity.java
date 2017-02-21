@@ -19,6 +19,7 @@ public class WelcomeScreenActivity extends AppCompatActivity {
     }
 
     public void goRegister(View view) {
-
+        Intent intent = new Intent(getBaseContext(), RegistrationActivity.class);
+        startActivity(intent);
     }
 }
