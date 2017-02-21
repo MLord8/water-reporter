@@ -1,4 +1,4 @@
-package com.example.noahrickles.waterreporterteam14_harambelovedwaters;
+package com.example.noahrickles.waterreporterteam14_harambelovedwaters.controllers;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -20,7 +20,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,7 +28,14 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import com.example.noahrickles.waterreporterteam14_harambelovedwaters.R;
+import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Administrator;
+import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Manager;
+import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.User;
+import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Worker;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -194,31 +200,67 @@ public class RegistrationActivity extends AppCompatActivity implements LoaderCal
             cancel = true;
         }
 
+        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+        int buttonChecked = radioGroup.getCheckedRadioButtonId();
+        boolean checked = false;
+        if (buttonChecked != -1) {
+            checked = true;
+        } else {
+            mPasswordView.setError(getString(R.string.error_user_type_not_selected));
+            focusView = mPasswordView;
+            cancel = true;
+        }
+
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
+            // There was an error; don't attempt registration and focus the first
             // form field with an error.
             focusView.requestFocus();
         } else {
             // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
+            // perform the user registration attempt.
             showProgress(true);
-            mAuthTask = new UserRegistrationTask(new User(email, username, password, registeredUserList.size()));
+            switch (buttonChecked) {
+                case R.id.user_button:
+                    if (checked) {
+                        mAuthTask = new UserRegistrationTask(new User(email, username, password,
+                                registeredUserList.size()));
+                    }
+                    break;
+                case R.id.worker_button:
+                    if (checked) {
+                        mAuthTask = new UserRegistrationTask(new Worker(email, username, password,
+                                registeredUserList.size()));
+                    }
+                    break;
+                case R.id.manager_button:
+                    if (checked) {
+                        mAuthTask = new UserRegistrationTask(new Manager(email, username, password,
+                                registeredUserList.size()));
+                    }
+                    break;
+                case R.id.administrator_button:
+                    if (checked) {
+                        mAuthTask = new UserRegistrationTask(new Administrator(email, username, password,
+                                registeredUserList.size()));
+                    }
+                    break;
+            }
+
             mAuthTask.execute((Void) null);
         }
     }
 
     private boolean isEmailValid(String email) {
-        return email.contains("@");
+        return email.contains("@") && email.contains(".") && email.length() >= 4;
     }
 
     private boolean isUsernameValid(String username) {
-        //TODO: Replace this with your own logic
         return !username.equals("") && username.length() >= 5;
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() >= 4;
+        return password.length() >= 4 && password.matches(".*\\d+.*")
+                && !password.equals(password.toLowerCase());
     }
 
     public void cancel(View view) {
@@ -322,6 +364,7 @@ public class RegistrationActivity extends AppCompatActivity implements LoaderCal
     public class UserRegistrationTask extends AsyncTask<Void, Void, Boolean> {
 
         private final User user;
+        private String error;
 
         UserRegistrationTask(User user) {
             this.user = user;
@@ -338,11 +381,14 @@ public class RegistrationActivity extends AppCompatActivity implements LoaderCal
                 return false;
             }
 
-            if (registeredUserMap.containsValue(user.getEmail()) || registeredUserMap.containsKey(user.getUsername())) {
+            if (registeredUserMap.containsKey(user.getEmail())) {
+                error = getString(R.string.error_email_taken);
+                return false;
+            } else if (registeredUserMap.containsKey(user.getUsername())) {
+                error = getString(R.string.error_username_taken);
                 return false;
             }
 
-            // TODO: register the new account here.
             return true;
         }
 
@@ -361,8 +407,13 @@ public class RegistrationActivity extends AppCompatActivity implements LoaderCal
                 mUsernameView.setText("");
                 mPasswordView.setText("");
             } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
+                if (error.equals(getString(R.string.error_email_taken))) {
+                    mEmailView.setError(error);
+                    mEmailView.requestFocus();
+                } else if (error.equals(getString(R.string.error_username_taken))) {
+                    mUsernameView.setError(error);
+                    mUsernameView.requestFocus();
+                }
             }
         }
 

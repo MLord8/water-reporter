@@ -1,9 +1,11 @@
-package com.example.noahrickles.waterreporterteam14_harambelovedwaters;
+package com.example.noahrickles.waterreporterteam14_harambelovedwaters.controllers;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.noahrickles.waterreporterteam14_harambelovedwaters.R;
 
 public class WelcomeScreenActivity extends AppCompatActivity {
 

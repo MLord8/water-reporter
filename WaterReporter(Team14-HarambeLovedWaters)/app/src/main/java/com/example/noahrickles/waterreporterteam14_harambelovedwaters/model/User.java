@@ -1,4 +1,4 @@
-package com.example.noahrickles.waterreporterteam14_harambelovedwaters;
+package com.example.noahrickles.waterreporterteam14_harambelovedwaters.model;
 
 /**
  * Created by Noah Rickles on 2/21/2017.
@@ -43,5 +43,9 @@ public class User {
 
     public void setPassword(String newPassword) {
         password = newPassword;
+    }
+
+    public String toString() {
+        return "email: " + email + " username: " + username + " password: " + password;
     }
 }

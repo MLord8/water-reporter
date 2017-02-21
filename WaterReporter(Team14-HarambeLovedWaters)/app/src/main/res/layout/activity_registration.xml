@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.noahrickles.waterreporterteam14_harambelovedwaters.LoginActivity">
+    tools:context="com.example.noahrickles.waterreporterteam14_harambelovedwaters.controllers.LoginActivity">
 
     <!-- Login progress -->
 
@@ -76,6 +76,31 @@
                 android:maxLines="1"
                 android:singleLine="true" />
 
+            <RadioGroup
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/radioGroup"
+                android:layout_below="@+id/classStandingTextView"
+                android:layout_alignParentStart="true">
+                <RadioButton android:id="@+id/user_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="User"/>
+                <RadioButton android:id="@+id/worker_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Worker"/>
+                <RadioButton android:id="@+id/manager_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Manager"/>
+                <RadioButton android:id="@+id/administrator_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Administrator"/>
+            </RadioGroup>
+
             <Button
                 android:id="@+id/email_sign_in_button"
                 style="?android:textAppearanceSmall"
@@ -86,11 +111,11 @@
                 android:textStyle="bold" />
 
             <Button
-android:text="@string/cancel"
-android:layout_width="80dp"
-android:layout_height="wrap_content"
-android:id="@+id/button"
-android:onClick="cancel" />
+                android:text="@string/cancel"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/button"
+                android:onClick="cancel" />
 
         </LinearLayout>
     </ScrollView>

@@ -14,18 +14,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".RegistrationActivity"
+            android:name=".controllers.RegistrationActivity"
             android:label="Registration">
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".controllers.LoginActivity"
             android:label="Login">
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".controllers.MainActivity"
             android:label="Water Reporter"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".WelcomeScreenActivity">
+        <activity android:name=".controllers.WelcomeScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
