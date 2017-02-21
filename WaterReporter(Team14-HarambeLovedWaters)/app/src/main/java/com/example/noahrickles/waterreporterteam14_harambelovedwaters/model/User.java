@@ -33,6 +33,10 @@ public class User {
         return id;
     }
 
+    public String getUserType() {
+        return "USER";
+    }
+
     public void setEmail(String newEmail) {
         email = newEmail;
     }
@@ -46,6 +50,7 @@ public class User {
     }
 
     public String toString() {
-        return "email: " + email + " username: " + username + " password: " + password;
+        return "email: " + email + " username: " + username + " password: " + password
+                + " user type: " + getUserType() + " id: " + id;
     }
 }

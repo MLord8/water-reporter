@@ -31,10 +31,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.R;
+import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -49,14 +51,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private static final int REQUEST_READ_CONTACTS = 0;
 
     /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "user:pass"
-    };
-
-    /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
@@ -66,6 +60,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+
+    private static User currUser;
+
+    public static User getCurrUser() {
+        return currUser;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -340,6 +340,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
+                Set<User> registeredUsers = RegistrationActivity.getRegisteredUserSet();
+                for (User u : registeredUsers) {
+                    if (u.getUsername().equals(mUsername)) {
+                        currUser = u;
+                    }
+                }
+
                 Intent intent = new Intent(getBaseContext(), MainActivity.class);
                 startActivity(intent);
                 mEmailView.setText("");

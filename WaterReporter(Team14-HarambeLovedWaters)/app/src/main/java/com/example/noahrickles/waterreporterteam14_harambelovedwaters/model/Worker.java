@@ -9,4 +9,8 @@ public class Worker extends User {
     public Worker(String email, String username, String password, int id) {
         super(email, username, password, id);
     }
+
+    public String getUserType() {
+        return "WORKER";
+    }
 }

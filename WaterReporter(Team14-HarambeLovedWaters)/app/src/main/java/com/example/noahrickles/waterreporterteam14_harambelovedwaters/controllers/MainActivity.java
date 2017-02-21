@@ -34,4 +34,9 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
+    public void goProfile(View view) {
+        Intent intent = new Intent(getBaseContext(), ProfileActivity.class);
+        startActivity(intent);
+    }
+
 }

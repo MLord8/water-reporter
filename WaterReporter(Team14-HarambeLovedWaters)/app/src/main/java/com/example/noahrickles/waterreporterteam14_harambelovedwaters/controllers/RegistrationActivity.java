@@ -39,7 +39,9 @@ import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Work
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -54,13 +56,13 @@ public class RegistrationActivity extends AppCompatActivity implements LoaderCal
     private static final int REQUEST_READ_CONTACTS = 0;
 
     private static HashMap<String, String> registeredUserMap = new HashMap<String, String>();
-    private static List<User> registeredUserList = new ArrayList<User>();
+    private static Set<User> registeredUserSet = new HashSet<User>();
 
     public static HashMap<String, String> getRegisteredUserMap() {
         return registeredUserMap;
     }
-    public static List<User> getRegisteredUserList() {
-        return registeredUserList;
+    public static Set<User> getRegisteredUserSet() {
+        return registeredUserSet;
     }
 
         /**
@@ -223,25 +225,25 @@ public class RegistrationActivity extends AppCompatActivity implements LoaderCal
                 case R.id.user_button:
                     if (checked) {
                         mAuthTask = new UserRegistrationTask(new User(email, username, password,
-                                registeredUserList.size()));
+                                registeredUserSet.size()));
                     }
                     break;
                 case R.id.worker_button:
                     if (checked) {
                         mAuthTask = new UserRegistrationTask(new Worker(email, username, password,
-                                registeredUserList.size()));
+                                registeredUserSet.size()));
                     }
                     break;
                 case R.id.manager_button:
                     if (checked) {
                         mAuthTask = new UserRegistrationTask(new Manager(email, username, password,
-                                registeredUserList.size()));
+                                registeredUserSet.size()));
                     }
                     break;
                 case R.id.administrator_button:
                     if (checked) {
                         mAuthTask = new UserRegistrationTask(new Administrator(email, username, password,
-                                registeredUserList.size()));
+                                registeredUserSet.size()));
                     }
                     break;
             }
@@ -400,7 +402,7 @@ public class RegistrationActivity extends AppCompatActivity implements LoaderCal
             if (success) {
                 registeredUserMap.put(user.getEmail(), user.getPassword());
                 registeredUserMap.put(user.getUsername(), user.getPassword());
-                registeredUserList.add(user);
+                registeredUserSet.add(user);
                 Intent intent = new Intent(getBaseContext(), LoginActivity.class);
                 startActivity(intent);
                 mEmailView.setText("");

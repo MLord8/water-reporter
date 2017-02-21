@@ -9,4 +9,8 @@ public class Administrator extends User {
     public Administrator(String email, String username, String password, int id) {
         super(email, username, password, id);
     }
+
+    public String getUserType() {
+        return "ADMINISTRATOR";
+    }
 }
