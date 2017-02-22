@@ -258,7 +258,7 @@ public class RegistrationActivity extends AppCompatActivity implements LoaderCal
      * @param email the user's email address
      * @return true if the email is valid, false otherwise
      */
-    private boolean isEmailValid(String email) {
+    public static boolean isEmailValid(String email) {
         return email.contains("@") && email.contains(".") && email.length() >= 4;
     }
 
@@ -267,7 +267,7 @@ public class RegistrationActivity extends AppCompatActivity implements LoaderCal
      * @param username the user's username
      * @return true if the username is valid, false otherwise
      */
-    private boolean isUsernameValid(String username) {
+    public static boolean isUsernameValid(String username) {
         return !username.equals("") && username.length() >= 5;
     }
 
@@ -277,7 +277,7 @@ public class RegistrationActivity extends AppCompatActivity implements LoaderCal
      * @param password the user's password
      * @return true if the password is valid, false otherwise.
      */
-    private boolean isPasswordValid(String password) {
+    public static boolean isPasswordValid(String password) {
         return password.length() >= 4 && password.matches(".*\\d+.*")
                 && !password.equals(password.toLowerCase());
     }
