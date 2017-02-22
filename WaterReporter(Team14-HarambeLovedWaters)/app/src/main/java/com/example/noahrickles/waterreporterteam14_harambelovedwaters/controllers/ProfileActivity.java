@@ -24,6 +24,10 @@ public class ProfileActivity extends AppCompatActivity {
         displayProfile(currUser);
     }
 
+    /**
+     * Displays the user profile
+     * @param user the user whose profile is to be displayed
+     */
     private void displayProfile(User user) {
         mUsernameView = (TextView) findViewById(R.id.username_text);
         mUserTypeView = (TextView) findViewById(R.id.user_type_text);
