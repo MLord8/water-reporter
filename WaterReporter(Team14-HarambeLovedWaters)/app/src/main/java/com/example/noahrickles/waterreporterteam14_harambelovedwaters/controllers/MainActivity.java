@@ -31,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void logout(View view) {
-        finish();
+        Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+        startActivity(intent);
     }
 
     public void goProfile(View view) {

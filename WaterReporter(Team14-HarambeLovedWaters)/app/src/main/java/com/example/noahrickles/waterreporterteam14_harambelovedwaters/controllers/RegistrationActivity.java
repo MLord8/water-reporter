@@ -252,6 +252,7 @@ public class RegistrationActivity extends AppCompatActivity implements LoaderCal
         }
     }
 
+<<<<<<< HEAD
     /**
      * Determines if the email provided is acceptable. An email must be longer than 4 characters
      * and contain the @ symbol and a ".".
@@ -278,6 +279,17 @@ public class RegistrationActivity extends AppCompatActivity implements LoaderCal
      * @return true if the password is valid, false otherwise.
      */
     private boolean isPasswordValid(String password) {
+=======
+    public static boolean isEmailValid(String email) {
+        return email.contains("@") && email.contains(".") && email.length() >= 4;
+    }
+
+    public static boolean isUsernameValid(String username) {
+        return !username.equals("") && username.length() >= 5;
+    }
+
+    public static boolean isPasswordValid(String password) {
+>>>>>>> a28224d859c98b7f2261ac2b391a32e911eba5bf
         return password.length() >= 4 && password.matches(".*\\d+.*")
                 && !password.equals(password.toLowerCase());
     }
