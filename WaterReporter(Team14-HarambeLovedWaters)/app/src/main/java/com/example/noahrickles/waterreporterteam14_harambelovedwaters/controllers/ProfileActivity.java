@@ -33,8 +33,8 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     /**
-     *
-     * @param user
+     * Displays the user profile
+     * @param user the user whose profile is to be displayed
      */
     private void displayProfile(User user) {
         mUsernameView = (EditText) findViewById(R.id.username_text);

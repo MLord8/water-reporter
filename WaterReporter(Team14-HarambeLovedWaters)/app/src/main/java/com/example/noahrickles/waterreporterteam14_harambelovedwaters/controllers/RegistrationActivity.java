@@ -253,15 +253,32 @@ public class RegistrationActivity extends AppCompatActivity implements LoaderCal
         }
     }
 
-    public static boolean isEmailValid(String email) {
+    /**
+     * Determines if the email provided is acceptable. An email must be longer than 4 characters
+     * and contain the @ symbol and a ".".
+     * @param email the user's email address
+     * @return true if the email is valid, false otherwise
+     */
+    private boolean isEmailValid(String email) {
         return email.contains("@") && email.contains(".") && email.length() >= 4;
     }
 
-    public static boolean isUsernameValid(String username) {
+    /**
+     * Determines if the username provided is acceptable. A username must be longer than 5 characters
+     * @param username the user's username
+     * @return true if the username is valid, false otherwise
+     */
+    private boolean isUsernameValid(String username) {
         return !username.equals("") && username.length() >= 5;
     }
 
-    public static boolean isPasswordValid(String password) {
+    /**
+     * Determines if the username provided is acceptable. A password must be longer than 4
+     * characters and contains at least 1 uppercase letter, and at least 1 number.
+     * @param password the user's password
+     * @return true if the password is valid, false otherwise.
+     */
+    private boolean isPasswordValid(String password) {
         return password.length() >= 4 && password.matches(".*\\d+.*")
                 && !password.equals(password.toLowerCase());
     }
