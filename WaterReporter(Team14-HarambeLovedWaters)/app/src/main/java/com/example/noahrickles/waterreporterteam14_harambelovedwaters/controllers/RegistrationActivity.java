@@ -222,6 +222,7 @@ public class RegistrationActivity extends AppCompatActivity implements LoaderCal
             // perform the user registration attempt.
             showProgress(true);
             switch (buttonChecked) {
+                //see which type of user was chosen
                 case R.id.user_button:
                     if (checked) {
                         mAuthTask = new UserRegistrationTask(new User(email, username, password,
