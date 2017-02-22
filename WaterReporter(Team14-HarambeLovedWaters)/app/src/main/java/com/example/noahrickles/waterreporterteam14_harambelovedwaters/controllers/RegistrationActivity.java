@@ -252,15 +252,15 @@ public class RegistrationActivity extends AppCompatActivity implements LoaderCal
         }
     }
 
-    private boolean isEmailValid(String email) {
+    public static boolean isEmailValid(String email) {
         return email.contains("@") && email.contains(".") && email.length() >= 4;
     }
 
-    private boolean isUsernameValid(String username) {
+    public static boolean isUsernameValid(String username) {
         return !username.equals("") && username.length() >= 5;
     }
 
-    private boolean isPasswordValid(String password) {
+    public static boolean isPasswordValid(String password) {
         return password.length() >= 4 && password.matches(".*\\d+.*")
                 && !password.equals(password.toLowerCase());
     }
