@@ -195,16 +195,30 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
+    /**
+     * Checks to see if the entered username is not null
+     * @param username the username to check
+     * @return true if the username is valid, false otherwise
+     */
     private boolean isUsernameValid(String username) {
         //TODO: Replace this with your own logic
         return !username.equals("");
     }
 
+    /**
+     * Checks to see if the entered password is of length 4 or more
+     * @param password the password to check
+     * @return true if the password is valid, false otherwise
+     */
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
         return password.length() >= 4;
     }
 
+    /**
+     * Brings the user back to the welcome screen
+     * @param view the cancel button
+     */
     public void cancel(View view) {
         Intent intent = new Intent(getBaseContext(), WelcomeScreenActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);

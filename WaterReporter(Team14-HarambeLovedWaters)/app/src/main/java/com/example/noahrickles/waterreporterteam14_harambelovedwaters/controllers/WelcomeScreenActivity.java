@@ -15,11 +15,19 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome_screen);
     }
 
+    /**
+     * Brings the user to the login screen
+     * @param view the login button
+     */
     public void goLogin(View view) {
         Intent intent = new Intent(getBaseContext(), LoginActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Brings the user to the registration screen
+     * @param view the registration button
+     */
     public void goRegister(View view) {
         Intent intent = new Intent(getBaseContext(), RegistrationActivity.class);
         startActivity(intent);

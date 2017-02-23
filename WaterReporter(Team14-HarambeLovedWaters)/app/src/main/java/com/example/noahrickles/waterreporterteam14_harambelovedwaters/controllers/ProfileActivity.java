@@ -53,8 +53,8 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     /**
-     *
-     * @param view
+     * Changes any updated information about the user
+     * @param view the save changes button
      */
     public void saveChanges(View view) {
         User user = currUser;
@@ -80,9 +80,9 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     /**
-     *
-     * @param user
-     * @param newUsername
+     * Changes the user's username if it is not taken and is valid
+     * @param user the current user
+     * @param newUsername the new username desired
      */
     private void changeUsername(User user, String newUsername) {
         HashMap<String, String> registeredUserMap = RegistrationActivity.getRegisteredUserMap();
@@ -103,9 +103,9 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     /**
-     *
-     * @param user
-     * @param newEmail
+     * Changes the user's email if it is not taken and is valid
+     * @param user the current user
+     * @param newEmail the new username desired
      */
     private void changeEmail(User user, String newEmail) {
         HashMap<String, String> registeredUserMap = RegistrationActivity.getRegisteredUserMap();
@@ -126,9 +126,9 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     /**
-     *
-     * @param user
-     * @param newPassword
+     * Changes the user's password if it is valid
+     * @param user the current user
+     * @param newPassword the new password desired
      */
     private void changePassword(User user, String newPassword) {
         HashMap<String, String> registeredUserMap = RegistrationActivity.getRegisteredUserMap();
@@ -146,14 +146,18 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     /**
-     *
-     * @param user
-     * @param newHomeAddress
+     * Changes the user's home address
+     * @param user the current user
+     * @param newHomeAddress the new home address desired
      */
     private void changeHomeAddress(User user, String newHomeAddress) {
         user.setHomeAddress(newHomeAddress);
     }
 
+    /**
+     * Brings the user back to the main application
+     * @param view the cancel button
+     */
     public void cancel(View view) {
         Intent intent = new Intent(getBaseContext(), MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);

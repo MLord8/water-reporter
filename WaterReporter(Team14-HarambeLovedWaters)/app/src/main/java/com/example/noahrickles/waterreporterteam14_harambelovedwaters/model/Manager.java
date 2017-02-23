@@ -19,7 +19,7 @@ public class Manager extends User {
 
     /**
      * Gets the user type of this class
-     * @return The user type, MANAGER
+     * @return the user type from this class, MANAGER
      */
     public String getUserType() {
         return "MANAGER";

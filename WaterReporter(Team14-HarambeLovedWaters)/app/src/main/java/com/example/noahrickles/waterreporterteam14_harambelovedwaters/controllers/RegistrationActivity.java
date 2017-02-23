@@ -264,7 +264,8 @@ public class RegistrationActivity extends AppCompatActivity implements LoaderCal
     }
 
     /**
-     * Determines if the username provided is acceptable. A username must be longer than 5 characters
+     * Determines if the username provided is acceptable. A username must be longer
+     * than 5 characters
      * @param username the user's username
      * @return true if the username is valid, false otherwise
      */
@@ -274,7 +275,7 @@ public class RegistrationActivity extends AppCompatActivity implements LoaderCal
 
     /**
      * Determines if the username provided is acceptable. A password must be longer than 4
-     * characters and contains at least 1 uppercase letter, and at least 1 number.
+     * characters and contain at least 1 uppercase letter, and at least 1 number.
      * @param password the user's password
      * @return true if the password is valid, false otherwise.
      */
@@ -283,6 +284,10 @@ public class RegistrationActivity extends AppCompatActivity implements LoaderCal
                 && !password.equals(password.toLowerCase());
     }
 
+    /**
+     * Brings the user back to the welcome screen
+     * @param view the cancel button
+     */
     public void cancel(View view) {
         finish();
     }

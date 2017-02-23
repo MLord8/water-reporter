@@ -17,8 +17,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -30,11 +28,19 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Logs the user out of the application and returns to the login screen
+     * @param view the logout button
+     */
     public void logout(View view) {
         Intent intent = new Intent(getBaseContext(), LoginActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Brings the user to a personalized profile page
+     * @param view the profile button
+     */
     public void goProfile(View view) {
         Intent intent = new Intent(getBaseContext(), ProfileActivity.class);
         startActivity(intent);
