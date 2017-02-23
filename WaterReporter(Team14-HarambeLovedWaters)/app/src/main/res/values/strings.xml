@@ -13,6 +13,7 @@
         and at least 4 characters.</string>
     <string name="error_user_type_not_selected">Please choose one of the
         following user options.</string>
+    <string name="error_username_does_not_exist">This username does not exist.</string>
     <string name="error_incorrect_password">This password is incorrect.</string>
     <string name="error_field_required">This field is required.</string>
     <string name="error_email_taken">This email is already taken.</string>
