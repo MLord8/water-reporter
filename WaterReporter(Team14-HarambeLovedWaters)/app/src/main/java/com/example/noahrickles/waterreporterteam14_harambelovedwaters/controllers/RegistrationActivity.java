@@ -4,27 +4,17 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
 
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.AsyncTask;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,45 +23,18 @@ import android.widget.TextView;
 
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.R;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Administrator;
+import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Singleton;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Manager;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.User;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Worker;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import java.util.Map;
 import java.util.Set;
-
-import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
  */
 public class RegistrationActivity extends AppCompatActivity {
-
-    //a hash map to hold the registered users
-    //each username and email is mapped to its corresponding value
-    private static HashMap<String, String> registeredUserMap = new HashMap<String, String>();
-
-    //a hash set to hold the registered User objects
-    private static Set<User> registeredUserSet = new HashSet<User>();
-
-    /**
-     * Gets the registered users hash map
-     * @return the HashMap of the registered users
-     */
-    public static HashMap<String, String> getRegisteredUserMap() {
-        return registeredUserMap;
-    }
-
-    /**
-     * Gets the registered users hash set
-     * @return the HashSet of the registered users
-     */
-    public static Set<User> getRegisteredUserSet() {
-        return registeredUserSet;
-    }
 
         /**
          * Keep track of the registration task to ensure we can cancel it if requested.
@@ -84,6 +47,10 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+
+    private Singleton instance = Singleton.getInstance();
+    private Map<String, String> registeredUserMap = instance.getRegisteredUserMap();
+    private Set<User> registeredUserSet = instance.getRegisteredUserSet();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,14 +108,14 @@ public class RegistrationActivity extends AppCompatActivity {
         View focusView = null;
 
         // Check for a valid username.
-        if (!isUsernameValid(username)) {
+        if (!instance.isUsernameValid(username)) {
             mUsernameView.setError(getString(R.string.error_invalid_username));
             focusView = mUsernameView;
             cancel = true;
         }
 
         // Check for a valid password, if the user entered one.
-        if (!isPasswordValid(password)) {
+        if (!instance.isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
@@ -159,7 +126,7 @@ public class RegistrationActivity extends AppCompatActivity {
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
             cancel = true;
-        } else if (!isEmailValid(email)) {
+        } else if (!instance.isEmailValid(email)) {
             mEmailView.setError(getString(R.string.error_invalid_email));
             focusView = mEmailView;
             cancel = true;
@@ -214,37 +181,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
             mAuthTask.execute((Void) null);
         }
-    }
-
-    /**
-     * Determines if the email provided is acceptable. An email must be longer than 4 characters
-     * and contain the @ symbol and a ".".
-     * @param email the user's email address
-     * @return true if the email is valid, false otherwise
-     */
-    public static boolean isEmailValid(String email) {
-        return email.contains("@") && email.contains(".") && email.length() >= 4;
-    }
-
-    /**
-     * Determines if the username provided is acceptable. A username must be longer
-     * than 5 characters
-     * @param username the user's username
-     * @return true if the username is valid, false otherwise
-     */
-    public static boolean isUsernameValid(String username) {
-        return !username.equals("") && username.length() >= 5;
-    }
-
-    /**
-     * Determines if the username provided is acceptable. A password must be longer than 4
-     * characters and contain at least 1 uppercase letter, and at least 1 number.
-     * @param password the user's password
-     * @return true if the password is valid, false otherwise.
-     */
-    public static boolean isPasswordValid(String password) {
-        return password.length() >= 4 && password.matches(".*\\d+.*")
-                && !password.equals(password.toLowerCase());
     }
 
     /**

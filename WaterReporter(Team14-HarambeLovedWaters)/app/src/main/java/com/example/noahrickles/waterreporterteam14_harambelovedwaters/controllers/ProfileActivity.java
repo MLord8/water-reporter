@@ -8,9 +8,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.R;
+import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Singleton;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.User;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -24,11 +26,18 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView mErrorView;
     private String error;
 
+    private Singleton instance = Singleton.getInstance();
+
+    private Map<String, String> registeredUserMap;
+    private Set<User> registeredUserSet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        currUser = LoginActivity.getCurrUser();
+        registeredUserMap = instance.getRegisteredUserMap();
+        registeredUserSet = instance.getRegisteredUserSet();
+        currUser = instance.getCurrUser();
         displayProfile(currUser);
     }
 
@@ -85,10 +94,10 @@ public class ProfileActivity extends AppCompatActivity {
      * @param newUsername the new username desired
      */
     private void changeUsername(User user, String newUsername) {
-        HashMap<String, String> registeredUserMap = RegistrationActivity.getRegisteredUserMap();
-        Set<User> registeredUserSet = RegistrationActivity.getRegisteredUserSet();
+        HashMap<String, String> registeredUserMap = instance.getRegisteredUserMap();
+        Set<User> registeredUserSet = instance.getRegisteredUserSet();
         if (!registeredUserMap.containsKey(newUsername)) {
-            if (!RegistrationActivity.isUsernameValid(newUsername)) {
+            if (!instance.isUsernameValid(newUsername)) {
                 error = "This username is invalid.";
             } else {
                 registeredUserMap.remove(user.getUsername(), user.getPassword());
@@ -108,10 +117,10 @@ public class ProfileActivity extends AppCompatActivity {
      * @param newEmail the new username desired
      */
     private void changeEmail(User user, String newEmail) {
-        HashMap<String, String> registeredUserMap = RegistrationActivity.getRegisteredUserMap();
-        Set<User> registeredUserSet = RegistrationActivity.getRegisteredUserSet();
+        HashMap<String, String> registeredUserMap = instance.getRegisteredUserMap();
+        Set<User> registeredUserSet = instance.getRegisteredUserSet();
         if (!registeredUserMap.containsKey(newEmail)) {
-            if (!RegistrationActivity.isEmailValid(newEmail)) {
+            if (!instance.isEmailValid(newEmail)) {
                 error = "This email is invalid.";
             } else {
                 registeredUserMap.remove(user.getUsername(), user.getEmail());
@@ -131,9 +140,9 @@ public class ProfileActivity extends AppCompatActivity {
      * @param newPassword the new password desired
      */
     private void changePassword(User user, String newPassword) {
-        HashMap<String, String> registeredUserMap = RegistrationActivity.getRegisteredUserMap();
-        Set<User> registeredUserSet = RegistrationActivity.getRegisteredUserSet();
-        if (RegistrationActivity.isPasswordValid(newPassword)) {
+        HashMap<String, String> registeredUserMap = instance.getRegisteredUserMap();
+        Set<User> registeredUserSet = instance.getRegisteredUserSet();
+        if (instance.isPasswordValid(newPassword)) {
             registeredUserMap.remove(user.getUsername(), user.getPassword());
             registeredUserMap.remove(user.getEmail(), user.getPassword());
             registeredUserSet.remove(user);

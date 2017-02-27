@@ -4,41 +4,28 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
 
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.AsyncTask;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.R;
+import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Singleton;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.User;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Set;
-
-import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
@@ -56,15 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     private View mProgressView;
     private View mLoginFormView;
 
-    private static User currUser;
-
-    /**
-     * Gets the current user that is logged in
-     * @return the user that is currently logged in
-     */
-    public static User getCurrUser() {
-        return currUser;
-    }
+    private Singleton instance = Singleton.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (!isPasswordValid(password)) {
+        if (!instance.isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
@@ -130,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
             mUsernameView.setError(getString(R.string.error_field_required));
             focusView = mUsernameView;
             cancel = true;
-        } else if (!isUsernameValid(username)) {
+        } else if (!instance.isUsernameValid(username)) {
             mUsernameView.setError(getString(R.string.error_invalid_username));
             focusView = mUsernameView;
             cancel = true;
@@ -149,28 +128,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Checks to see if the entered username is not null
-     * @param username the username to check
-     * @return true if the username is valid, false otherwise
-     */
-    private boolean isUsernameValid(String username) {
-        return !username.equals("");
-    }
-
-    /**
-     * Checks to see if the entered password is of length 4 or more
-     * @param password the password to check
-     * @return true if the password is valid, false otherwise
-     */
-    private boolean isPasswordValid(String password) {
-        return password.length() >= 4;
-    }
-
-    /**
-     * Brings the user back to the welcome screen
-     * @param view the cancel button
-     */
     public void cancel(View view) {
         Intent intent = new Intent(getBaseContext(), WelcomeScreenActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -239,7 +196,7 @@ public class LoginActivity extends AppCompatActivity {
                 return false;
             }
 
-            HashMap<String, String> registeredUserMap = RegistrationActivity.getRegisteredUserMap();
+            HashMap<String, String> registeredUserMap = Singleton.getRegisteredUserMap();
             if (registeredUserMap.containsKey(mUsername)) {
                 if (registeredUserMap.get(mUsername).equals(mPassword)) {
                     return true;
@@ -259,10 +216,10 @@ public class LoginActivity extends AppCompatActivity {
             showProgress(false);
 
             if (success) {
-                Set<User> registeredUsers = RegistrationActivity.getRegisteredUserSet();
+                Set<User> registeredUsers = Singleton.getRegisteredUserSet();
                 for (User u : registeredUsers) {
                     if (u.getUsername().equals(mUsername)) {
-                        currUser = u;
+                        instance.setCurrUser(u);
                     }
                 }
 
