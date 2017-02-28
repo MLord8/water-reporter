@@ -1,5 +1,6 @@
 package com.example.noahrickles.waterreporterteam14_harambelovedwaters.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,6 +18,8 @@ public class Singleton {
     //a hash map to hold the registered users
     //each username and email is mapped to its corresponding value
     private static HashMap<String, String> registeredUserMap = new HashMap<String, String>();
+
+    private static ArrayList<WaterReport> reportList = new ArrayList<>();
 
     private static User currUser;
 
@@ -85,5 +88,9 @@ public class Singleton {
     public static boolean isPasswordValid(String password) {
         return password.length() >= 4 && password.matches(".*\\d+.*")
                 && !password.equals(password.toLowerCase());
+    }
+
+    public static void addWaterReport(WaterReport w) {
+        reportList.add(w);
     }
 }

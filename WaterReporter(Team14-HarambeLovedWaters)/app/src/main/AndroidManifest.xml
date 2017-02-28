@@ -15,10 +15,10 @@
         android:theme="@style/AppCompactLight">
         <activity
             android:name=".controllers.RegistrationActivity"
-            android:label="Registration"></activity>
+            android:label="Registration" />
         <activity
             android:name=".controllers.LoginActivity"
-            android:label="Login"></activity>
+            android:label="Login" />
         <activity
             android:name=".controllers.MainActivity"
             android:label="Water Reporter" />
@@ -29,8 +29,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".controllers.ProfileActivity"
-                  android:label="Profile"></activity>
+        <activity
+            android:name=".controllers.ProfileActivity"
+            android:label="Profile" />
+        <activity android:name=".controllers.SubmitReportActivity"></activity>
     </application>
 
 </manifest>

@@ -46,4 +46,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void report(View view) {
+        Intent intent = new Intent(getBaseContext(), SubmitReportActivity.class);
+        startActivity(intent);
+    }
+
 }
