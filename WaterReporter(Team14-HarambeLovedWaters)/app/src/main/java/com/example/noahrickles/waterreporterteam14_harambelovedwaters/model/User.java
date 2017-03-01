@@ -21,10 +21,10 @@ public class User {
 
     /**
      * Creates a new User object
-     * @param email the User's email
-     * @param username the User's username
-     * @param password the User's password
-     * @param id the User's id
+     * @param email     the User's email
+     * @param username  the User's username
+     * @param password  the User's password
+     * @param id        the User's id
      */
     public User(String email, String username, String password, int id) {
         this.email = email;
@@ -81,7 +81,7 @@ public class User {
 
     /**
      * Sets the email of the User
-     * @param newEmail the User's new email
+     * @param newEmail  the User's new email
      */
     public void setEmail(String newEmail) {
         email = newEmail;
@@ -89,7 +89,7 @@ public class User {
 
     /**
      * Sets the username of the User
-     * @param newUsername the User's new username
+     * @param newUsername   the User's new username
      */
     public void setUsername(String newUsername) {
         username = newUsername;
@@ -97,7 +97,7 @@ public class User {
 
     /**
      * Sets the password of the User
-     * @param newPassword the User's new password
+     * @param newPassword   the User's new password
      */
     public void setPassword(String newPassword) {
         password = newPassword;
@@ -105,12 +105,13 @@ public class User {
 
     /**
      * Sets the home address of the User
-     * @param newHomeAddress the User's new home address
+     * @param newHomeAddress    the User's new home address
      */
     public void setHomeAddress(String newHomeAddress) { homeAddress = newHomeAddress; }
 
     /**
-     * Gets a String representation of the User, including important information about the User
+     * Gets a String representation of the User, including important
+     * information about the User
      * @return the String representation of the User
      */
     public String toString() {

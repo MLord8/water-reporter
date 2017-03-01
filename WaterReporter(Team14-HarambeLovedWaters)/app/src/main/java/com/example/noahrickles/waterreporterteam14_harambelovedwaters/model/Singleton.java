@@ -31,6 +31,10 @@ public class Singleton {
         return currUser;
     }
 
+    /**
+     * Sets the current user to the user passed in
+     * @param user  the user passed in
+     */
     public static void setCurrUser(User user) {
         currUser = user;
     }
@@ -62,7 +66,7 @@ public class Singleton {
     /**
      * Determines if the email provided is acceptable. An email must be longer than 4 characters
      * and contain the @ symbol and a ".".
-     * @param email the user's email address
+     * @param email     the user's email address
      * @return true if the email is valid, false otherwise
      */
     public static boolean isEmailValid(String email) {
@@ -72,7 +76,7 @@ public class Singleton {
     /**
      * Determines if the username provided is acceptable. A username must be longer
      * than 5 characters
-     * @param username the user's username
+     * @param username  the user's username
      * @return true if the username is valid, false otherwise
      */
     public static boolean isUsernameValid(String username) {
@@ -82,7 +86,7 @@ public class Singleton {
     /**
      * Determines if the username provided is acceptable. A password must be longer than 4
      * characters and contain at least 1 uppercase letter, and at least 1 number.
-     * @param password the user's password
+     * @param password  the user's password
      * @return true if the password is valid, false otherwise.
      */
     public static boolean isPasswordValid(String password) {
@@ -90,14 +94,26 @@ public class Singleton {
                 && !password.equals(password.toLowerCase());
     }
 
+    /**
+     * Checks to see if the location passed in is valid
+     * @param location  the location passed in to be checked
+     */
     public static boolean isLocationValid(String location) {
         return !location.equals("") && location.length() > 5;
     }
 
+    /**
+     * Adds a WaterReport to the list of water reports
+     * @param w     the water report passed in
+     */
     public static void addWaterReport(WaterReport w) {
         reportList.add(w);
     }
 
+    /**
+     * Gets the list of water reports
+     * @return the ArrayList reportList of type WaterReport
+     */
     public static ArrayList<WaterReport> getWaterReports() {
         return reportList;
     }

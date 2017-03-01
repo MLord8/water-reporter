@@ -23,6 +23,10 @@ public class SubmitReportActivity extends AppCompatActivity {
     private int reportNum;
     private Singleton instance;
 
+    /**
+     * Actions that occur when SubmitReportActivity is prompted.
+     * @param savedInstanceState     the previously saved state of an instance
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         reportNum = 0;
@@ -114,8 +118,8 @@ public class SubmitReportActivity extends AppCompatActivity {
         if (cancel || !checked1 || !checked2) {
             focusView.requestFocus();
         } else {
-            instance.addWaterReport(new WaterReport(currentDateAndTime, location, currentUser,
-                    instance.getWaterReports().size()+1, type, condition));
+            instance.addWaterReport(new WaterReport(currentDateAndTime, location,
+                currentUser, instance.getWaterReports().size()+1, type, condition));
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
             startActivity(intent);
         }

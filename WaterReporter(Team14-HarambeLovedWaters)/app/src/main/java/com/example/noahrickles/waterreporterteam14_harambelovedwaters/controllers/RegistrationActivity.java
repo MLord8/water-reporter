@@ -52,6 +52,10 @@ public class RegistrationActivity extends AppCompatActivity {
     private Map<String, String> registeredUserMap = instance.getRegisteredUserMap();
     private Set<User> registeredUserSet = instance.getRegisteredUserSet();
 
+    /**
+     * Actions that occur when RegistrationActivity is prompted.
+     * @param savedInstanceState     the previously saved state of an instance
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -155,25 +159,26 @@ public class RegistrationActivity extends AppCompatActivity {
                 //see which type of user was chosen
                 case R.id.user_button:
                     if (checked) {
-                        mAuthTask = new UserRegistrationTask(new User(email, username, password,
-                                registeredUserSet.size()));
+                        mAuthTask = new UserRegistrationTask(new User(email,
+                            username, password, registeredUserSet.size()));
                     }
                     break;
                 case R.id.worker_button:
                     if (checked) {
-                        mAuthTask = new UserRegistrationTask(new Worker(email, username, password,
-                                registeredUserSet.size()));
+                        mAuthTask = new UserRegistrationTask(new Worker(email,
+                            username, password, registeredUserSet.size()));
                     }
                     break;
                 case R.id.manager_button:
                     if (checked) {
-                        mAuthTask = new UserRegistrationTask(new Manager(email, username, password,
-                                registeredUserSet.size()));
+                        mAuthTask = new UserRegistrationTask(new Manager(email,
+                            username, password, registeredUserSet.size()));
                     }
                     break;
                 case R.id.administrator_button:
                     if (checked) {
-                        mAuthTask = new UserRegistrationTask(new Administrator(email, username, password,
+                        mAuthTask = new UserRegistrationTask(
+                            new Administrator(email, username, password,
                                 registeredUserSet.size()));
                     }
                     break;
@@ -193,6 +198,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     /**
      * Shows the progress UI and hides the login form.
+     * @param show  boolean for whether or not to show progress
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
@@ -236,10 +242,18 @@ public class RegistrationActivity extends AppCompatActivity {
         private final User user;
         private String error;
 
+        /**
+         * Constructor for the UserRegistrationTask class
+         * @param user  User passed in for task
+         */
         UserRegistrationTask(User user) {
             this.user = user;
         }
 
+        /**
+         * Actions to do in the background
+         * @param params     background activities
+         */
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
@@ -261,7 +275,10 @@ public class RegistrationActivity extends AppCompatActivity {
 
             return true;
         }
-
+        /**
+         * Actions to complete after execution
+         * @param success    whether or not execution was successful
+         */
         @Override
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
@@ -287,6 +304,9 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         }
 
+        /**
+         * Actions to execute if login is cancelled
+         */
         @Override
         protected void onCancelled() {
             mAuthTask = null;

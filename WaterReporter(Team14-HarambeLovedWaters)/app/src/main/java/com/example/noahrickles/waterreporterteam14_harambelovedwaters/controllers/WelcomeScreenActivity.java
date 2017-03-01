@@ -9,6 +9,10 @@ import com.example.noahrickles.waterreporterteam14_harambelovedwaters.R;
 
 public class WelcomeScreenActivity extends AppCompatActivity {
 
+    /**
+     * Actions that occur when WelcomeScreenActivity is prompted.
+     * @param savedInstanceState     the previously saved state of an instance
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

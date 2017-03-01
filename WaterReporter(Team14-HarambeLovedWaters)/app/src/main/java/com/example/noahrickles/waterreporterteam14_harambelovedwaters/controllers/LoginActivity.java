@@ -45,6 +45,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private Singleton instance = Singleton.getInstance();
 
+    /**
+     * Actions that occur when LoginActivity is prompted.
+     * If the id is not valid, a login is not initiated.
+     * @param savedInstanceState     the previously saved state of an instance
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,9 +58,11 @@ public class LoginActivity extends AppCompatActivity {
         mUsernameView = (AutoCompleteTextView) findViewById(R.id.email);
 
         mPasswordView = (EditText) findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        mPasswordView.setOnEditorActionListener(
+            new TextView.OnEditorActionListener() {
             @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+            public boolean onEditorAction(TextView textView, int id,
+                KeyEvent keyEvent) {
                 if (id == R.id.login || id == EditorInfo.IME_NULL) {
                     attemptLogin();
                     return true;
@@ -64,7 +71,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        Button mEmailSignInButton = (Button) findViewById(
+            R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -128,6 +136,10 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Cancels the login activity.
+     * @param view the View passed in
+     */
     public void cancel(View view) {
         Intent intent = new Intent(getBaseContext(), WelcomeScreenActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -136,6 +148,7 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * Shows the progress UI and hides the login form.
+     * @param show  boolean for whether or not to show progress
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
@@ -143,7 +156,8 @@ public class LoginActivity extends AppCompatActivity {
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+            int shortAnimTime = getResources().getInteger(
+                android.R.integer.config_shortAnimTime);
 
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
             mLoginFormView.animate().setDuration(shortAnimTime).alpha(
@@ -180,11 +194,20 @@ public class LoginActivity extends AppCompatActivity {
         private final String mPassword;
         private int error;
 
+        /**
+         * Constructor for UserLoginTask class
+         * @param username   username for a user
+         * @param password   password for a user
+         */
         UserLoginTask(String username, String password) {
             mUsername = username;
             mPassword = password;
         }
 
+        /**
+         * Actions to do in the background
+         * @param params     background activities
+         */
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
@@ -196,7 +219,8 @@ public class LoginActivity extends AppCompatActivity {
                 return false;
             }
 
-            HashMap<String, String> registeredUserMap = Singleton.getRegisteredUserMap();
+            HashMap<String, String> registeredUserMap
+                = Singleton.getRegisteredUserMap();
             if (registeredUserMap.containsKey(mUsername)) {
                 if (registeredUserMap.get(mUsername).equals(mPassword)) {
                     return true;
@@ -210,6 +234,10 @@ public class LoginActivity extends AppCompatActivity {
             return false;
         }
 
+        /**
+         * Actions to complete after execution
+         * @param success    whether or not execution was successful
+         */
         @Override
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
@@ -229,15 +257,20 @@ public class LoginActivity extends AppCompatActivity {
                 mPasswordView.setText("");
             } else {
                 if (error == 0) {
-                    mUsernameView.setError(getString(R.string.error_username_does_not_exist));
+                    mUsernameView.setError(getString(
+                        R.string.error_username_does_not_exist));
                     mUsernameView.requestFocus();
                 } else if (error == 1) {
-                    mPasswordView.setError(getString(R.string.error_incorrect_password));
+                    mPasswordView.setError(getString(
+                        R.string.error_incorrect_password));
                     mPasswordView.requestFocus();
                 }
             }
         }
 
+        /**
+         * Actions to execute if login is cancelled
+         */
         @Override
         protected void onCancelled() {
             mAuthTask = null;

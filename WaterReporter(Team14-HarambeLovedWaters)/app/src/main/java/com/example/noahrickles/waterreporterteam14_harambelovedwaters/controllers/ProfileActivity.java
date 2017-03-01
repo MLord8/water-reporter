@@ -31,6 +31,10 @@ public class ProfileActivity extends AppCompatActivity {
     private Map<String, String> registeredUserMap;
     private Set<User> registeredUserSet;
 
+    /**
+     * Actions that occur when ProfileActivity is prompted.
+     * @param savedInstanceState     the previously saved state of an instance
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

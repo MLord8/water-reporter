@@ -23,6 +23,10 @@ public class MainActivity extends AppCompatActivity {
     private Singleton instance;
     private ArrayAdapter<String> listAdapter;
 
+    /**
+    * Actions that occur when MainActivity is prompted.
+    * @param savedInstanceState     the previously saved state of an instance
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +74,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Submits a report for the user
+     * @param view the report button
+     */
     public void report(View view) {
         Intent intent = new Intent(getBaseContext(), SubmitReportActivity.class);
         startActivity(intent);
