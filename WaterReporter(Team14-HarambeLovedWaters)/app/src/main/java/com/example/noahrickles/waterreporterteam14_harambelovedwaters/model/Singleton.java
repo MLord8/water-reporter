@@ -90,6 +90,10 @@ public class Singleton {
                 && !password.equals(password.toLowerCase());
     }
 
+    public static boolean isLocationValid(String location) {
+        return !location.equals("") && location.length() > 5;
+    }
+
     public static void addWaterReport(WaterReport w) {
         reportList.add(w);
     }

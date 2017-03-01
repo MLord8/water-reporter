@@ -10,19 +10,17 @@ public class WaterReport {
     private String location;
     private String workerName;
     private int reportNumber;
-    private String condition;
-    private double virusPPM;
-    private double contaminantPPM;
+    private String typeOfWater;
+    private String conditionOfWater;
 
     public WaterReport(String dateAndTime, String location, String workerName,
-                       int reportNumber, String condition, double virusPPM, double contaminantPPM) {
+                       int reportNumber, String typeOfWater, String conditionOfWater) {
         this.dateAndTime = dateAndTime;
         this.location = location;
         this.workerName = workerName;
         this.reportNumber = reportNumber;
-        this.condition = condition;
-        this.virusPPM = virusPPM;
-        this.contaminantPPM = contaminantPPM;
+        this.typeOfWater = typeOfWater;
+        this.conditionOfWater = conditionOfWater;
     }
 
     public String getDateAndTime() {
@@ -41,22 +39,16 @@ public class WaterReport {
         return reportNumber;
     }
 
-    public String getCondition() {
-        return condition;
+    public String getTypeOfWater() {
+        return typeOfWater;
     }
 
-    public double getVirusPPM() {
-        return virusPPM;
-    }
-
-    public double getContaminantPPM() {
-        return getContaminantPPM();
-    }
+    public String getConditionOfWater() { return conditionOfWater; }
 
     public String toString() {
         return "Date/Time: " + dateAndTime + "\nLocation: " + location + "\nWorker name: " +
-                workerName + "\nReport number: " + reportNumber + "\nCondition: " +
-                condition + "\nVirusPPM: " + virusPPM + "\nContaminant PPM: " + contaminantPPM;
+                workerName + "\nReport number: " + reportNumber + "\nType of Water: " +
+                typeOfWater + "\nCondition of Water: " + conditionOfWater;
     }
 
 }

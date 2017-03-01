@@ -21,67 +21,38 @@
         android:layout_alignParentStart="true"
         android:hint="Location" />
 
-    <RadioGroup
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView3"
+        android:id="@+id/textView3"
+        android:layout_marginTop="20dp"
+        android:text="Type of Water"
+        android:layout_below="@+id/locEdit"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="13dp"
-        android:id="@+id/purityGroup">
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp" />
 
-        <RadioButton
-            android:text="Safe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/safe"
-            android:layout_weight="1" />
-
-        <RadioButton
-            android:text="Treatable"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/treatable"
-            android:layout_weight="1" />
-
-        <RadioButton
-            android:text="Unsafe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/unsafe"
-            android:layout_weight="1" />
-    </RadioGroup>
-
-    <EditText
+    <TextView
+        android:text="Condition of Water"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/virusEdit"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:hint="Virus PPM" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:layout_below="@+id/virusEdit"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="36dp"
-        android:id="@+id/contamEdit"
-        android:hint="Contaminant PPM" />
+        android:layout_marginLeft="88dp"
+        android:layout_marginStart="88dp"
+        android:id="@+id/textView4"
+        android:layout_alignBaseline="@+id/textView3"
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_toRightOf="@+id/textView3"
+        android:layout_toEndOf="@+id/textView3" />
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="23dp">
+        android:layout_marginTop="44dp"
+        android:layout_below="@+id/typeGroup"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <Button
             android:text="Cancel"
@@ -100,13 +71,91 @@
             android:onClick="submitReport"/>
     </LinearLayout>
 
-    <TextView
-        android:text="Water Purity"
+    <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView3"
-        android:layout_marginTop="22dp"
-        android:layout_below="@+id/locEdit"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:id="@+id/typeGroup"
+        android:layout_marginTop="18dp"
+        android:layout_below="@+id/textView3"
+        android:layout_alignRight="@+id/textView3"
+        android:layout_alignEnd="@+id/textView3">
+
+        <RadioButton
+            android:text="Bottled"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bottled" />
+
+        <RadioButton
+            android:text="Well"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/well"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/stream"
+            android:text="Stream" />
+
+        <RadioButton
+            android:text="Lake"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lake"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:text="Spring"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spring"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:text="Other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/other"
+            android:layout_weight="1" />
+    </RadioGroup>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/conditionGroup"
+        android:layout_alignTop="@+id/typeGroup"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_alignStart="@+id/textView4">
+
+        <RadioButton
+            android:text="Treatable-Clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/treatableclear"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/treatablemuddy"
+            android:text="Treatable-Muddy" />
+
+        <RadioButton
+            android:text="Potable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/potable"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:text="Waste"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/waste" />
+
+    </RadioGroup>
 </RelativeLayout>
