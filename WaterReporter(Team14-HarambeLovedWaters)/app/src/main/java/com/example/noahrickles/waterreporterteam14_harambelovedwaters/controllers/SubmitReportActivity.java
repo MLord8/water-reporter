@@ -17,7 +17,7 @@ import java.util.Date;
 
 public class SubmitReportActivity extends AppCompatActivity {
 
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss");
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
     private EditText locationField;
     private int reportNum;
@@ -41,7 +41,6 @@ public class SubmitReportActivity extends AppCompatActivity {
         String location = locationField.getText().toString();
         String currentDateAndTime = sdf.format(new Date());
         String currentUser = instance.getCurrUser().getUsername();
-        ++reportNum;
 
         boolean cancel = false;
         View focusView = null;
@@ -116,7 +115,7 @@ public class SubmitReportActivity extends AppCompatActivity {
             focusView.requestFocus();
         } else {
             instance.addWaterReport(new WaterReport(currentDateAndTime, location, currentUser,
-                    reportNum, type, condition));
+                    instance.getWaterReports().size()+1, type, condition));
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
             startActivity(intent);
         }
