@@ -32,6 +32,11 @@ public class SubmitReportActivity extends AppCompatActivity {
         locationField = (EditText) findViewById(R.id.locEdit);
     }
 
+    /**
+     * Creates a report with inputted and auto-generated parameters and adds it to the list of
+     * reports.
+     * @param view The view of the button
+     */
     public void submitReport(View view) {
         String location = locationField.getText().toString();
         String currentDateAndTime = sdf.format(new Date());
@@ -117,8 +122,12 @@ public class SubmitReportActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Cancels the report submission and returns the user to the main screen when the
+     * cancel button is pressed
+     * @param view The current view of the button
+     */
     public void cancelReport(View view) {
-        locationField.setText("");
         Intent intent = new Intent(getBaseContext(), MainActivity.class);
         startActivity(intent);
     }
