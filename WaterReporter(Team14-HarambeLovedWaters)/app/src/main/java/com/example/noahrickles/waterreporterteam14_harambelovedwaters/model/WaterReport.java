@@ -9,7 +9,7 @@ public class WaterReport {
     private String dateAndTime;
     private String location;
     private String username;
-    private int reportNumber;
+    private int reportNumber = 0;
     private String typeOfWater;
     private String conditionOfWater;
 
@@ -55,7 +55,7 @@ public class WaterReport {
     public String getConditionOfWater() { return conditionOfWater; }
 
     public String toString() {
-        return "Date/Time: " + dateAndTime + "\nLocation: " + location + "\nWorker name: " +
+        return "Date/Time: " + dateAndTime + "\nLocation: " + location + "\nSubmitter: " +
                 username + "\nReport number: " + reportNumber + "\nType of Water: " +
                 typeOfWater + "\nCondition of Water: " + conditionOfWater;
     }

@@ -97,4 +97,8 @@ public class Singleton {
     public static void addWaterReport(WaterReport w) {
         reportList.add(w);
     }
+
+    public static ArrayList<WaterReport> getWaterReports() {
+        return reportList;
+    }
 }

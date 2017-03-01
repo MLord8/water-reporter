@@ -8,15 +8,39 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.R;
+import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Singleton;
+import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.WaterReport;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    private ListView reports;
+    private Singleton instance;
+    private ArrayAdapter<String> listAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        instance = Singleton.getInstance();
+
+        reports = (ListView) findViewById(R.id.reportView);
+        ArrayList<WaterReport> reportList = instance.getWaterReports();
+
+        ArrayList<String> reportStrings = new ArrayList<String>();
+        for (int i = 0; i < reportList.size(); i++) {
+            reportStrings.add(reportList.get(i).toString());
+        }
+
+        listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
+                reportStrings);
+        reports.setAdapter(listAdapter);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

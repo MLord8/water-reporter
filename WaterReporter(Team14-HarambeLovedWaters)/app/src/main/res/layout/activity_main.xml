@@ -23,43 +23,56 @@
         app:srcCompat="@android:drawable/ic_dialog_email" />
 
     <include layout="@layout/content_main"
-        android:id="@+id/include" />
+        android:id="@+id/include"
+        android:layout_weight="1" />
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <Button
-            android:text="Profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/profile_button"
-            android:onClick="goProfile"
-            android:layout_gravity="bottom|right"
-            app:layout_anchor="@+id/include"
-            app:layout_anchorGravity="top|left"
-            android:layout_weight="1" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <Button
-            android:text="Submit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/submit_button"
-            app:layout_anchor="@+id/include"
-            android:layout_weight="1"
-            android:onClick="report"/>
+            <Button
+                android:text="Profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/profile_button"
+                android:onClick="goProfile"
+                android:layout_gravity="bottom|right"
+                app:layout_anchor="@+id/include"
+                app:layout_anchorGravity="top|left"
+                android:layout_weight="1" />
 
-        <Button
-            android:text="Logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/logout_button"
-            app:layout_anchor="@+id/include"
-            app:layout_anchorGravity="bottom|left"
-            android:layout_gravity="top|right"
-            android:onClick="logout"
-            android:layout_weight="1" />
+            <Button
+                android:text="Submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/submit_button"
+                app:layout_anchor="@+id/include"
+                android:layout_weight="1"
+                android:onClick="report"/>
+
+            <Button
+                android:text="Logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/logout_button"
+                app:layout_anchor="@+id/include"
+                app:layout_anchorGravity="bottom|left"
+                android:layout_gravity="top|right"
+                android:onClick="logout"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/reportView" />
     </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>
