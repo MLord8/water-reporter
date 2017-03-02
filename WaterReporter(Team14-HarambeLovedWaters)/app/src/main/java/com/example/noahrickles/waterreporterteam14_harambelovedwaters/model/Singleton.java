@@ -19,8 +19,10 @@ public class Singleton {
     //each username and email is mapped to its corresponding value
     private static HashMap<String, String> registeredUserMap = new HashMap<String, String>();
 
+    //a list to hold the submitted water reports
     private static ArrayList<WaterReport> reportList = new ArrayList<>();
 
+    //keeps track of the user currently logged in
     private static User currUser;
 
     /**
@@ -39,10 +41,17 @@ public class Singleton {
         currUser = user;
     }
 
+    /**
+     * Private constructor to prevent multiple instances of the class being created
+     */
     private Singleton() {
 
     }
 
+    /**
+     * Returns the one instance of the Singleton
+     * @return the instance of the Singleton
+     */
     public static Singleton getInstance() {
         return instance;
     }
