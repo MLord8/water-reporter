@@ -75,6 +75,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Brings the user to a personalized profile page
+     * @param view the map button
+     */
+    public void goToMap(View view) {
+        Intent intent = new Intent(getBaseContext(), MapsActivity.class);
+        startActivity(intent);
+    }
+
+    /**
      * Submits a report for the user
      * @param view the report button
      */

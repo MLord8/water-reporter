@@ -14,6 +14,7 @@ import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Wate
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import com.google.android.gms.maps.model.LatLng;
 
 public class SubmitReportActivity extends AppCompatActivity {
 
@@ -42,7 +43,8 @@ public class SubmitReportActivity extends AppCompatActivity {
      * @param view The view of the button
      */
     public void submitReport(View view) {
-        String location = locationField.getText().toString();
+//        String location = locationField.getText().toString();
+        LatLng location = new LatLng(0,0);
         String currentDateAndTime = sdf.format(new Date());
         String currentUser = instance.getCurrUser().getUsername();
 

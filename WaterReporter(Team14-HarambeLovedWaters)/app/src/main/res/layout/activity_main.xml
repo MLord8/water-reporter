@@ -48,6 +48,17 @@
                 android:layout_weight="1" />
 
             <Button
+                android:text="Maps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/maps_button"
+                android:onClick="goToMap"
+                android:layout_gravity="bottom|right"
+                app:layout_anchor="@+id/include"
+                app:layout_anchorGravity="top|left"
+                android:layout_weight="1" />
+
+            <Button
                 android:text="Submit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
