@@ -4,10 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -17,10 +14,7 @@ import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Sing
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.WaterReport;
 
 import java.util.ArrayList;
-import com.example.noahrickles.waterreporterteam14_harambelovedwaters.R;
 
-import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -34,7 +28,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.LinkedList;
-import android.util.Log;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 

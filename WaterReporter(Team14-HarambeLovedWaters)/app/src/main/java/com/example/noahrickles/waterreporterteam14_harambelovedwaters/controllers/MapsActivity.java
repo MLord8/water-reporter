@@ -1,7 +1,5 @@
 package com.example.noahrickles.waterreporterteam14_harambelovedwaters.controllers;
 
-import com.example.noahrickles.waterreporterteam14_harambelovedwaters.R;
-
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -15,9 +13,10 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import com.example.noahrickles.waterreporterteam14_harambelovedwaters.R;
+
 import java.util.LinkedList;
 import android.util.Log;
-import android.widget.Toast;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
