@@ -219,7 +219,8 @@ public class LoginActivity extends AppCompatActivity {
                 return false;
             }
 
-            HashMap<String, String> registeredUserMap = instance.getRegisteredUserMap();
+            HashMap<String, String> registeredUserMap
+                = instance.getRegisteredUserMap();
             if (registeredUserMap.containsKey(mUsername)) {
                 if (registeredUserMap.get(mUsername).equals(mPassword)) {
                     return true;
