@@ -8,6 +8,7 @@ import com.google.android.gms.maps.model.LatLng;
 public class WaterReport {
 
     private String dateAndTime;
+    private String address;
     private LatLng location;
     private String username;
     private int reportNumber = 0;
@@ -23,9 +24,10 @@ public class WaterReport {
      * @param typeOfWater       The type of the water source
      * @param conditionOfWater  The drinking condition of the water
      */
-    public WaterReport(String dateAndTime, LatLng location, String username,
+    public WaterReport(String dateAndTime, String address, LatLng location, String username,
                        int reportNumber, String typeOfWater, String conditionOfWater) {
         this.dateAndTime = dateAndTime;
+        this.address = address;
         this.location = location;
         this.username = username;
         this.reportNumber = reportNumber;
@@ -41,6 +43,13 @@ public class WaterReport {
         return dateAndTime;
     }
 
+    /**
+     * Gets the address of a WaterReport
+     * @return the WaterReport's address
+     */
+    public String getAddress() {
+        return address;
+    }
     /**
      * Gets the location of a WaterReport
      * @return the WaterReport's location
@@ -88,6 +97,7 @@ public class WaterReport {
      */
     public String toString() {
         return "Date/Time: " + dateAndTime
+                + "\nAddress: " + address
                 + "\nLocation: " + location.toString()
                 + "\nSubmitter: " + username
                 + "\nReport number: " + reportNumber

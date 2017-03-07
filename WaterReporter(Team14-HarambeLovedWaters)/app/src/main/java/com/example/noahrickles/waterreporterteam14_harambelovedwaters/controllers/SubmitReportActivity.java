@@ -44,6 +44,7 @@ public class SubmitReportActivity extends AppCompatActivity {
      */
     public void submitReport(View view) {
 //        String location = locationField.getText().toString();
+        String address = "This is the address";
         LatLng location = new LatLng(0,0);
         String currentDateAndTime = sdf.format(new Date());
         String currentUser = instance.getCurrUser().getUsername();
@@ -120,7 +121,7 @@ public class SubmitReportActivity extends AppCompatActivity {
         if (cancel || !checked1 || !checked2) {
             focusView.requestFocus();
         } else {
-            instance.addWaterReport(new WaterReport(currentDateAndTime, location,
+            instance.addWaterReport(new WaterReport(currentDateAndTime, address, location,
                 currentUser, instance.getWaterReports().size()+1, type, condition));
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
             startActivity(intent);
