@@ -220,7 +220,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             HashMap<String, String> registeredUserMap
-                = Singleton.getRegisteredUserMap();
+                = instance.getRegisteredUserMap();
             if (registeredUserMap.containsKey(mUsername)) {
                 if (registeredUserMap.get(mUsername).equals(mPassword)) {
                     return true;
@@ -244,7 +244,7 @@ public class LoginActivity extends AppCompatActivity {
             showProgress(false);
 
             if (success) {
-                Set<User> registeredUsers = Singleton.getRegisteredUserSet();
+                Set<User> registeredUsers = instance.getRegisteredUserSet();
                 for (User u : registeredUsers) {
                     if (u.getUsername().equals(mUsername)) {
                         instance.setCurrUser(u);
