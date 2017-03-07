@@ -13,23 +13,23 @@ public class Singleton {
     private static final Singleton instance = new Singleton();
 
     //a hash set to hold the registered User objects
-    private static Set<User> registeredUserSet = new HashSet<User>();
+    private Set<User> registeredUserSet = new HashSet<User>();
 
     //a hash map to hold the registered users
     //each username and email is mapped to its corresponding value
-    private static HashMap<String, String> registeredUserMap = new HashMap<String, String>();
+    private HashMap<String, String> registeredUserMap = new HashMap<String, String>();
 
     //a list to hold the submitted water reports
-    private static ArrayList<WaterReport> reportList = new ArrayList<>();
+    private ArrayList<WaterReport> reportList = new ArrayList<>();
 
     //keeps track of the user currently logged in
-    private static User currUser;
+    private User currUser;
 
     /**
      * Gets the current user that is logged in
      * @return the user that is currently logged in
      */
-    public static User getCurrUser() {
+    public User getCurrUser() {
         return currUser;
     }
 
@@ -37,7 +37,7 @@ public class Singleton {
      * Sets the current user to the user passed in
      * @param user  the user passed in
      */
-    public static void setCurrUser(User user) {
+    public void setCurrUser(User user) {
         currUser = user;
     }
 
@@ -60,7 +60,7 @@ public class Singleton {
      * Gets the registered users hash map
      * @return the HashMap of the registered users
      */
-    public static HashMap<String, String> getRegisteredUserMap() {
+    public HashMap<String, String> getRegisteredUserMap() {
         return registeredUserMap;
     }
 
@@ -68,7 +68,7 @@ public class Singleton {
      * Gets the registered users hash set
      * @return the HashSet of the registered users
      */
-    public static Set<User> getRegisteredUserSet() {
+    public Set<User> getRegisteredUserSet() {
         return registeredUserSet;
     }
 
@@ -78,7 +78,7 @@ public class Singleton {
      * @param email     the user's email address
      * @return true if the email is valid, false otherwise
      */
-    public static boolean isEmailValid(String email) {
+    public boolean isEmailValid(String email) {
         return email.contains("@") && email.contains(".") && email.length() >= 4;
     }
 
@@ -88,7 +88,7 @@ public class Singleton {
      * @param username  the user's username
      * @return true if the username is valid, false otherwise
      */
-    public static boolean isUsernameValid(String username) {
+    public boolean isUsernameValid(String username) {
         return !username.equals("") && username.length() >= 5;
     }
 
@@ -98,7 +98,7 @@ public class Singleton {
      * @param password  the user's password
      * @return true if the password is valid, false otherwise.
      */
-    public static boolean isPasswordValid(String password) {
+    public boolean isPasswordValid(String password) {
         return password.length() >= 4 && password.matches(".*\\d+.*")
                 && !password.equals(password.toLowerCase());
     }
@@ -107,7 +107,7 @@ public class Singleton {
      * Checks to see if the location passed in is valid
      * @param location  the location passed in to be checked
      */
-    public static boolean isLocationValid(String location) {
+    public boolean isLocationValid(String location) {
         return !location.equals("") && location.length() > 5;
     }
 
@@ -115,7 +115,7 @@ public class Singleton {
      * Adds a WaterReport to the list of water reports
      * @param w     the water report passed in
      */
-    public static void addWaterReport(WaterReport w) {
+    public void addWaterReport(WaterReport w) {
         reportList.add(w);
     }
 
@@ -123,7 +123,7 @@ public class Singleton {
      * Gets the list of water reports
      * @return the ArrayList reportList of type WaterReport
      */
-    public static ArrayList<WaterReport> getWaterReports() {
+    public ArrayList<WaterReport> getWaterReports() {
         return reportList;
     }
 }
