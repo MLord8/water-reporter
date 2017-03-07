@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
-
+import com.google.android.gms.maps.model.LatLng;
 /**
  * Created by Noah Rickles on 2/27/2017.
  */
@@ -107,8 +107,8 @@ public class Singleton {
      * Checks to see if the location passed in is valid
      * @param location  the location passed in to be checked
      */
-    public boolean isLocationValid(String location) {
-        return !location.equals("") && location.length() > 5;
+    public boolean isLocationValid(LatLng location) {
+        return !location.equals(null);
     }
 
     /**
