@@ -98,7 +98,7 @@ public class WaterReport {
     public String toString() {
         return "Date/Time: " + dateAndTime
                 + "\nAddress: " + address
-                + "\nLocation: " + location.toString()
+                + "\nLocation: (" + location.latitude + ", " + location.longitude + ")"
                 + "\nSubmitter: " + username
                 + "\nReport number: " + reportNumber
                 + "\nType of Water: " + typeOfWater

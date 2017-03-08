@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 /**
  * Created by Noah Rickles on 2/27/2017.
@@ -21,9 +23,25 @@ public class Singleton {
 
     //a list to hold the submitted water reports
     private ArrayList<WaterReport> reportList = new ArrayList<>();
-
+//    private GoogleMap mMap;
     //keeps track of the user currently logged in
     private User currUser;
+
+//    /**
+//     * Gets the current Google Map instance
+//     * @return the current Google Map
+//     */
+//    public GoogleMap getMap() {
+//        return mMap;
+//    }
+//
+//    /**
+//     * Sets the current map to the map passed in
+//     * @param gMap the map passed in
+//     */
+//    public void setMap(GoogleMap gMap) {
+//        mMap = gMap;
+//    }
 
     /**
      * Gets the current user that is logged in
@@ -125,5 +143,19 @@ public class Singleton {
      */
     public ArrayList<WaterReport> getWaterReports() {
         return reportList;
+    }
+
+    /**
+     * Returns the water report by the corresponding id
+     * @param id
+     * @return the desired WaterReport (or null if not found)
+     */
+    public WaterReport getWaterReportById(int id) {
+        for (WaterReport report : reportList) {
+            if (report.getReportNumber() == id) {
+                return report;
+            }
+        }
+        return null;
     }
 }

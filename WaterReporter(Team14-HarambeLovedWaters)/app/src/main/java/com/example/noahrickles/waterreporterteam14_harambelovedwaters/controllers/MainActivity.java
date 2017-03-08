@@ -1,12 +1,16 @@
 package com.example.noahrickles.waterreporterteam14_harambelovedwaters.controllers;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.R;
@@ -15,6 +19,7 @@ import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Wate
 
 import java.util.ArrayList;
 
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -31,7 +36,7 @@ import java.util.LinkedList;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    private ListView reports;
+//    private ListView reports;
     private Singleton instance;
     private ArrayAdapter<String> listAdapter;
     private GoogleMap mMap;
@@ -47,17 +52,28 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         instance = Singleton.getInstance();
 
-        reports = (ListView) findViewById(R.id.reportView);
+//        reports = (ListView) findViewById(R.id.reportView);
         ArrayList<WaterReport> reportList = instance.getWaterReports();
-
-        ArrayList<String> reportStrings = new ArrayList<String>();
-        for (int i = 0; i < reportList.size(); i++) {
-            reportStrings.add(reportList.get(i).toString());
+        for (int i = 0; i < 10; i++) {
+            reportList.add(new WaterReport(
+                    "dateAndTime",
+                    "address",
+                    new LatLng(90 - 18 * i, 36 * i - 180),
+                    "username",
+                    i,
+                    "typeOfWater",
+                    "conditionOfWater"));
         }
 
-        listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
-                reportStrings);
-        reports.setAdapter(listAdapter);
+
+//        ArrayList<String> reportStrings = new ArrayList<String>();
+//        for (int i = 0; i < reportList.size(); i++) {
+//            reportStrings.add(reportList.get(i).toString());
+//        }
+
+//        listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
+//                reportStrings);
+//        reports.setAdapter(listAdapter);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -111,45 +127,91 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+//        instance.setMap(googleMap);
         mMap = googleMap;
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            /**
-             * Called when marker is ready
-             * @param marker
-             * @return false
-             */
+//        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+//            /**
+//             * Called when marker is ready
+//             * @param marker
+//             * @return false
+//             */
+//            @Override
+//            public boolean onMarkerClick(Marker marker) {
+////                Log.d("potatoes", marker.getPosition().toString());
+////                return true;
+//                Toast.makeText(getApplicationContext(), "You've clicked a marker!",
+//                        Toast.LENGTH_SHORT).show();
+//                return false;
+//            }
+//        });
+
+
+//        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+//            /**
+//             * Called when window is ready
+//             * @param marker
+//             */
+//            @Override
+//            public void onInfoWindowClick(Marker marker) {
+//                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+
+//        instance.getMap().setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+
             @Override
-            public boolean onMarkerClick(Marker marker) {
-//                Log.d("potatoes", marker.getPosition().toString());
-//                return true;
-                Toast.makeText(getApplicationContext(), "Title: " + marker.getTitle()
-                        +  "Position: " + marker.getPosition()
-                        + "Tag: " + marker.getTag(), Toast.LENGTH_SHORT).show();
-                return false;
+            public View getInfoWindow(Marker marker) {
+                return null;
+            }
+
+            @Override
+            public View getInfoContents(Marker marker) {
+                return prepareInfoView(marker);
+            }
+
+            private View prepareInfoView(Marker marker) {
+                LinearLayout infoView = new LinearLayout(MainActivity.this);
+                LinearLayout.LayoutParams infoViewParams = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                infoView.setOrientation(LinearLayout.HORIZONTAL);
+                infoView.setLayoutParams(infoViewParams);
+
+                ImageView infoImageView = new ImageView(MainActivity.this);
+                int icon = android.R.drawable.ic_dialog_map;
+                Drawable drawable = ContextCompat.getDrawable(getApplicationContext(),
+                        icon);
+                infoImageView.setImageDrawable(drawable);
+                infoView.addView(infoImageView);
+
+                LinearLayout subInfoView = new LinearLayout(MainActivity.this);
+                LinearLayout.LayoutParams subInfoViewParams = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                subInfoView.setOrientation(LinearLayout.VERTICAL);
+                subInfoView.setLayoutParams(subInfoViewParams);
+
+                TextView subInfoLat = new TextView(MainActivity.this);
+                subInfoLat.setText(instance.getWaterReportById((Integer) marker.getTag()).toString());
+                TextView subInfoLng = new TextView(MainActivity.this);
+                //subInfoLng.setText("Lng: " + marker.getPosition().longitude);
+                subInfoView.addView(subInfoLat);
+                //subInfoView.addView(subInfoLng);
+                infoView.addView(subInfoView);
+
+                return infoView;
             }
         });
 
-        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-            /**
-             * Called when window is ready
-             * @param marker
-             */
-            @Override
-            public void onInfoWindowClick(Marker marker) {
-                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
-                startActivity(intent);
-            }
-        });
+//        LinkedList<LatLng> locations = new LinkedList<LatLng>();
 
-        LinkedList<LatLng> locations = new LinkedList<LatLng>();
-        for (int i = 0; i < 10; i++) {
-            locations.add(new LatLng(18 * i - 90, 36 * i - 180));
+        for (WaterReport report : instance.getWaterReports()) {
+            Marker temp = mMap.addMarker(new MarkerOptions().position(report.getLocation()));
+            temp.setTag(report.getReportNumber());
         }
-        for (int i = 0; i < locations.size(); i++) {
-            String title = "Marker #" + i + "\nLocation: " + locations.get(i);
-            mMap.addMarker(new MarkerOptions().position(locations.get(i)).title(title));
-        }
-        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(new LatLngBounds(locations.get(2), locations.get(7)), 5));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(new LatLngBounds(new LatLng(-45,-90), new LatLng(45, 90)), 5));
         /*
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
