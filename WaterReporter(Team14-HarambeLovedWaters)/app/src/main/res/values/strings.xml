@@ -29,6 +29,6 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="cancel">Cancel</string>
     <string name="title_activity_submit_report">SubmitReportActivity</string>
-    <string name="error_invalid_location">Enter a location with length greater than 5.</string>
+    <string name="error_invalid_location">Please enter a valid location.</string>
     <string name="title_activity_maps">Map</string>
 </resources>
