@@ -1,9 +1,14 @@
 package com.example.noahrickles.waterreporterteam14_harambelovedwaters.model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+import android.location.Address;
+import android.location.Geocoder;
+import android.content.Context;
+import java.util.List;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
@@ -157,5 +162,13 @@ public class Singleton {
             }
         }
         return null;
+    }
+
+    public Address getAddressFromName(Context context, String address) throws IOException {
+        List<Address> addrList = new Geocoder(context).getFromLocationName(address, 1);
+        if (addrList.size() > 0) {
+            return addrList.get(0);
+        }
+        throw new IOException();
     }
 }

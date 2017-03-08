@@ -1,8 +1,10 @@
 package com.example.noahrickles.waterreporterteam14_harambelovedwaters.controllers;
 
 import android.content.Intent;
+import android.location.Geocoder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -11,13 +13,15 @@ import com.example.noahrickles.waterreporterteam14_harambelovedwaters.R;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Singleton;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.WaterReport;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import com.google.android.gms.maps.model.LatLng;
+import android.location.Address;
 
 public class SubmitReportActivity extends AppCompatActivity {
 
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a (z)");
 
     private EditText locationField;
     private int reportNum;
@@ -43,19 +47,31 @@ public class SubmitReportActivity extends AppCompatActivity {
      */
     public void submitReport(View view) {
 //        String location = locationField.getText().toString();
-        String address = "This is the address";
-        LatLng location = new LatLng(0,0);
+
+//        LatLng location = new LatLng(0,0);
+
         String currentDateAndTime = sdf.format(new Date());
         String currentUser = instance.getCurrUser().getUsername();
 
         boolean cancel = false;
         View focusView = null;
 
-        if (!instance.isLocationValid(location)) {
+
+        Address address = null;
+        try {
+            address = instance.getAddressFromName(getBaseContext(), locationField.getText().toString());
+        } catch (IOException e) {
+            e.printStackTrace();
             locationField.setError(getString(R.string.error_invalid_location));
             focusView = locationField;
             cancel = true;
         }
+
+//        if (!instance.isLocationValid(location)) {
+//            locationField.setError(getString(R.string.error_invalid_location));
+//            focusView = locationField;
+//            cancel = true;
+//        }
 
         RadioGroup typeGroup = (RadioGroup) findViewById(R.id.typeGroup);
         int buttonChecked1 = typeGroup.getCheckedRadioButtonId();
@@ -119,10 +135,11 @@ public class SubmitReportActivity extends AppCompatActivity {
         //add the water report
         if (cancel || !checked1 || !checked2) {
             focusView.requestFocus();
-        } else {
-            instance.addWaterReport(new WaterReport(currentDateAndTime, address, location,
+        } else if (address != null) {
+            instance.addWaterReport(new WaterReport(currentDateAndTime, address,
                 currentUser, instance.getWaterReports().size()+1, type, condition));
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
+            finish();
             startActivity(intent);
         }
     }
@@ -134,6 +151,7 @@ public class SubmitReportActivity extends AppCompatActivity {
      */
     public void cancelReport(View view) {
         Intent intent = new Intent(getBaseContext(), MainActivity.class);
+        finish();
         startActivity(intent);
     }
 
