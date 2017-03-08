@@ -1,28 +1,22 @@
 package com.example.noahrickles.waterreporterteam14_harambelovedwaters.controllers;
 
 import android.content.Intent;
-import android.location.Geocoder;
-import android.support.v7.app.AppCompatActivity;
+import android.location.Address;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.R;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Singleton;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.WaterReport;
-
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import com.google.android.gms.maps.model.LatLng;
-import android.location.Address;
 
 public class SubmitReportActivity extends AppCompatActivity {
 
     SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a (z)");
-
     private EditText locationField;
     private int reportNum;
     private Singleton instance;
@@ -46,18 +40,11 @@ public class SubmitReportActivity extends AppCompatActivity {
      * @param view The view of the button
      */
     public void submitReport(View view) {
-//        String location = locationField.getText().toString();
-
-//        LatLng location = new LatLng(0,0);
-
-        String currentDateAndTime = sdf.format(new Date());
         String currentUser = instance.getCurrUser().getUsername();
-
         boolean cancel = false;
         View focusView = null;
-
-
         Address address = null;
+
         try {
             address = instance.getAddressFromName(getBaseContext(), locationField.getText().toString());
         } catch (IOException e) {
@@ -132,12 +119,15 @@ public class SubmitReportActivity extends AppCompatActivity {
                     break;
             }
         }
-        //add the water report
+        //add the water report if requirements are met
         if (cancel || !checked1 || !checked2) {
             focusView.requestFocus();
         } else if (address != null) {
-            instance.addWaterReport(new WaterReport(currentDateAndTime, address,
-                currentUser, instance.getWaterReports().size()+1, type, condition));
+            instance.addWaterReport(
+                    new WaterReport(sdf.format(new Date()),
+                                    address, currentUser,
+                            instance.getWaterReports().size() + 1,
+                                    type, condition));
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
             finish();
             startActivity(intent);

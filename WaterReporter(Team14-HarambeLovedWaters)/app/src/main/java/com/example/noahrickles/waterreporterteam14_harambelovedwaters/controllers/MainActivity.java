@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         instance = Singleton.getInstance();
 
         ArrayList<WaterReport> reportList = instance.getWaterReports();
+        /*
         String[] addresses = {"120 North Avenue NW", "Tel Aviv",
                 "101 Carrer de Sardenya, 08013 Barcelona, Spain"};
         for (int i = 0; i < addresses.length; i++) {
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 e.printStackTrace();
             }
         }
+        */
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -137,6 +139,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
 
             private View prepareInfoView(Marker marker) {
+                WaterReport report = instance.getWaterReportById((Integer) marker.getTag());
+                String condition = report.getConditionOfWater();
+
                 LinearLayout infoView = new LinearLayout(MainActivity.this);
                 LinearLayout.LayoutParams infoViewParams = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -145,7 +150,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 infoView.setLayoutParams(infoViewParams);
 
                 ImageView infoImageView = new ImageView(MainActivity.this);
-                int icon = android.R.drawable.ic_dialog_map;
+
+                int icon;
+                if (condition == "Treatable-Clear") {
+                    icon = android.R.drawable.presence_online;
+                } else if (condition == "Treatable-Muddy") {
+                    icon = android.R.drawable.presence_away;
+                } else if (condition == "Potable") {
+                    icon = android.R.drawable.presence_offline;
+                } else if (condition == "Waste") {
+                    icon = android.R.drawable.presence_busy;
+                } else {
+                    icon = android.R.drawable.ic_dialog_map;
+                }
                 Drawable drawable = ContextCompat.getDrawable(getApplicationContext(),
                         icon);
                 infoImageView.setImageDrawable(drawable);
@@ -159,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 subInfoView.setLayoutParams(subInfoViewParams);
 
                 TextView subInfo = new TextView(MainActivity.this);
-                subInfo.setText(instance.getWaterReportById((Integer) marker.getTag()).toString());
+                subInfo.setText(report.toString());
                 subInfoView.addView(subInfo);
                 infoView.addView(subInfoView);
 
