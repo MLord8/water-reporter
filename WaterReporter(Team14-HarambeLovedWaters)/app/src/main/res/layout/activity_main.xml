@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/submit_button"
                 app:layout_anchor="@+id/include"
-                android:layout_weight="2"
+                android:layout_weight="1.9"
                 android:onClick="report"/>
 
             <Button
