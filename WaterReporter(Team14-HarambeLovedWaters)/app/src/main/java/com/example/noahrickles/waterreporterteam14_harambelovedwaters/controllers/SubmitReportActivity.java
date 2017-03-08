@@ -46,7 +46,7 @@ public class SubmitReportActivity extends AppCompatActivity {
         Address address = null;
 
         try {
-            address = instance.getAddressFromName(getBaseContext(), locationField.getText().toString());
+            address = instance.findAddressFromName(getBaseContext(), locationField.getText().toString());
         } catch (IOException e) {
             e.printStackTrace();
             locationField.setError(getString(R.string.error_invalid_location));

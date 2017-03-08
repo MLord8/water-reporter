@@ -155,7 +155,7 @@ public class Singleton {
      * @param id
      * @return the desired WaterReport (or null if not found)
      */
-    public WaterReport getWaterReportById(int id) {
+    public WaterReport findWaterReportById(int id) {
         for (WaterReport report : reportList) {
             if (report.getReportNumber() == id) {
                 return report;
@@ -164,7 +164,7 @@ public class Singleton {
         return null;
     }
 
-    public Address getAddressFromName(Context context, String address) throws IOException {
+    public Address findAddressFromName(Context context, String address) throws IOException {
         List<Address> addrList = new Geocoder(context).getFromLocationName(address, 1);
         if (addrList.size() > 0) {
             return addrList.get(0);

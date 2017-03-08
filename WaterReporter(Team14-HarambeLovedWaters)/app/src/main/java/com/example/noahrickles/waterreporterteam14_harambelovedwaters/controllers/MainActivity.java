@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.R;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Singleton;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.WaterReport;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -130,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
 
             private View prepareInfoView(Marker marker) {
-                WaterReport report = instance.getWaterReportById((Integer) marker.getTag());
+                WaterReport report = instance.findWaterReportById((Integer) marker.getTag());
                 String condition = report.getConditionOfWater();
 
                 LinearLayout infoView = new LinearLayout(MainActivity.this);
@@ -177,10 +178,20 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         for (WaterReport report : instance.getWaterReports()) {
             Address adr = report.getAddress();
-            Marker temp = mMap.addMarker(new MarkerOptions().position(report.getLocation()
-            ));
+            Marker temp = mMap.addMarker(new MarkerOptions().position(report.getLocation()));
             temp.setTag(report.getReportNumber());
         }
-        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(new LatLngBounds(new LatLng(-45,-90), new LatLng(45, 90)), 5));
+
+        int width = getResources().getDisplayMetrics().widthPixels;
+        int height = getResources().getDisplayMetrics().heightPixels;
+        int padding = (int) (width * 0.12);
+
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        builder.include(new LatLng(-45, -90));
+        builder.include(new LatLng(45, 90));
+        LatLngBounds bounds = builder.build();
+
+        CameraUpdate camUpdate = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding);
+        mMap.animateCamera(camUpdate);
     }
 }
