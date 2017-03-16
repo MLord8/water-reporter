@@ -14,10 +14,12 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class SubmitReportActivity extends AppCompatActivity {
+public class SubmitPurityReportActivity extends AppCompatActivity {
 
     SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a (z)");
     private EditText locationField;
+    private EditText virusPPMField;
+    private EditText contaminantPPMField;
     private int reportNum;
     private Singleton instance;
 
@@ -29,9 +31,13 @@ public class SubmitReportActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         reportNum = 0;
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_submit_report);
+        setContentView(R.layout.activity_submit_purity_report);
         instance = Singleton.getInstance();
         locationField = (EditText) findViewById(R.id.locEdit);
+        virusPPMField = (EditText) findViewById(R.id.locEdit);
+        contaminantPPMField = (EditText) findViewById(R.id.locEdit);
+
+
     }
 
     /**
@@ -44,6 +50,8 @@ public class SubmitReportActivity extends AppCompatActivity {
         boolean cancel = false;
         View focusView = null;
         Address address = null;
+        String virusPPM = virusPPMField.getText();
+
 
         try {
             address = instance.findAddressFromName(getBaseContext(), locationField.getText().toString());
@@ -60,38 +68,6 @@ public class SubmitReportActivity extends AppCompatActivity {
 //            cancel = true;
 //        }
 
-        RadioGroup typeGroup = (RadioGroup) findViewById(R.id.typeGroup);
-        int buttonChecked1 = typeGroup.getCheckedRadioButtonId();
-        String type = "N/A";
-        boolean checked1 = false;
-        if (buttonChecked1 != -1) {
-            checked1 = true;
-        } else {
-            focusView = locationField;
-            locationField.setError(getString(R.string.error_type_not_selected));
-        }
-        if (checked1) {
-            switch(buttonChecked1) {
-                case R.id.bottled:
-                    type = "Bottled";
-                    break;
-                case R.id.well:
-                    type = "Well";
-                    break;
-                case R.id.stream:
-                    type = "Stream";
-                    break;
-                case R.id.lake:
-                    type = "Lake";
-                    break;
-                case R.id.spring:
-                    type = "Spring";
-                    break;
-                case R.id.other:
-                    type = "Other";
-                    break;
-            }
-        }
 
         RadioGroup conditionGroup = (RadioGroup) findViewById(R.id.conditionGroup);
         int buttonChecked2 = conditionGroup.getCheckedRadioButtonId();
@@ -105,27 +81,29 @@ public class SubmitReportActivity extends AppCompatActivity {
         }
         if (checked2) {
             switch(buttonChecked2) {
-                case R.id.safe:
+                case R.id.treatableclear:
                     condition = "Treatable-Clear";
                     break;
-                case R.id.treatable:
+                case R.id.treatablemuddy:
                     condition = "Treatable-Muddy";
                     break;
-                case R.id.unsafe:
+                case R.id.potable:
                     condition = "Potable";
                     break;
-
+                case R.id.waste:
+                    condition = "Waste";
+                    break;
             }
         }
         //add the water report if requirements are met
         if (cancel || !checked1 || !checked2) {
             focusView.requestFocus();
         } else if (address != null) {
-            instance.addWaterReport(
+            instance.addWaterPurityReport(
                     new WaterReport(sdf.format(new Date()),
-                                    address, currentUser,
+                            address, currentUser,
                             instance.getWaterReports().size() + 1,
-                                    type, condition));
+                            con, condition));
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
             finish();
             startActivity(intent);

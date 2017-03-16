@@ -92,6 +92,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         finish();
         startActivity(intent);
     }
+    /**
+     * Submits a  purity report for the user
+     * @param view the purity report button
+     */
+    public void reportPurity(View view) {
+        Intent intent = new Intent(getBaseContext(), SubmitPurityReportActivity.class);
+        finish();
+        startActivity(intent);
+    }
 
     /**
      * Manipulates the map once available.

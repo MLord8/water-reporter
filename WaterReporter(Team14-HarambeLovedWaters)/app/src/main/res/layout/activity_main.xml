@@ -33,12 +33,18 @@
 
             <Button
                 android:text="Submit a Report"
-                android:layout_width="wrap_content"
+                android:layout_width="78dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/submit_button"
                 app:layout_anchor="@+id/include"
-                android:layout_weight="1.9"
-                android:onClick="report"/>
+                android:onClick="report"
+                android:layout_weight="0.50" />
+
+            <Button
+                android:text="Submit a purity Report"
+                android:layout_width="99dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/button6" />
 
             <Button
                 android:text="Logout"
@@ -48,8 +54,7 @@
                 app:layout_anchor="@+id/include"
                 app:layout_anchorGravity="bottom|left"
                 android:layout_gravity="top|right"
-                android:onClick="logout"
-                android:layout_weight="1" />
+                android:onClick="logout" />
 
         </LinearLayout>
 

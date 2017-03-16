@@ -28,7 +28,9 @@ public class Singleton {
 
     //a list to hold the submitted water reports
     private ArrayList<WaterReport> reportList = new ArrayList<>();
-//    private GoogleMap mMap;
+    private ArrayList<WaterPurityReport> purityReportList = new ArrayList<>();
+
+    //    private GoogleMap mMap;
     //keeps track of the user currently logged in
     private User currUser;
 
@@ -140,6 +142,14 @@ public class Singleton {
      */
     public void addWaterReport(WaterReport w) {
         reportList.add(w);
+    }
+
+    /**
+     * Adds a WaterPurityReport to the list of water purity reports
+     * @param w     the water report passed in
+     */
+    public void addWaterPurityReport(WaterPurityReport w) {
+        purityReportList.add(w);
     }
 
     /**
