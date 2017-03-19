@@ -30,5 +30,5 @@
     <string name="cancel">Cancel</string>
     <string name="title_activity_submit_report">SubmitReportActivity</string>
     <string name="error_invalid_location">Please enter a valid location.</string>
-    <string name="title_activity_maps">Map</string>
+    <string name="error_invalid_double">Please enter a number.</string>
 </resources>

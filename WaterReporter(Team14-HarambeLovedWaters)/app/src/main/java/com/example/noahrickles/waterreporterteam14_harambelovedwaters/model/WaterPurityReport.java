@@ -12,8 +12,8 @@ public class WaterPurityReport {
     //    private LatLng location;
     private String username;
     private int reportNumber = 0;
-    private String virusPPM;
-    private String contaminantPPM;
+    private double virusPPM;
+    private double contaminantPPM;
     private String conditionOfWater;
 
 
@@ -28,7 +28,7 @@ public class WaterPurityReport {
      * @param conditionOfWater  The drinking condition of the water
      */
     public WaterPurityReport(String dateAndTime, Address address, String username,
-                       int reportNumber, String contaminantPPM, String virusPPM, String conditionOfWater) {
+                       int reportNumber, double contaminantPPM, double virusPPM, String conditionOfWater) {
         this.dateAndTime = dateAndTime;
         this.address = address;
 //        this.location = location;
@@ -101,14 +101,14 @@ public class WaterPurityReport {
      * Gets the condition of water of a WaterReport
      * @return the WaterReport's conditionOfWater
      */
-    public String getContaminantPPMOfWater() {
+    public double getContaminantPPMOfWater() {
         return contaminantPPM;
     }
     /**
      * Gets the condition of water of a WaterReport
      * @return the WaterReport's conditionOfWater
      */
-    public String getVirusPPMOfWater() {
+    public double getVirusPPMOfWater() {
         return virusPPM;
     }
     /**

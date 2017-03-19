@@ -41,10 +41,11 @@
                 android:layout_weight="0.50" />
 
             <Button
-                android:text="Submit a purity Report"
+                android:id="@+id/button6"
                 android:layout_width="99dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/button6" />
+                android:onClick="reportPurity"
+                android:text="Submit a purity Report" />
 
             <Button
                 android:text="Logout"

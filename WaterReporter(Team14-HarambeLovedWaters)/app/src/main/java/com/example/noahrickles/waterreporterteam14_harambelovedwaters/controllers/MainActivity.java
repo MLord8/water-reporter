@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     /**
-     * Submits a report for the user
+     * Navigates to the water report screen
      * @param view the report button
      */
     public void report(View view) {
@@ -93,13 +93,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         startActivity(intent);
     }
     /**
-     * Submits a  purity report for the user
+     * Navigates to the water purity report screen if user has sufficient credentials
      * @param view the purity report button
      */
     public void reportPurity(View view) {
-        Intent intent = new Intent(getBaseContext(), SubmitPurityReportActivity.class);
-        finish();
-        startActivity(intent);
+        if (instance.getCurrUser().getUserType().equals("WORKER")
+                || instance.getCurrUser().getUserType().equals("MANAGER")) {
+            Intent intent = new Intent(getBaseContext(), SubmitPurityReportActivity.class);
+            finish();
+            startActivity(intent);
+        }
     }
 
     /**

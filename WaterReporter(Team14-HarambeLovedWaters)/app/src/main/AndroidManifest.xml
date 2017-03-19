@@ -39,7 +39,12 @@
         <activity
             android:name=".controllers.ProfileActivity"
             android:label="Profile" />
-        <activity android:name=".controllers.SubmitReportActivity" />
+        <activity
+            android:name=".controllers.SubmitReportActivity"
+            android:label="Submit Water Report"/>
+        <activity
+            android:name=".controllers.SubmitPurityReportActivity"
+            android:label="Submit Water Purity Report" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -52,9 +57,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity
-            android:name=".controllers.MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
     </application>
 
 </manifest>

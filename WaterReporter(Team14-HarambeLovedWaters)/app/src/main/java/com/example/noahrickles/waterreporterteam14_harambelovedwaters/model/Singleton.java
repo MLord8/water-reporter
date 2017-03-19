@@ -30,25 +30,8 @@ public class Singleton {
     private ArrayList<WaterReport> reportList = new ArrayList<>();
     private ArrayList<WaterPurityReport> purityReportList = new ArrayList<>();
 
-    //    private GoogleMap mMap;
     //keeps track of the user currently logged in
     private User currUser;
-
-//    /**
-//     * Gets the current Google Map instance
-//     * @return the current Google Map
-//     */
-//    public GoogleMap getMap() {
-//        return mMap;
-//    }
-//
-//    /**
-//     * Sets the current map to the map passed in
-//     * @param gMap the map passed in
-//     */
-//    public void setMap(GoogleMap gMap) {
-//        mMap = gMap;
-//    }
 
     /**
      * Gets the current user that is logged in

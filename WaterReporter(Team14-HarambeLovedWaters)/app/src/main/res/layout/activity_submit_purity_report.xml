@@ -40,10 +40,9 @@
         android:id="@+id/button5"
         android:layout_weight="1"
         android:onClick="cancelReport"
-        android:layout_below="@+id/conditionGroup"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="51dp" />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:text="Submit"
@@ -68,15 +67,15 @@
         android:layout_toStartOf="@+id/typeGroup" />
 
     <EditText
+        android:id="@+id/editLoc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/editText3"
-        android:hint="Location"
-        android:layout_alignTop="@+id/textView4"
+        android:layout_alignBottom="@+id/linearLayout"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:ems="10"
+        android:hint="Location"
+        android:inputType="text" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -85,28 +84,31 @@
         android:ems="10"
         android:id="@+id/editVirusPPM"
         android:hint="Virus PPM"
-        android:layout_alignBottom="@+id/textView2"
+        android:layout_marginTop="17dp"
+        android:layout_below="@+id/editContamination"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <EditText
+        android:id="@+id/editContamination"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/editContamination"
-        android:hint="Location"
-        android:layout_below="@+id/conditionGroup"
-        android:layout_toRightOf="@+id/textView2"
-        android:layout_toEndOf="@+id/textView2" />
+        android:hint="Contamination PPM"
+        android:inputType="textPersonName"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="11dp" />
 
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/conditionGroup"
-        android:layout_below="@+id/editText3"
-        android:layout_alignLeft="@+id/textView4"
-        android:layout_alignStart="@+id/textView4">
+        android:layout_marginTop="14dp"
+        android:layout_below="@+id/textView4"
+        android:layout_toRightOf="@+id/textView2"
+        android:layout_toEndOf="@+id/textView2">
 
         <RadioButton
             android:layout_width="wrap_content"
@@ -135,7 +137,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView4"
-        android:layout_above="@+id/linearLayout"
-        android:layout_toRightOf="@+id/button4"
-        android:layout_toEndOf="@+id/button4" />
+        android:layout_below="@+id/editVirusPPM"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="37dp" />
 </RelativeLayout>

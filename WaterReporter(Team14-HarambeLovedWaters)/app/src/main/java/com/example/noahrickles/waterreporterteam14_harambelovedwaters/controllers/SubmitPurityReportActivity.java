@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.R;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Singleton;
+import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.WaterPurityReport;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.WaterReport;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -33,11 +34,9 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_purity_report);
         instance = Singleton.getInstance();
-        locationField = (EditText) findViewById(R.id.locEdit);
-        virusPPMField = (EditText) findViewById(R.id.locEdit);
-        contaminantPPMField = (EditText) findViewById(R.id.locEdit);
-
-
+        locationField = (EditText) findViewById(R.id.editLoc);
+        virusPPMField = (EditText) findViewById(R.id.editVirusPPM);
+        contaminantPPMField = (EditText) findViewById(R.id.editContamination);
     }
 
     /**
@@ -50,8 +49,25 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
         boolean cancel = false;
         View focusView = null;
         Address address = null;
-        String virusPPM = virusPPMField.getText();
+        double contaminantPPM = 0.0;
+        double virusPPM = 0.0;
+        try {
+            contaminantPPM = Double.parseDouble(contaminantPPMField.getText().toString());
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            contaminantPPMField.setError(getString(R.string.error_invalid_double));
+            focusView = contaminantPPMField;
+            cancel = true;
+        }
 
+        try {
+            virusPPM = Double.parseDouble(virusPPMField.getText().toString());
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            virusPPMField.setError(getString(R.string.error_invalid_double));
+            focusView = virusPPMField;
+            cancel = true;
+        }
 
         try {
             address = instance.findAddressFromName(getBaseContext(), locationField.getText().toString());
@@ -62,48 +78,39 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
             cancel = true;
         }
 
-//        if (!instance.isLocationValid(location)) {
-//            locationField.setError(getString(R.string.error_invalid_location));
-//            focusView = locationField;
-//            cancel = true;
-//        }
-
-
         RadioGroup conditionGroup = (RadioGroup) findViewById(R.id.conditionGroup);
-        int buttonChecked2 = conditionGroup.getCheckedRadioButtonId();
+        int buttonChecked = conditionGroup.getCheckedRadioButtonId();
         String condition = "N/A";
-        boolean checked2 = false;
-        if (buttonChecked2 != -1) {
-            checked2 = true;
+        boolean checked = false;
+        if (buttonChecked != -1) {
+            checked = true;
         } else {
             focusView = locationField;
             locationField.setError(getString(R.string.error_condition_not_selected));
         }
-        if (checked2) {
-            switch(buttonChecked2) {
-                case R.id.treatableclear:
-                    condition = "Treatable-Clear";
+        if (checked) {
+            switch(buttonChecked) {
+                case R.id.safe:
+                    condition = "Safe";
                     break;
-                case R.id.treatablemuddy:
-                    condition = "Treatable-Muddy";
+                case R.id.treatable:
+                    condition = "Treatable";
                     break;
-                case R.id.potable:
-                    condition = "Potable";
-                    break;
-                case R.id.waste:
-                    condition = "Waste";
+                case R.id.unsafe:
+                    condition = "Unsafe";
                     break;
             }
         }
-        //add the water report if requirements are met
-        if (cancel || !checked1 || !checked2) {
+
+        //add the water purity report if requirements are met
+        if (cancel || !checked) {
             focusView.requestFocus();
         } else if (address != null) {
             instance.addWaterPurityReport(
-                    new WaterReport(sdf.format(new Date()),
+                    new WaterPurityReport(sdf.format(new Date()),
                             address, currentUser,
                             instance.getWaterReports().size() + 1,
-                            con, condition));
+                            contaminantPPM, virusPPM, condition));
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
             finish();
             startActivity(intent);
