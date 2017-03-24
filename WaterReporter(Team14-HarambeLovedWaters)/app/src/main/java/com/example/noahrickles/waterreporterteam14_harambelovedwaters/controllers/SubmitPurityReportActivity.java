@@ -5,15 +5,18 @@ import android.location.Address;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioGroup;
+
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.R;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Singleton;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.WaterPurityReport;
-import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.WaterReport;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class SubmitPurityReportActivity extends AppCompatActivity {
 
@@ -21,7 +24,7 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
     private EditText locationField;
     private EditText virusPPMField;
     private EditText contaminantPPMField;
-    private int reportNum;
+    private ListView purityReportScroll;
     private Singleton instance;
 
     /**
@@ -30,13 +33,19 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        reportNum = 0;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_purity_report);
         instance = Singleton.getInstance();
         locationField = (EditText) findViewById(R.id.editLoc);
         virusPPMField = (EditText) findViewById(R.id.editVirusPPM);
         contaminantPPMField = (EditText) findViewById(R.id.editContamination);
+        if (instance.getCurrUser().getUserType().equals("MANAGER")) {
+            ArrayAdapter adapter = new ArrayAdapter<String>(this,
+                    android.R.layout.simple_list_item_1, (List) instance.getWaterPurityReports());
+
+            ListView listView = (ListView) findViewById(R.id.purityReportScroll);
+            listView.setAdapter(adapter);
+        }
     }
 
     /**
@@ -109,7 +118,7 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
             instance.addWaterPurityReport(
                     new WaterPurityReport(sdf.format(new Date()),
                             address, currentUser,
-                            instance.getWaterReports().size() + 1,
+                            instance.getWaterPurityReports().size() + 1,
                             contaminantPPM, virusPPM, condition));
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
             finish();

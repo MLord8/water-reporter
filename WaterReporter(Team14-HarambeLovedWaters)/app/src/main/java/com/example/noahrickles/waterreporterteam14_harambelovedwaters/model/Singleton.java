@@ -144,6 +144,14 @@ public class Singleton {
     }
 
     /**
+     * Gets the list of water purity reports
+     * @return the ArrayList purityReportList of type WaterPurityReport
+     */
+    public ArrayList<WaterPurityReport> getWaterPurityReports() {
+        return purityReportList;
+    }
+
+    /**
      * Returns the water report by the corresponding id
      * @param id
      * @return the desired WaterReport (or null if not found)

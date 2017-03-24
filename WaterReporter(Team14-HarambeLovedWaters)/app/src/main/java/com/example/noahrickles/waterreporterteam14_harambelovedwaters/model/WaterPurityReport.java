@@ -124,7 +124,7 @@ public class WaterPurityReport {
                 + ")\nSubmitter: " + username
                 + "\nReport number: " + reportNumber
                 + "\nVirus PPM: " + virusPPM
-                + "\nContaminant PPM: " + virusPPM
+                + "\nContaminant PPM: " + contaminantPPM
                 + "\nCondition of Water: " + conditionOfWater;
     }
 
