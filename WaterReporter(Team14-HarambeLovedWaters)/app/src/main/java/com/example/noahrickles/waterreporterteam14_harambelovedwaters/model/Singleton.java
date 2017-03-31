@@ -8,10 +8,20 @@ import java.util.Set;
 import android.location.Address;
 import android.location.Geocoder;
 import android.content.Context;
+import android.provider.ContactsContract;
+import android.util.Log;
+
 import java.util.List;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.ValueEventListener;
+
 /**
  * Created by Noah Rickles on 2/27/2017.
  */
@@ -171,5 +181,37 @@ public class Singleton {
             return addrList.get(0);
         }
         throw new IOException();
+    }
+
+    public FirebaseDatabase getDatabaseInstance() {
+        return FirebaseDatabase.getInstance();
+    }
+
+    public void setupDatabaseReferences(FirebaseDatabase db) {
+        DatabaseReference users = db.getReference().child("users");
+        users.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                GenericTypeIndicator<List<User>> l = new GenericTypeIndicator<List<User>>() {};
+                List<User> userList = dataSnapshot.getValue(l);
+                if (registeredUserSet.size() == 0) {
+                    for (User u : userList) {
+                        registeredUserSet.add(u);
+                    }
+                } else {
+                    registeredUserSet.add(userList.get(userList.size() - 1));
+                }
+                Log.d("Success", "Value is: " + userList);
+                Log.d("Set", registeredUserSet.toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("Failure", "Failed to read value.", error.toException());
+            }
+        });
     }
 }

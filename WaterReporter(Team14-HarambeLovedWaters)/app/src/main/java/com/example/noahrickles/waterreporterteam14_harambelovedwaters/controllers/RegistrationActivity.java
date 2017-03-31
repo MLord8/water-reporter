@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.AsyncTask;
@@ -27,6 +28,8 @@ import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Sing
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Manager;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.User;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Worker;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Map;
 import java.util.Set;
@@ -288,6 +291,10 @@ public class RegistrationActivity extends AppCompatActivity {
                 registeredUserMap.put(user.getEmail(), user.getPassword());
                 registeredUserMap.put(user.getUsername(), user.getPassword());
                 registeredUserSet.add(user);
+
+                FirebaseDatabase mDatabase = instance.getDatabaseInstance();
+                mDatabase.getReference("users").child(Integer.toString(user.getId())).setValue(user);
+
                 Intent intent = new Intent(getBaseContext(), LoginActivity.class);
                 startActivity(intent);
                 mEmailView.setText("");

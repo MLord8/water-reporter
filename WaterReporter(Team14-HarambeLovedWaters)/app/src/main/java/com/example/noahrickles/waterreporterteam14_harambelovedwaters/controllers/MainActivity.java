@@ -41,25 +41,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         instance = Singleton.getInstance();
 
-        ArrayList<WaterReport> reportList = instance.getWaterReports();
-        /*
-        String[] addresses = {"120 North Avenue NW", "Tel Aviv",
-                "101 Carrer de Sardenya, 08013 Barcelona, Spain"};
-        for (int i = 0; i < addresses.length; i++) {
-            try {
-                reportList.add(new WaterReport(
-                        "dateAndTime",
-                        instance.getAddressFromName(getApplicationContext(), addresses[i]),
-                        "username",
-                        i,
-                        "typeOfWater",
-                        "conditionOfWater"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        */
-
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);

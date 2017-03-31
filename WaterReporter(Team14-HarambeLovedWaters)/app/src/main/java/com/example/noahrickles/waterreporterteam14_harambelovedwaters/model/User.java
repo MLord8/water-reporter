@@ -19,6 +19,10 @@ public class User {
     private String homeAddress;
     private int id;
 
+    public User() {
+
+    }
+
     /**
      * Creates a new User object
      * @param email     the User's email
