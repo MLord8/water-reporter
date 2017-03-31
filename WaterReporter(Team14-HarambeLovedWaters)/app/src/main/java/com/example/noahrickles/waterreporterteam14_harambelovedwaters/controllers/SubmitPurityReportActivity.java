@@ -79,7 +79,7 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
         }
 
         try {
-            address = instance.findAddressFromName(getBaseContext(), locationField.getText().toString());
+            address = instance.findAddressFromName(locationField.getText().toString());
         } catch (IOException e) {
             e.printStackTrace();
             locationField.setError(getString(R.string.error_invalid_location));

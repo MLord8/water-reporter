@@ -2,17 +2,23 @@ package com.example.noahrickles.waterreporterteam14_harambelovedwaters.model;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
+
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.content.Context;
 import android.provider.ContactsContract;
+import android.test.mock.MockContext;
 import android.util.Log;
 
 import java.util.List;
 
+import com.example.noahrickles.waterreporterteam14_harambelovedwaters.controllers.MainActivity;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
@@ -175,8 +181,8 @@ public class Singleton {
         return null;
     }
 
-    public Address findAddressFromName(Context context, String address) throws IOException {
-        List<Address> addrList = new Geocoder(context).getFromLocationName(address, 1);
+    public Address findAddressFromName(String address) throws IOException {
+        List<Address> addrList = new Geocoder(new MockContext()).getFromLocationName(address, 1);
         if (addrList.size() > 0) {
             return addrList.get(0);
         }
@@ -189,6 +195,8 @@ public class Singleton {
 
     public void setupDatabaseReferences(FirebaseDatabase db) {
         DatabaseReference users = db.getReference().child("users");
+        DatabaseReference waterReports = db.getReference().child("waterReports");
+        DatabaseReference waterPurityReports = db.getReference().child("waterPurityReports");
         users.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -198,13 +206,44 @@ public class Singleton {
                 List<User> userList = dataSnapshot.getValue(l);
                 if (registeredUserSet.size() == 0) {
                     for (User u : userList) {
+                        registeredUserMap.put(u.getEmail(), u.getPassword());
+                        registeredUserMap.put(u.getUsername(), u.getPassword());
                         registeredUserSet.add(u);
                     }
                 } else {
-                    registeredUserSet.add(userList.get(userList.size() - 1));
+                    User u = userList.get(userList.size() - 1);
+                    registeredUserMap.put(u.getEmail(), u.getPassword());
+                    registeredUserMap.put(u.getUsername(), u.getPassword());
+                    registeredUserSet.add(u);
                 }
                 Log.d("Success", "Value is: " + userList);
                 Log.d("Set", registeredUserSet.toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("Failure", "Failed to read value.", error.toException());
+            }
+        });
+
+        waterReports.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                GenericTypeIndicator<List<WaterReport>> l = new GenericTypeIndicator<List<WaterReport>>() {};
+                List<WaterReport> reportListDB = dataSnapshot.getValue(l);
+                if (reportList.size() == 0) {
+                    for (WaterReport r : reportListDB) {
+                        reportList.add(r);
+                    }
+                } else {
+                    WaterReport r = reportListDB.get(reportListDB.size() - 1);
+                    reportList.add(r);
+                }
+                Log.d("Success", "Value is: " + reportListDB);
+                Log.d("Set", reportList.toString());
             }
 
             @Override

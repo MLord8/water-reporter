@@ -16,6 +16,9 @@ public class WaterPurityReport {
     private double contaminantPPM;
     private String conditionOfWater;
 
+    public WaterPurityReport() {
+
+    }
 
     /**
      * Constructor for the water report object

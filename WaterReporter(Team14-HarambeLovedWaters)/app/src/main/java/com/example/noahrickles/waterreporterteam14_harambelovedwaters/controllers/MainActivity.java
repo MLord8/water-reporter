@@ -3,9 +3,11 @@ package com.example.noahrickles.waterreporterteam14_harambelovedwaters.controlle
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,6 +26,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -170,9 +173,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
 
         for (WaterReport report : instance.getWaterReports()) {
-            Address adr = report.getAddress();
-            Marker temp = mMap.addMarker(new MarkerOptions().position(report.getLocation()));
-            temp.setTag(report.getReportNumber());
+            try {
+                Address address;
+                List<Address> addrList = new Geocoder(getBaseContext()).getFromLocationName(report.getAddressStr(), 1);
+                if (addrList.size() > 0) {
+                    address = addrList.get(0);
+                } else {
+                    throw new IOException();
+                }
+                Marker temp = mMap.addMarker(new MarkerOptions().position(new LatLng(address.getLatitude(), address.getLongitude())));
+                temp.setTag(report.getReportNumber());
+            } catch (IOException e) {
+
+            }
         }
 
         int width = getResources().getDisplayMetrics().widthPixels;

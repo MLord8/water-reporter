@@ -288,10 +288,6 @@ public class RegistrationActivity extends AppCompatActivity {
             showProgress(false);
 
             if (success) {
-                registeredUserMap.put(user.getEmail(), user.getPassword());
-                registeredUserMap.put(user.getUsername(), user.getPassword());
-                registeredUserSet.add(user);
-
                 FirebaseDatabase mDatabase = instance.getDatabaseInstance();
                 mDatabase.getReference("users").child(Integer.toString(user.getId())).setValue(user);
 
