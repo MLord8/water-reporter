@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "202630865929",
+    "firebase_url": "https://harambe-loved-waters-reporter.firebaseio.com",
+    "project_id": "harambe-loved-waters-reporter",
+    "storage_bucket": "harambe-loved-waters-reporter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:202630865929:android:9df319aa9fc4328b",
+        "android_client_info": {
+          "package_name": "com.example.noahrickles.waterreporterteam14_harambelovedwaters"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "202630865929-fm0o184upfmsbg591phq2q2ga5le9tbg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.noahrickles.waterreporterteam14_harambelovedwaters",
+            "certificate_hash": "05b46ca4fa8ca6157979eec804d29a13f445e238"
+          }
+        },
+        {
+          "client_id": "202630865929-7gn3cqkup3ebnn7nhb06s63nm7jffqkf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDq6f5jeOt-ug7_k4HDSCx7t35hEfbT9Rg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "202630865929-7gn3cqkup3ebnn7nhb06s63nm7jffqkf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
