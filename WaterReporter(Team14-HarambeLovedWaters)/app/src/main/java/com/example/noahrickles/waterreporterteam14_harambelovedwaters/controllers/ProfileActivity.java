@@ -109,6 +109,8 @@ public class ProfileActivity extends AppCompatActivity {
                 user.setUsername(newUsername);
                 registeredUserMap.put(newUsername, user.getPassword());
                 registeredUserSet.add(user);
+
+                instance.addUser(user);
             }
         } else {
             error = "This username is currently in use.";
@@ -132,6 +134,8 @@ public class ProfileActivity extends AppCompatActivity {
                 user.setEmail(newEmail);
                 registeredUserMap.put(newEmail, user.getPassword());
                 registeredUserSet.add(user);
+
+                instance.addUser(user);
             }
         } else {
             error = "This email is currently in use.";
@@ -153,6 +157,8 @@ public class ProfileActivity extends AppCompatActivity {
             user.setPassword(newPassword);
             registeredUserMap.put(user.getUsername(), newPassword);
             registeredUserSet.add(user);
+
+            instance.addUser(user);
         } else {
             error = "This password is not valid.";
         }
@@ -165,6 +171,7 @@ public class ProfileActivity extends AppCompatActivity {
      */
     private void changeHomeAddress(User user, String newHomeAddress) {
         user.setHomeAddress(newHomeAddress);
+        instance.addUser(user);
     }
 
     /**

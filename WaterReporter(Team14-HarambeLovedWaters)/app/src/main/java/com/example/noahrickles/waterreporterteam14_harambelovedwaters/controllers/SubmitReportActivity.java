@@ -134,13 +134,10 @@ public class SubmitReportActivity extends AppCompatActivity {
         if (cancel || !checked1 || !checked2) {
             focusView.requestFocus();
         } else if (address != null) {
-            FirebaseDatabase mDatabase = instance.getDatabaseInstance();
-            mDatabase.getReference("waterReports")
-                    .child(Integer.toString(instance.getWaterReports().size()))
-                    .setValue(new WaterReport(sdf.format(new Date()),
-                            locationField.getText().toString(), currentUser,
-                            instance.getWaterReports().size(),
-                            type, condition));
+            instance.addWaterReport(new WaterReport(sdf.format(new Date()),
+                    locationField.getText().toString(), currentUser,
+                    instance.getWaterReports().size(),
+                    type, condition));
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
             finish();
             startActivity(intent);

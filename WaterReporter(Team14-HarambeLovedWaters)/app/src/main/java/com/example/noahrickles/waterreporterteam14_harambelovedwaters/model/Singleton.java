@@ -35,6 +35,8 @@ import com.google.firebase.database.ValueEventListener;
 public class Singleton {
     private static final Singleton instance = new Singleton();
 
+    FirebaseDatabase db = FirebaseDatabase.getInstance();
+
     //a hash set to hold the registered User objects
     private Set<User> registeredUserSet = new HashSet<User>();
 
@@ -140,7 +142,13 @@ public class Singleton {
      * @param w     the water report passed in
      */
     public void addWaterReport(WaterReport w) {
-        reportList.add(w);
+        db.getReference("waterReports")
+                .child(Integer.toString(instance.getWaterReports().size()))
+                .setValue(w);
+    }
+
+    public void addUser(User u) {
+        db.getReference("users").child(Integer.toString(u.getId())).setValue(u);
     }
 
     /**
@@ -181,19 +189,15 @@ public class Singleton {
         return null;
     }
 
-    public Address findAddressFromName(String address) throws IOException {
-        List<Address> addrList = new Geocoder(new MockContext()).getFromLocationName(address, 1);
+    public Address findAddressFromName(String address, Geocoder geocoder) throws IOException {
+        List<Address> addrList = geocoder.getFromLocationName(address, 1);
         if (addrList.size() > 0) {
             return addrList.get(0);
         }
         throw new IOException();
     }
 
-    public FirebaseDatabase getDatabaseInstance() {
-        return FirebaseDatabase.getInstance();
-    }
-
-    public void setupDatabaseReferences(FirebaseDatabase db) {
+    public void setupDatabaseReferences() {
         DatabaseReference users = db.getReference().child("users");
         DatabaseReference waterReports = db.getReference().child("waterReports");
         DatabaseReference waterPurityReports = db.getReference().child("waterPurityReports");

@@ -2,6 +2,7 @@ package com.example.noahrickles.waterreporterteam14_harambelovedwaters.controlle
 
 import android.content.Intent;
 import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -79,7 +80,8 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
         }
 
         try {
-            address = instance.findAddressFromName(locationField.getText().toString());
+            address = instance.findAddressFromName(locationField.getText().toString(),
+                    new Geocoder(getBaseContext()));
         } catch (IOException e) {
             e.printStackTrace();
             locationField.setError(getString(R.string.error_invalid_location));

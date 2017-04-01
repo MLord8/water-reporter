@@ -22,8 +22,7 @@ public class WelcomeScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_screen);
-        FirebaseDatabase db = instance.getDatabaseInstance();
-        instance.setupDatabaseReferences(db);
+        instance.setupDatabaseReferences();
     }
 
     /**

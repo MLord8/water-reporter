@@ -17,6 +17,7 @@ public class User {
     private String username;
     private String password;
     private String homeAddress;
+    private UserType userType;
     private int id;
 
     public User() {
@@ -30,11 +31,12 @@ public class User {
      * @param password  the User's password
      * @param id        the User's id
      */
-    public User(String email, String username, String password, int id) {
+    public User(String email, String username, String password, int id, UserType userType) {
         this.email = email;
         this.username = username;
         this.password = password;
         this.id = id;
+        this.userType = userType;
     }
 
     /**
@@ -77,10 +79,10 @@ public class User {
 
     /**
      * Gets the user type from this class
-     * @return the user type from this class, USER
+     * @return the user type from this class
      */
     public String getUserType() {
-        return "USER";
+        return userType.toString();
     }
 
     /**
@@ -105,6 +107,10 @@ public class User {
      */
     public void setPassword(String newPassword) {
         password = newPassword;
+    }
+
+    public void setUserType(UserType newUserType) {
+        userType = newUserType;
     }
 
     /**

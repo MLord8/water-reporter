@@ -25,8 +25,6 @@ public class WaterReport {
     private String typeOfWater;
     private String conditionOfWater;
 
-    private Singleton instance = Singleton.getInstance();
-
     public WaterReport() {
 
     }
@@ -66,10 +64,6 @@ public class WaterReport {
     public String getAddressStr() {
         return addressStr;
     }
-
-    //public Address findAddress() throws IOException {
-//
-    //}
 
     //public String findAddressString() throws IOException {
         //Address address = findAddress();
@@ -134,7 +128,7 @@ public class WaterReport {
                 + "\nAddress: " + getAddressStr()
                 //+ "\nLat/Lng: (" + String.format("%.3f", address.getLatitude())
                         //+ ", " + String.format("%.3f", address.getLongitude())
-                + ")\nSubmitter: " + username
+                + "\nSubmitter: " + username
                 + "\nReport number: " + reportNumber
                 + "\nType of Water: " + typeOfWater
                 + "\nCondition of Water: " + conditionOfWater;

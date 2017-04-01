@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.AsyncTask;
@@ -23,13 +22,9 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.R;
-import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Administrator;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Singleton;
-import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Manager;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.User;
-import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Worker;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.UserType;
 
 import java.util.Map;
 import java.util.Set;
@@ -163,26 +158,26 @@ public class RegistrationActivity extends AppCompatActivity {
                 case R.id.user_button:
                     if (checked) {
                         mAuthTask = new UserRegistrationTask(new User(email,
-                            username, password, registeredUserSet.size()));
+                            username, password, registeredUserSet.size(), UserType.USER));
                     }
                     break;
                 case R.id.worker_button:
                     if (checked) {
-                        mAuthTask = new UserRegistrationTask(new Worker(email,
-                            username, password, registeredUserSet.size()));
+                        mAuthTask = new UserRegistrationTask(new User(email,
+                            username, password, registeredUserSet.size(), UserType.WORKER));
                     }
                     break;
                 case R.id.manager_button:
                     if (checked) {
-                        mAuthTask = new UserRegistrationTask(new Manager(email,
-                            username, password, registeredUserSet.size()));
+                        mAuthTask = new UserRegistrationTask(new User(email,
+                            username, password, registeredUserSet.size(), UserType.MANAGER));
                     }
                     break;
                 case R.id.administrator_button:
                     if (checked) {
                         mAuthTask = new UserRegistrationTask(
-                            new Administrator(email, username, password,
-                                registeredUserSet.size()));
+                            new User(email, username, password, registeredUserSet.size(),
+                                    UserType.ADMINISTRATOR));
                     }
                     break;
             }
@@ -288,8 +283,7 @@ public class RegistrationActivity extends AppCompatActivity {
             showProgress(false);
 
             if (success) {
-                FirebaseDatabase mDatabase = instance.getDatabaseInstance();
-                mDatabase.getReference("users").child(Integer.toString(user.getId())).setValue(user);
+                instance.addUser(user);
 
                 Intent intent = new Intent(getBaseContext(), LoginActivity.class);
                 startActivity(intent);

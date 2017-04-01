@@ -1,5 +1,6 @@
 package com.example.noahrickles.waterreporterteam14_harambelovedwaters.controllers;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
@@ -12,6 +13,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.R;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Singleton;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.WaterReport;
@@ -86,6 +89,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             Intent intent = new Intent(getBaseContext(), SubmitPurityReportActivity.class);
             finish();
             startActivity(intent);
+        } else {
+            Context context = getApplicationContext();
+            CharSequence text = "You do not have sufficient user privileges to access this page.";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
         }
     }
 
@@ -174,17 +184,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         for (WaterReport report : instance.getWaterReports()) {
             try {
-                Address address;
-                List<Address> addrList = new Geocoder(getBaseContext()).getFromLocationName(report.getAddressStr(), 1);
-                if (addrList.size() > 0) {
-                    address = addrList.get(0);
-                } else {
-                    throw new IOException();
-                }
-                Marker temp = mMap.addMarker(new MarkerOptions().position(new LatLng(address.getLatitude(), address.getLongitude())));
+                Address address = instance.
+                        findAddressFromName(report.getAddressStr(), new Geocoder(getBaseContext()));
+                Marker temp = mMap.
+                        addMarker(new MarkerOptions().position(new LatLng(address.getLatitude(),
+                                address.getLongitude())));
                 temp.setTag(report.getReportNumber());
             } catch (IOException e) {
-
+                Log.d("Error", "findAddressFromName failed on " + report);
             }
         }
 
