@@ -119,8 +119,8 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
         } else if (address != null) {
             instance.addWaterPurityReport(
                     new WaterPurityReport(sdf.format(new Date()),
-                            address, currentUser,
-                            instance.getWaterPurityReports().size() + 1,
+                            locationField.getText().toString(), currentUser,
+                            instance.getWaterPurityReports().size(),
                             contaminantPPM, virusPPM, condition));
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
             finish();
@@ -138,5 +138,4 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
         finish();
         startActivity(intent);
     }
-
 }
