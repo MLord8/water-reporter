@@ -186,7 +186,7 @@ public class Singleton {
      */
     public WaterReport findWaterReportById(int id) {
         for (WaterReport report : reportList) {
-            if (report.getReportNumber() == id) {
+            if (report != null && report.getReportNumber() == id) {
                 return report;
             }
         }

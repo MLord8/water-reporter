@@ -201,12 +201,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         for (WaterReport report : instance.getWaterReports()) {
             try {
-                Address address = instance.
-                        findAddressFromName(report.getAddressStr(), new Geocoder(getBaseContext()));
-                Marker temp = mMap.
-                        addMarker(new MarkerOptions().position(new LatLng(address.getLatitude(),
-                                address.getLongitude())));
-                temp.setTag(report.getReportNumber());
+                if (report != null) {
+                    Address address = instance.
+                            findAddressFromName(report.getAddressStr(), new Geocoder(getBaseContext()));
+                    Marker temp = mMap.
+                            addMarker(new MarkerOptions().position(new LatLng(address.getLatitude(),
+                                    address.getLongitude())));
+                    temp.setTag(report.getReportNumber());
+                }
             } catch (IOException e) {
                 Log.d("Error", "findAddressFromName failed on " + report);
             }
