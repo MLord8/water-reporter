@@ -100,6 +100,23 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     /**
+     * Prompts the user for information and creates a graph if the user has proper credentials
+     * @param view The create graph button
+     */
+    public void createGraph(View view) {
+        if (instance.getCurrUser().getUserType().equals("MANAGER")) {
+            
+        } else {
+            Context context = getApplicationContext();
+            CharSequence text = "You do not have sufficient user privileges to access this page.";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
+    }
+
+    /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
      * This is where we can add markers or lines, add listeners or move the camera. In this case,
