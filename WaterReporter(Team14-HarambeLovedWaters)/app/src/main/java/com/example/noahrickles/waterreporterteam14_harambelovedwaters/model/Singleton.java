@@ -145,7 +145,7 @@ public class Singleton {
         db.getReference("waterReports")
                 .child(Integer.toString(reportList.size()))
                 .setValue(w);
-        reportList.add(w);
+        //reportList.add(w);
     }
 
     public void addUser(User u) {
@@ -160,7 +160,7 @@ public class Singleton {
         db.getReference("waterPurityReports")
                 .child(Integer.toString(purityReportList.size()))
                 .setValue(w);
-        purityReportList.add(w);
+        //purityReportList.add(w);
     }
 
     /**
@@ -247,6 +247,12 @@ public class Singleton {
                     for (WaterReport r : reportListDB) {
                         reportList.add(r);
                     }
+                } else {
+                    for (WaterReport r : reportListDB) {
+                        if (!reportList.contains(r)) {
+                            reportList.add(r);
+                        }
+                    }
                 }
                 Log.d("Success", "Value is: " + reportListDB);
             }
@@ -269,6 +275,12 @@ public class Singleton {
                 if (purityReportList.size() == 0) {
                     for (WaterPurityReport r : purityReportListDB) {
                         purityReportList.add(r);
+                    }
+                } else {
+                    for (WaterPurityReport r : purityReportListDB) {
+                        if (!purityReportList.contains(r)) {
+                            purityReportList.add(r);
+                        }
                     }
                 }
                 Log.d("Success", "Value is: " + purityReportListDB);
