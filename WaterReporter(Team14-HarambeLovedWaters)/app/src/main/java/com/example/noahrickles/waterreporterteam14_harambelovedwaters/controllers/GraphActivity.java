@@ -53,6 +53,10 @@ public class GraphActivity extends AppCompatActivity {
         virusText.setTextColor(Color.RED);
     }
 
+    /**
+     * Plots points on graph using the CPPM and VPPM Graph Points.
+     * @param v View to modify
+     */
     public void graphCreate(View v) {
         String location = locationField.getText().toString();
         String year = yearField.getText().toString();

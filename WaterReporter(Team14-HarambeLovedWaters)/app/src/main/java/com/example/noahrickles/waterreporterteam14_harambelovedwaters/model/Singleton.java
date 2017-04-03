@@ -193,6 +193,13 @@ public class Singleton {
         return null;
     }
 
+    /**
+     * Returns address based on location name
+     * @param address string containing address
+     * @param geocoder gives address using location name
+     * @return address based on location provided
+     * @throws IOException
+     */
     public Address findAddressFromName(String address, Geocoder geocoder) throws IOException {
         List<Address> addrList = geocoder.getFromLocationName(address, 1);
         if (addrList.size() > 0) {
@@ -201,6 +208,12 @@ public class Singleton {
         throw new IOException();
     }
 
+    /**
+     * Gives Contaminant PPM points to graph based on location/year
+     * @param location string specifying location to check
+     * @param year string specifying year to check
+     * @return graph points for CPPM
+     */
     public HashMap<Integer, Double> getCPPMGraphPoints(String location, String year) {
         HashMap<Integer, Double> graphPoints = new HashMap<>();
         int[] months = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
@@ -227,6 +240,12 @@ public class Singleton {
         return graphPoints;
     }
 
+    /**
+     * Gives Virus PPM points to graph based on location/year
+     * @param location string specifying location to check
+     * @param year string specifying year to check
+     * @return graph points for VPPM
+     */
     public HashMap<Integer, Double> getVPPMGraphPoints(String location, String year) {
         HashMap<Integer, Double> graphPoints = new HashMap<>();
         int[] months = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
@@ -253,6 +272,9 @@ public class Singleton {
         return graphPoints;
     }
 
+    /**
+     * Refreshes instance variables storing app information from database.
+     */
     public void setupDatabaseReferences() {
         DatabaseReference users = db.getReference().child("users");
         DatabaseReference waterReports = db.getReference().child("waterReports");
