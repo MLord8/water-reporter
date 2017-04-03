@@ -201,7 +201,7 @@ public class Singleton {
         throw new IOException();
     }
 
-    public HashMap getGraphPoints(String location, String year) {
+    public HashMap<Integer, Double> getGraphPoints(String location, String year) {
         HashMap<Integer, Double> graphPoints = new HashMap<>();
         int[] months = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
         for (int i = 1; i <= 12; i++) {
@@ -209,8 +209,7 @@ public class Singleton {
             double monthlySum = 0;
             {
                 for (WaterPurityReport w : getWaterPurityReports()) {
-                    String month = w.getDateAndTime().substring(0, 1);
-                    String reportYear = w.getDateAndTime().substring(6, 9);
+                    String reportYear = w.getDateAndTime().substring(6, 10);
                     String loc = w.getAddress();
 
                     if (loc.equals(location) && reportYear.equals(year)) {
