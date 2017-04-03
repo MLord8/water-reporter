@@ -41,7 +41,7 @@
             android:label="Profile" />
         <activity
             android:name=".controllers.SubmitReportActivity"
-            android:label="Submit Water Report"/>
+            android:label="Submit Water Report" />
         <activity
             android:name=".controllers.SubmitPurityReportActivity"
             android:label="Submit Water Purity Report" />
@@ -57,6 +57,10 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <activity
+            android:name=".controllers.GraphActivity"
+            android:label="@string/title_activity_graph"
+            android:theme="@style/AppCompactLight.NoActionBar"></activity>
     </application>
 
 </manifest>
