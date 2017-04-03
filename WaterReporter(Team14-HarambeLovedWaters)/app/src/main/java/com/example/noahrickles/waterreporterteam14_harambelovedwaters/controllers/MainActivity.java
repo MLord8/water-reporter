@@ -105,7 +105,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
      */
     public void createGraph(View view) {
         if (instance.getCurrUser().getUserType().equals("MANAGER")) {
-            
+            Intent intent = new Intent(getBaseContext(), GraphActivity.class);
+            finish();
+            startActivity(intent);
         } else {
             Context context = getApplicationContext();
             CharSequence text = "You do not have sufficient user privileges to access this page.";

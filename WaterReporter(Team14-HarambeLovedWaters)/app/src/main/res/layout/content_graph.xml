@@ -16,10 +16,10 @@
         tools:layout_editor_absoluteY="8dp">
 
         <com.jjoe64.graphview.GraphView
+            android:id="@+id/graph"
             android:layout_width="match_parent"
             android:layout_height="200dip"
-            app:seriesType="line"
-            android:id="@+id/graph" />
+            app:seriesType="line" />
 
         <EditText
             android:id="@+id/locationField"
