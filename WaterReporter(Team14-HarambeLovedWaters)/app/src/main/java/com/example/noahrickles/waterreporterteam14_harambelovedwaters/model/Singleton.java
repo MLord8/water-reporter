@@ -201,6 +201,31 @@ public class Singleton {
         throw new IOException();
     }
 
+    public HashMap getGraphPoints(String location, String year) {
+        HashMap<Integer, Double> graphPoints = new HashMap<>();
+        int[] months = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+        for (int i = 1; i <= 12; i++) {
+            int entryCount = 0;
+            double monthlySum = 0;
+            {
+                for (WaterPurityReport w : getWaterPurityReports()) {
+                    String month = w.getDateAndTime().substring(0, 1);
+                    String reportYear = w.getDateAndTime().substring(6, 9);
+                    String loc = w.getAddress();
+
+                    if (loc.equals(location) && reportYear.equals(year)) {
+                        monthlySum += w.getContaminantPPM();
+                        entryCount++;
+                    }
+                }
+                double monthlyAvg = (monthlySum / entryCount);
+                graphPoints.put(months[i-1], monthlyAvg);
+            }
+        }
+
+        return graphPoints;
+    }
+
     public void setupDatabaseReferences() {
         DatabaseReference users = db.getReference().child("users");
         DatabaseReference waterReports = db.getReference().child("waterReports");
