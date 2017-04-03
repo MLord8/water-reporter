@@ -201,7 +201,7 @@ public class Singleton {
         throw new IOException();
     }
 
-    public HashMap<Integer, Double> getGraphPoints(String location, String year) {
+    public HashMap<Integer, Double> getCPPMGraphPoints(String location, String year) {
         HashMap<Integer, Double> graphPoints = new HashMap<>();
         int[] months = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
         for (int i = 1; i <= 12; i++) {
@@ -214,6 +214,32 @@ public class Singleton {
                     Integer reportMonth = Integer.parseInt(w.getDateAndTime().substring(0, 2));
                     if (loc.equals(location) && reportYear.equals(year) && reportMonth == i) {
                         monthlySum += w.getContaminantPPM();
+                        entryCount++;
+                    }
+                }
+                double monthlyAvg = (monthlySum / entryCount);
+                if (entryCount != 0) {
+                    graphPoints.put(months[i-1], monthlyAvg);
+                }
+            }
+        }
+
+        return graphPoints;
+    }
+
+    public HashMap<Integer, Double> getVPPMGraphPoints(String location, String year) {
+        HashMap<Integer, Double> graphPoints = new HashMap<>();
+        int[] months = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+        for (int i = 1; i <= 12; i++) {
+            int entryCount = 0;
+            double monthlySum = 0;
+            {
+                for (WaterPurityReport w : getWaterPurityReports()) {
+                    String reportYear = w.getDateAndTime().substring(6, 10);
+                    String loc = w.getAddress();
+                    Integer reportMonth = Integer.parseInt(w.getDateAndTime().substring(0, 2));
+                    if (loc.equals(location) && reportYear.equals(year) && reportMonth == i) {
+                        monthlySum += w.getVirusPPM();
                         entryCount++;
                     }
                 }

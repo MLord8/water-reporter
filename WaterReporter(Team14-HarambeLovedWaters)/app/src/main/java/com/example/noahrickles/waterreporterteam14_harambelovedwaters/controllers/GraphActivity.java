@@ -1,6 +1,8 @@
 package com.example.noahrickles.waterreporterteam14_harambelovedwaters.controllers;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -44,24 +46,44 @@ public class GraphActivity extends AppCompatActivity {
         String location = locationField.getText().toString();
         String year = yearField.getText().toString();
         if (!year.equals("") && !location.equals("")) {
-            HashMap<Integer, Double> graphPoints = instance.getGraphPoints(location, year);
-            Log.d("Points", graphPoints.toString());
-            ArrayList<DataPoint> values = new ArrayList<DataPoint>();
-            for (Integer key : graphPoints.keySet()) {
-                Double val = graphPoints.get(key);
-                DataPoint point = new DataPoint(key, val);
-                values.add(point);
-            }
-            DataPoint[] finalArray = new DataPoint[values.size()];
+            HashMap<Integer, Double> CPPMGraphPoints = instance.getCPPMGraphPoints(location, year);
+            HashMap<Integer, Double> VPPMGraphPoints = instance.getVPPMGraphPoints(location, year);
 
-            for (int i = 0; i < finalArray.length; i++) {
-                finalArray[i] = values.get(i);
+            ArrayList<DataPoint> CPPMValues = new ArrayList<>();
+            ArrayList<DataPoint> VPPMValues = new ArrayList<>();
+            Integer[] keySet = new Integer[CPPMGraphPoints.keySet().size()];
+            int index = 0;
+            for (Integer key : CPPMGraphPoints.keySet()) {
+                keySet[index] = key;
+                index++;
+            }
+            Arrays.sort(keySet);
+            for (Integer key : keySet) {
+                Double val1 = CPPMGraphPoints.get(key);
+                Double val2 = VPPMGraphPoints.get(key);
+                DataPoint point1 = new DataPoint(key, val1);
+                DataPoint point2 = new DataPoint(key, val2);
+                CPPMValues.add(point1);
+                VPPMValues.add(point2);
+            }
+            DataPoint[] CPPMArray = new DataPoint[CPPMValues.size()];
+            DataPoint[] VPPMArray = new DataPoint[VPPMValues.size()];
+            for (int i = 0; i < CPPMArray.length; i++) {
+                CPPMArray[i] = CPPMValues.get(i);
+                VPPMArray[i] = VPPMValues.get(i);
             }
 
-            LineGraphSeries<DataPoint> series = new LineGraphSeries<>(finalArray);
-            series.setTitle("PPM over the year " + year);
-            series.setDrawDataPoints(true);
-            graph.addSeries(series);
+            LineGraphSeries<DataPoint> CPPMseries = new LineGraphSeries<>(CPPMArray);
+            CPPMseries.setTitle("PPM over the year " + year);
+            CPPMseries.setDrawDataPoints(true);
+            CPPMseries.setColor(Color.GREEN);
+            graph.addSeries(CPPMseries);
+
+            LineGraphSeries<DataPoint> VPPMseries = new LineGraphSeries<>(VPPMArray);
+            VPPMseries.setTitle("PPM over the year " + year);
+            VPPMseries.setDrawDataPoints(true);
+            VPPMseries.setColor(Color.RED);
+            graph.addSeries(VPPMseries);
         } else {
             Context context = getApplicationContext();
             CharSequence text = "Enter information into fields.";
@@ -70,6 +92,16 @@ public class GraphActivity extends AppCompatActivity {
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
         }
+    }
+
+    /**
+     * Brings the user back to the main application
+     * @param view the cancel button
+     */
+    public void cancel(View view) {
+        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+        finish();
+        startActivity(intent);
     }
 
 }

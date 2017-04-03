@@ -19,8 +19,16 @@
             android:id="@+id/graph"
             android:layout_width="match_parent"
             android:layout_height="200dip"
+            app:seriesColor="#ee0000"
             app:seriesType="line"
-            app:seriesColor="#ee0000"/>
+            tools:paddingTop="50dp" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contaminant and Virus PPM by Month"
+            android:gravity="center"/>
 
         <EditText
             android:id="@+id/locationField"
@@ -44,6 +52,13 @@
             android:layout_height="wrap_content"
             android:onClick="graphCreate"
             android:text="Create \n Graph" />
+
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="cancel"
+            android:text="Cancel" />
 
 
     </LinearLayout>
