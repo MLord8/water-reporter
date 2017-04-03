@@ -19,7 +19,8 @@
             android:id="@+id/graph"
             android:layout_width="match_parent"
             android:layout_height="200dip"
-            app:seriesType="line" />
+            app:seriesType="line"
+            app:seriesColor="#ee0000"/>
 
         <EditText
             android:id="@+id/locationField"

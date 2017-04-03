@@ -211,14 +211,16 @@ public class Singleton {
                 for (WaterPurityReport w : getWaterPurityReports()) {
                     String reportYear = w.getDateAndTime().substring(6, 10);
                     String loc = w.getAddress();
-
-                    if (loc.equals(location) && reportYear.equals(year)) {
+                    Integer reportMonth = Integer.parseInt(w.getDateAndTime().substring(0, 2));
+                    if (loc.equals(location) && reportYear.equals(year) && reportMonth == i) {
                         monthlySum += w.getContaminantPPM();
                         entryCount++;
                     }
                 }
                 double monthlyAvg = (monthlySum / entryCount);
-                graphPoints.put(months[i-1], monthlyAvg);
+                if (entryCount != 0) {
+                    graphPoints.put(months[i-1], monthlyAvg);
+                }
             }
         }
 

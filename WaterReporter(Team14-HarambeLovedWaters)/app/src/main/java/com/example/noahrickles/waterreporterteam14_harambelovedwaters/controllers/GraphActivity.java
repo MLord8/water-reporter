@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -16,6 +17,8 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class GraphActivity extends AppCompatActivity {
@@ -42,13 +45,22 @@ public class GraphActivity extends AppCompatActivity {
         String year = yearField.getText().toString();
         if (!year.equals("") && !location.equals("")) {
             HashMap<Integer, Double> graphPoints = instance.getGraphPoints(location, year);
-            DataPoint[] values = new DataPoint[12];
-            Integer[] keys = (Integer[]) graphPoints.keySet().toArray();
-            for (int i = 0; i < graphPoints.size(); i++) {
-                DataPoint point = new DataPoint((double) keys[i], (double) graphPoints.get(i));
+            Log.d("Points", graphPoints.toString());
+            ArrayList<DataPoint> values = new ArrayList<DataPoint>();
+            for (Integer key : graphPoints.keySet()) {
+                Double val = graphPoints.get(key);
+                DataPoint point = new DataPoint(key, val);
+                values.add(point);
             }
-            LineGraphSeries<DataPoint> series = new LineGraphSeries<>(values);
+            DataPoint[] finalArray = new DataPoint[values.size()];
+
+            for (int i = 0; i < finalArray.length; i++) {
+                finalArray[i] = values.get(i);
+            }
+
+            LineGraphSeries<DataPoint> series = new LineGraphSeries<>(finalArray);
             series.setTitle("PPM over the year " + year);
+            series.setDrawDataPoints(true);
             graph.addSeries(series);
         } else {
             Context context = getApplicationContext();
