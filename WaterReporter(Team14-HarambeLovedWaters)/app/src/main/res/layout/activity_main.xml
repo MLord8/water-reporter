@@ -11,80 +11,91 @@
         android:id="@+id/include" />
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
 
-        <!--<ListView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/reportView" />-->
 
-        <HorizontalScrollView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/profile_button"
+            android:layout_marginLeft="0dp"
+            android:layout_marginStart="0dp"
+            android:orientation="horizontal">
 
-            <LinearLayout
+            <Button
+                android:id="@+id/profile_button"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_height="35dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="bottom|left"
+                android:layout_weight="1"
+                android:onClick="goProfile"
+                android:text="Profile" />
 
-                <Button
-                    android:id="@+id/profile_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|right"
-                    android:layout_weight="1"
-                    android:onClick="goProfile"
-                    android:text="Profile"
-                    app:layout_anchor="@+id/include"
-                    app:layout_anchorGravity="top|left" />
+            <Button
+                android:id="@+id/submit_button"
+                android:layout_width="78dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/profile_button"
+                android:layout_weight="0.50"
+                android:onClick="report"
+                android:text="Submit a Report"
+                app:layout_anchor="@+id/include" />
 
-                <Button
-                    android:id="@+id/submit_button"
-                    android:layout_width="78dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.50"
-                    android:onClick="report"
-                    android:text="Submit a Report"
-                    app:layout_anchor="@+id/include" />
+            <Button
+                android:id="@+id/button6"
+                android:layout_width="99dp"
+                android:layout_height="wrap_content"
+                android:onClick="reportPurity"
+                android:text="Submit a purity Report"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
 
-                <Button
-                    android:id="@+id/button6"
-                    android:layout_width="99dp"
-                    android:layout_height="wrap_content"
-                    android:onClick="reportPurity"
-                    android:text="Submit a purity Report" />
+            <Button
+                android:id="@+id/graphButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="createGraph"
+                android:text="Create \n Graph"
+                android:layout_marginRight="13dp"
+                android:layout_marginEnd="13dp"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/button6"
+                android:layout_toStartOf="@+id/button6" />
 
-                <Button
-                    android:id="@+id/logout_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top|right"
-                    android:onClick="logout"
-                    android:text="Logout"
-                    app:layout_anchor="@+id/include"
-                    app:layout_anchorGravity="bottom|left" />
+        </RelativeLayout>
 
-                <Button
-                    android:id="@+id/graphButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="createGraph"
-                    android:text="Create \n Graph" />
-
-            </LinearLayout>
-        </HorizontalScrollView>
-
-        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:map="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
+        <fragment
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="100dp"
+            android:layout_weight="1"
             tools:context="com.example.noahrickles.waterreporterteam14_harambelovedwaters.controllers.MapsActivity" />
+
+        <Button
+            android:id="@+id/logout_button"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="top|right"
+            android:onClick="logout"
+            android:text="Logout"
+            app:layout_anchor="@+id/include"
+            app:layout_anchorGravity="bottom|left" />
+
 
     </LinearLayout>
 
