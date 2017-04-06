@@ -27,8 +27,6 @@ import com.google.firebase.database.ValueEventListener;
 public class Singleton {
     private static final Singleton instance = new Singleton();
 
-    FirebaseDatabase db = FirebaseDatabase.getInstance();
-
     //a hash set to hold the registered User objects
     private Set<User> registeredUserSet = new HashSet<User>();
 
@@ -64,6 +62,14 @@ public class Singleton {
      */
     private Singleton() {
 
+    }
+
+    /**
+     *
+     * @return
+     */
+    public static FirebaseDatabase getFirebaseInstance() {
+        return FirebaseDatabase.getInstance();
     }
 
     /**
@@ -134,13 +140,13 @@ public class Singleton {
      * @param w     the water report passed in
      */
     public void addWaterReport(WaterReport w) {
-        db.getReference("waterReports")
+        getFirebaseInstance().getReference("waterReports")
                 .child(Integer.toString(reportList.size()))
                 .setValue(w);
     }
 
     public void addUser(User u) {
-        db.getReference("users").child(Integer.toString(u.getId())).setValue(u);
+        getFirebaseInstance().getReference("users").child(Integer.toString(u.getId())).setValue(u);
     }
 
     /**
@@ -148,7 +154,7 @@ public class Singleton {
      * @param w     the water report passed in
      */
     public void addWaterPurityReport(WaterPurityReport w) {
-        db.getReference("waterPurityReports")
+        getFirebaseInstance().getReference("waterPurityReports")
                 .child(Integer.toString(purityReportList.size()))
                 .setValue(w);
     }
@@ -175,6 +181,10 @@ public class Singleton {
      * @return the desired WaterReport (or null if not found)
      */
     public WaterReport findWaterReportById(int id) {
+        if (id < 0) {
+            return null;
+        }
+
         for (WaterReport report : reportList) {
             if (report != null && report.getReportNumber() == id) {
                 return report;
@@ -266,6 +276,7 @@ public class Singleton {
      * Refreshes instance variables storing app information from database.
      */
     public void setupDatabaseReferences() {
+        FirebaseDatabase db = getFirebaseInstance();
         DatabaseReference users = db.getReference().child("users");
         DatabaseReference waterReports = db.getReference().child("waterReports");
         DatabaseReference waterPurityReports = db.getReference().child("waterPurityReports");

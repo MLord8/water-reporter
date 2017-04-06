@@ -180,7 +180,7 @@ public class ProfileActivity extends AppCompatActivity {
      */
     public void cancel(View view) {
         Intent intent = new Intent(getBaseContext(), MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        finish();
         startActivity(intent);
     }
 }
