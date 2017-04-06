@@ -2,24 +2,16 @@ package com.example.noahrickles.waterreporterteam14_harambelovedwaters.model;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Set;
 
-import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
-import android.content.Context;
-import android.provider.ContactsContract;
-import android.test.mock.MockContext;
 import android.util.Log;
 
 import java.util.List;
 
-import com.example.noahrickles.waterreporterteam14_harambelovedwaters.controllers.MainActivity;
-import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -145,7 +137,6 @@ public class Singleton {
         db.getReference("waterReports")
                 .child(Integer.toString(reportList.size()))
                 .setValue(w);
-        //reportList.add(w);
     }
 
     public void addUser(User u) {
@@ -160,7 +151,6 @@ public class Singleton {
         db.getReference("waterPurityReports")
                 .child(Integer.toString(purityReportList.size()))
                 .setValue(w);
-        //purityReportList.add(w);
     }
 
     /**
