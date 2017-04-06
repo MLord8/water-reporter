@@ -1,12 +1,15 @@
 package com.example.noahrickles.waterreporterteam14_harambelovedwaters;
 
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Singleton;
+import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.WaterPurityReport;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.WaterReport;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
+
+import java.util.HashMap;
 
 /**
  * Created by Noah Rickles on 4/5/2017.
@@ -53,5 +56,44 @@ public class JUnitTests {
         assertNull(instance.findWaterReportById(1));
         assertNull(instance.findWaterReportById(2));
         assertNull(instance.findWaterReportById(99));
+    }
+
+    // Nikhil Ramesh
+    @Test
+    public void testGetCPPMGraphPoints() throws Exception {
+        assertNull(instance.getCPPMGraphPoints(null, "2017"));
+        assertNull(instance.getCPPMGraphPoints("Tokyo, Japan", null));
+        assertNull(instance.getCPPMGraphPoints(null, null));
+
+        HashMap<Integer, Double> graphPoints = new HashMap<>();
+        assertEquals(instance.getCPPMGraphPoints("Tokyo, Japan", "2015"), graphPoints);
+
+        WaterPurityReport wp1 = new WaterPurityReport("06/10/2010 02:15:15 PM (EDT)",
+                "Tokyo, Japan", "nramesh", 1, 2.0, 2.0, "Treatable");
+        instance.getWaterPurityReports().add(wp1);
+        graphPoints.put(6, 2.0);
+        assertEquals(graphPoints, instance.getCPPMGraphPoints("Tokyo, Japan", "2010"));
+
+        WaterPurityReport wp2 = new WaterPurityReport("06/21/2010 03:15:15 PM (EDT)",
+                "Tokyo, Japan", "nramesh", 1, 6.0, 2.0, "Safe");
+        instance.getWaterPurityReports().add(wp2);
+        graphPoints.put(6, 4.0);
+        assertEquals(graphPoints, instance.getCPPMGraphPoints("Tokyo, Japan", "2010"));
+
+        WaterPurityReport wp3 = new WaterPurityReport("08/27/2010 03:15:15 PM (EDT)",
+                "Tokyo, Japan", "nramesh", 1, 10.0, 2.0, "Treatable");
+        instance.getWaterPurityReports().add(wp3);
+        graphPoints.put(8, 10.0);
+        assertEquals(graphPoints, instance.getCPPMGraphPoints("Tokyo, Japan", "2010"));
+
+        WaterPurityReport wp4 = new WaterPurityReport("08/27/2012 03:15:15 PM (EDT)",
+                "Tokyo, Japan", "nramesh", 1, 10.0, 2.0, "Treatable");
+        instance.getWaterPurityReports().add(wp4);
+        assertEquals(graphPoints, instance.getCPPMGraphPoints("Tokyo, Japan", "2010"));
+
+        WaterPurityReport wp5 = new WaterPurityReport("08/27/2012 03:15:15 PM (EDT)",
+                "Sydney, Australia", "nramesh", 1, 10.0, 2.0, "Treatable");
+        instance.getWaterPurityReports().add(wp5);
+        assertEquals(graphPoints, instance.getCPPMGraphPoints("Tokyo, Japan", "2010"));
     }
 }

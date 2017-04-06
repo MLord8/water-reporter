@@ -215,6 +215,10 @@ public class Singleton {
      * @return graph points for CPPM
      */
     public HashMap<Integer, Double> getCPPMGraphPoints(String location, String year) {
+        if (location == null || year == null) {
+            return null;
+        }
+
         HashMap<Integer, Double> graphPoints = new HashMap<>();
         int[] months = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
         for (int i = 1; i <= 12; i++) {
