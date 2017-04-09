@@ -96,4 +96,31 @@ public class JUnitTests {
         instance.getWaterPurityReports().add(wp5);
         assertEquals(graphPoints, instance.getCPPMGraphPoints("Tokyo, Japan", "2010"));
     }
+
+    //Matt Lord
+    @Test
+    public void testGetVPPMGraphPoints() throws Exception {
+        assertNull(instance.getVPPMGraphPoints(null, "2016"));
+        assertNull(instance.getVPPMGraphPoints("Charleston, West Virginia", null));
+        assertNull(instance.getVPPMGraphPoints(null, null));
+
+        HashMap<Integer, Double> graphPoints = new HashMap<>();
+        WaterPurityReport wp1 = new WaterPurityReport("04/01/2017 02:15:15 PM (EDT)",
+                "Atlanta, Georgia", "BoolinBob420", 1, 3.0, 3.0, "Treatable");
+        instance.getWaterPurityReports().add(wp1);
+        graphPoints.put(4, 3.0);
+        assertEquals(graphPoints, instance.getCPPMGraphPoints("Atlanta, Georgia", "2017"));
+
+        WaterPurityReport wp2 = new WaterPurityReport("04/02/2017 05:15:15 AM (EDT)",
+                "Atlanta, Georgia", "BoolinBob420", 1, 9.0, 9.0, "Treatable");
+        instance.getWaterPurityReports().add(wp2);
+        graphPoints.put(4, 6.0);
+        assertEquals(graphPoints, instance.getCPPMGraphPoints("Atlanta, Georgia", "2017"));
+
+        WaterPurityReport wp3 = new WaterPurityReport("11/02/2013 05:15:15 AM (EDT)",
+                "New York, New York", "BoolinBob420", 1, 10.0, 12.0, "Treatable");
+        instance.getWaterPurityReports().add(wp3);
+        graphPoints.put(4, 6.0);
+        assertEquals(graphPoints, instance.getCPPMGraphPoints("Atlanta, Georgia", "2017"));
+    }
 }
