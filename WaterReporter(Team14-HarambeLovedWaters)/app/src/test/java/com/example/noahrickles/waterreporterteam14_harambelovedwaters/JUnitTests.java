@@ -2,9 +2,6 @@ package com.example.noahrickles.waterreporterteam14_harambelovedwaters;
 
 import android.annotation.SuppressLint;
 
-import android.location.Geocoder;
-import android.content.Context;
-
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Singleton;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.WaterPurityReport;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.WaterReport;
