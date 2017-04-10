@@ -4,6 +4,7 @@ package com.example.noahrickles.waterreporterteam14_harambelovedwaters.model;
  * Created by Matt on 2/27/2017.
  */
 
+@SuppressWarnings("DefaultFileTemplate")
 public class WaterReport {
 
     private String dateAndTime;

@@ -15,7 +15,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+        tools:layout_editor_absoluteY="8dp"
+        tools:ignore="RtlHardcoded">
 
         <com.jjoe64.graphview.GraphView
             android:id="@+id/graph"
@@ -37,7 +38,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingLeft="20dp"
-            android:paddingRight="0dp">
+            android:paddingRight="0dp"
+            tools:ignore="RtlHardcoded">
 
             <TextView
                 android:id="@+id/keyText"

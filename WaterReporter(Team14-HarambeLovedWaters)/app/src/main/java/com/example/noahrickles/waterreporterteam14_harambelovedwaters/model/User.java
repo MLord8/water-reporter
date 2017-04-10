@@ -4,6 +4,7 @@ package com.example.noahrickles.waterreporterteam14_harambelovedwaters.model;
  * Created by Noah Rickles on 2/21/2017.
  */
 
+@SuppressWarnings("DefaultFileTemplate")
 public class User {
     private String email;
     private String username;

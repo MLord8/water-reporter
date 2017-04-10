@@ -60,7 +60,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/button5"
             android:layout_weight="1"
-            android:onClick="cancelReport"/>
+            android:onClick="cancelReport"
+            tools:ignore="ButtonStyle" />
 
         <Button
             android:text="@string/submit"
@@ -68,7 +69,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/button4"
             android:layout_weight="1"
-            android:onClick="submitReport"/>
+            android:onClick="submitReport"
+            tools:ignore="ButtonStyle" />
     </LinearLayout>
 
     <RadioGroup

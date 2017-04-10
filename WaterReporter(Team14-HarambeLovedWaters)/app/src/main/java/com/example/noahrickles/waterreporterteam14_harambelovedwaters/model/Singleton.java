@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
+import android.annotation.SuppressLint;
 import android.location.Address;
 import android.location.Geocoder;
 import android.util.Log;
@@ -23,15 +24,16 @@ import com.google.firebase.database.ValueEventListener;
  * Created by Noah Rickles on 2/27/2017.
  */
 
+@SuppressWarnings({"DefaultFileTemplate", "BooleanMethodIsAlwaysInverted"})
 public class Singleton {
     private static final Singleton instance = new Singleton();
 
     //a hash set to hold the registered User objects
-    private final Set<User> registeredUserSet = new HashSet<User>();
+    private final Set<User> registeredUserSet = new HashSet<>();
 
     //a hash map to hold the registered users
     //each username and email is mapped to its corresponding value
-    private final HashMap<String, String> registeredUserMap = new HashMap<String, String>();
+    private final HashMap<String, String> registeredUserMap = new HashMap<>();
 
     //a list to hold the submitted water reports
     private final ArrayList<WaterReport> reportList = new ArrayList<>();
@@ -210,7 +212,7 @@ public class Singleton {
             return null;
         }
 
-        HashMap<Integer, Double> graphPoints = new HashMap<>();
+        @SuppressLint("UseSparseArrays") HashMap<Integer, Double> graphPoints = new HashMap<>();
         int[] months = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
         for (int i = 1; i <= 12; i++) {
             int entryCount = 0;
@@ -246,7 +248,7 @@ public class Singleton {
             return null;
         }
 
-        HashMap<Integer, Double> graphPoints = new HashMap<>();
+        @SuppressLint("UseSparseArrays") HashMap<Integer, Double> graphPoints = new HashMap<>();
         int[] months = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
         for (int i = 1; i <= 12; i++) {
             int entryCount = 0;

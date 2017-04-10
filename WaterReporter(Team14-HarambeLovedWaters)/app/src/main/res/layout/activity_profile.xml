@@ -16,7 +16,8 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        tools:ignore="UselessParent">
 
         <EditText
             android:layout_width="match_parent"
@@ -36,14 +37,16 @@
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
-            android:id="@+id/email_text" />
+            android:id="@+id/email_text"
+            tools:ignore="TextFields" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
-            android:id="@+id/password_text" />
+            android:id="@+id/password_text"
+            tools:ignore="TextFields" />
 
         <EditText
             android:layout_width="match_parent"

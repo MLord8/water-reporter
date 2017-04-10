@@ -1,5 +1,7 @@
 package com.example.noahrickles.waterreporterteam14_harambelovedwaters;
 
+import android.annotation.SuppressLint;
+
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Singleton;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.WaterPurityReport;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.WaterReport;
@@ -15,6 +17,7 @@ import java.util.HashMap;
  * Created by Noah Rickles on 4/5/2017.
  */
 
+@SuppressWarnings("DefaultFileTemplate")
 public class JUnitTests {
     private final Singleton instance = Singleton.getInstance();
 
@@ -65,7 +68,7 @@ public class JUnitTests {
         assertNull(instance.getCPPMGraphPoints("Tokyo, Japan", null));
         assertNull(instance.getCPPMGraphPoints(null, null));
 
-        HashMap<Integer, Double> graphPoints = new HashMap<>();
+        @SuppressLint("UseSparseArrays") HashMap<Integer, Double> graphPoints = new HashMap<>();
         assertEquals(instance.getCPPMGraphPoints("Tokyo, Japan", "2015"), graphPoints);
 
         WaterPurityReport wp1 = new WaterPurityReport("06/10/2010 02:15:15 PM (EDT)",
@@ -104,7 +107,7 @@ public class JUnitTests {
         assertNull(instance.getVPPMGraphPoints("Charleston, West Virginia", null));
         assertNull(instance.getVPPMGraphPoints(null, null));
 
-        HashMap<Integer, Double> graphPoints = new HashMap<>();
+        @SuppressLint("UseSparseArrays") HashMap<Integer, Double> graphPoints = new HashMap<>();
         WaterPurityReport wp1 = new WaterPurityReport("04/01/2017 02:15:15 PM (EDT)",
                 "Atlanta, Georgia", "BoolinBob420", 1, 3.0, 3.0, "Treatable");
         instance.getWaterPurityReports().add(wp1);
