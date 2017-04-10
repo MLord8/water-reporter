@@ -104,7 +104,7 @@ public class Singleton {
      * @return true if the email is valid, false otherwise
      */
     public boolean isEmailValid(String email) {
-        return (email.contains("@") && email.contains(".") && email.length() >= 4);
+        return (email != null && email.contains("@") && email.contains(".") && email.length() >= 4);
     }
 
     /**
@@ -114,7 +114,7 @@ public class Singleton {
      * @return true if the username is valid, false otherwise
      */
     public boolean isUsernameValid(String username) {
-        return (!username.equals("") && username.length() >= 5);
+        return (username != null && !username.equals("") && username.length() >= 5);
     }
 
     /**

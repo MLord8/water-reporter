@@ -1,12 +1,19 @@
 package com.example.noahrickles.waterreporterteam14_harambelovedwaters;
 
+<<<<<<< HEAD
 import android.annotation.SuppressLint;
+=======
+import android.location.Geocoder;
+import android.content.Context;
+>>>>>>> 41546516191c16897066c49c09aa263e1caed93b
 
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Singleton;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.WaterPurityReport;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.WaterReport;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
@@ -125,5 +132,23 @@ public class JUnitTests {
         instance.getWaterPurityReports().add(wp3);
         graphPoints.put(4, 6.0);
         assertEquals(graphPoints, instance.getCPPMGraphPoints("Atlanta, Georgia", "2017"));
+    }
+
+    // Manoaj Kandiakounder
+    @Test
+    public void testIsEmailValid() throws Exception {
+        assertFalse(instance.isEmailValid(null));
+        assertFalse(instance.isEmailValid(""));
+        assertFalse(instance.isEmailValid("@"));
+        assertFalse(instance.isEmailValid("."));
+        assertFalse(instance.isEmailValid("a"));
+        assertFalse(instance.isEmailValid("abc"));
+        assertFalse(instance.isEmailValid("abcd"));
+        assertFalse(instance.isEmailValid("a@bcd"));
+        assertFalse(instance.isEmailValid(".@"));
+        assertFalse(instance.isEmailValid("abcd."));
+        assertTrue(instance.isEmailValid("a@b.c"));
+        assertTrue(instance.isEmailValid("gpurdell3@gatech.edu"));
+        assertTrue(instance.isEmailValid("cs2340@t2.gatech.edu"));
     }
 }
