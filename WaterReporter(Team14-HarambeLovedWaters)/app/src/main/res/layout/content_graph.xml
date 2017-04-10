@@ -13,7 +13,6 @@
         android:layout_height="495dp"
         android:orientation="vertical"
         android:layout_alignParentLeft="true"
-        android:layout_alignStartLeft="true"
         android:layout_alignParentTop="true"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
