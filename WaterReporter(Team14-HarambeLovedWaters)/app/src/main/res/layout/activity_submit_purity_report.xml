@@ -27,29 +27,27 @@
         android:layout_height="wrap_content"
         android:id="@+id/typeGroup"
         android:layout_marginTop="18dp"
-        android:layout_below="@+id/textView3"
-        android:layout_alignRight="@+id/textView3"
-        android:layout_alignEnd="@+id/textView3">
+        android:layout_below="@+id/textView2"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_alignEnd="@+id/textView2">
 
     </RadioGroup>
 
     <Button
-        android:text="Cancel"
+        android:text="@string/cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button5"
-        android:layout_weight="1"
         android:onClick="cancelReport"
         android:layout_alignTop="@+id/conditionGroup"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp" />
 
     <Button
-        android:text="Submit"
+        android:text="@string/submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button4"
-        android:layout_weight="1"
         android:onClick="submitReport"
         android:layout_alignBaseline="@+id/button5"
         android:layout_alignBottom="@+id/button5"
@@ -60,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView2"
-        android:text="Virus PPM"
+        android:text="@string/virus_ppm"
         android:layout_marginBottom="40dp"
         android:layout_above="@+id/button5"
         android:layout_toLeftOf="@+id/typeGroup"
@@ -74,7 +72,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:ems="10"
-        android:hint="Location"
+        android:hint="@string/location"
         android:inputType="text" />
 
     <EditText
@@ -83,7 +81,7 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/editVirusPPM"
-        android:hint="Virus PPM"
+        android:hint="@string/virus_ppm"
         android:layout_marginTop="17dp"
         android:layout_below="@+id/editContamination"
         android:layout_alignParentLeft="true"
@@ -94,7 +92,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Contamination PPM"
+        android:hint="@string/contamination_ppm"
         android:inputType="textPersonName"
         android:layout_below="@+id/linearLayout"
         android:layout_alignParentLeft="true"
@@ -115,17 +113,17 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/safe"
-            android:text="Safe" />
+            android:text="@string/safe" />
 
         <RadioButton
-            android:text="Treatable"
+            android:text="@string/treatable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/treatable"
             android:layout_weight="1" />
 
         <RadioButton
-            android:text="Unsafe"
+            android:text="@string/unsafe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/unsafe" />
@@ -133,7 +131,7 @@
     </RadioGroup>
 
     <TextView
-        android:text="Condition of Water"
+        android:text="@string/condition_of_water"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView4"

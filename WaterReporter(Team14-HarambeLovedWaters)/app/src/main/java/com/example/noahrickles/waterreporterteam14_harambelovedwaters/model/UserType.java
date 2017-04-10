@@ -8,5 +8,5 @@ public enum UserType {
     USER,
     WORKER,
     MANAGER,
-    ADMINISTRATOR;
+    ADMINISTRATOR
 }

@@ -1,13 +1,5 @@
 package com.example.noahrickles.waterreporterteam14_harambelovedwaters.model;
 
-import com.example.noahrickles.waterreporterteam14_harambelovedwaters.controllers.RegistrationActivity;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
 /**
  * Created by Noah Rickles on 2/21/2017.
  */
@@ -20,6 +12,9 @@ public class User {
     private UserType userType;
     private int id;
 
+    /**
+     * Empty constructor required by Firebase
+     */
     public User() {
 
     }
@@ -109,6 +104,10 @@ public class User {
         password = newPassword;
     }
 
+    /**
+     * Method used by Firebase to set the user type
+     * @param newUserType usertype passed in from the type created upon registration
+     */
     public void setUserType(UserType newUserType) {
         userType = newUserType;
     }

@@ -12,7 +12,7 @@
     tools:context="com.example.noahrickles.waterreporterteam14_harambelovedwaters.controllers.WelcomeScreenActivity">
 
     <TextView
-        android:text="Welcome to Water Reporter!"
+        android:text="@string/welcome_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView"
@@ -23,7 +23,7 @@
         android:gravity="center" />
 
     <Button
-        android:text="Login"
+        android:text="@string/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button2"
@@ -35,7 +35,7 @@
         android:onClick="goLogin" />
 
     <Button
-        android:text="Register"
+        android:text="@string/register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button3"
@@ -54,5 +54,7 @@
         android:id="@+id/imageView"
         android:layout_below="@+id/button3"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:contentDescription="@null"
+        />
 </RelativeLayout>

@@ -21,11 +21,12 @@ import java.util.List;
 
 public class SubmitPurityReportActivity extends AppCompatActivity {
 
-    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a (z)");
+    private final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a (z)",
+            java.util.Locale.getDefault());
     private EditText locationField;
     private EditText virusPPMField;
     private EditText contaminantPPMField;
-    private ListView purityReportScroll;
+//    private ListView purityReportScroll;
     private Singleton instance;
 
     /**
@@ -41,7 +42,7 @@ public class SubmitPurityReportActivity extends AppCompatActivity {
         virusPPMField = (EditText) findViewById(R.id.editVirusPPM);
         contaminantPPMField = (EditText) findViewById(R.id.editContamination);
         if (instance.getCurrUser().getUserType().equals("MANAGER")) {
-            ArrayAdapter adapter = new ArrayAdapter<String>(this,
+            ArrayAdapter adapter = new ArrayAdapter(this,
                     android.R.layout.simple_list_item_1, (List) instance.getWaterPurityReports());
 
             ListView listView = (ListView) findViewById(R.id.purityReportScroll);

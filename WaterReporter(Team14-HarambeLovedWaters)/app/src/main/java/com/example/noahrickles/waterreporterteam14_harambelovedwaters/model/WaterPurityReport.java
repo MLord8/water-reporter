@@ -1,6 +1,5 @@
 package com.example.noahrickles.waterreporterteam14_harambelovedwaters.model;
-import com.google.android.gms.maps.model.LatLng;
-import android.location.Address;
+
 /**
  * Created by Matt on 2/27/2017.
  */
@@ -15,6 +14,9 @@ public class WaterPurityReport {
     private double contaminantPPM;
     private String conditionOfWater;
 
+    /**
+     * Empty constructor required by Firebase
+     */
     public WaterPurityReport() {
 
     }

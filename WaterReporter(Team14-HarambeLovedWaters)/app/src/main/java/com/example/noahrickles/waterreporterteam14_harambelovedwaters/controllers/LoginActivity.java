@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     private View mProgressView;
     private View mLoginFormView;
 
-    private Singleton instance = Singleton.getInstance();
+    private final Singleton instance = Singleton.getInstance();
 
     /**
      * Actions that occur when LoginActivity is prompted.

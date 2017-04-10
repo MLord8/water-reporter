@@ -16,7 +16,7 @@ import java.util.HashMap;
  */
 
 public class JUnitTests {
-    Singleton instance = Singleton.getInstance();
+    private final Singleton instance = Singleton.getInstance();
 
     //Noah Rickles
     @Test

@@ -46,9 +46,9 @@ public class RegistrationActivity extends AppCompatActivity {
     private View mProgressView;
     private View mLoginFormView;
 
-    private Singleton instance = Singleton.getInstance();
-    private Map<String, String> registeredUserMap = instance.getRegisteredUserMap();
-    private Set<User> registeredUserSet = instance.getRegisteredUserSet();
+    private final Singleton instance = Singleton.getInstance();
+    private final Map<String, String> registeredUserMap = instance.getRegisteredUserMap();
+    private final Set<User> registeredUserSet = instance.getRegisteredUserSet();
 
     /**
      * Actions that occur when RegistrationActivity is prompted.
