@@ -144,4 +144,24 @@ public class JUnitTests {
         assertTrue(instance.isEmailValid("gpurdell3@gatech.edu"));
         assertTrue(instance.isEmailValid("cs2340@t2.gatech.edu"));
     }
+
+
+    // Renner Brown
+    @Test
+    public void testIsUsernameValid() throws Exception {
+        assertFalse(instance.isUsernameValid(null));
+        assertFalse(instance.isUsernameValid(""));
+        assertFalse(instance.isUsernameValid("@"));
+        assertFalse(instance.isUsernameValid("."));
+        assertFalse(instance.isUsernameValid("a"));
+        assertFalse(instance.isUsernameValid("abc"));
+        assertFalse(instance.isUsernameValid("abcd"));
+        assertTrue(instance.isUsernameValid("abcde"));
+        assertTrue(instance.isUsernameValid("a@bcd"));
+        assertFalse(instance.isUsernameValid(".@"));
+        assertTrue(instance.isUsernameValid("abcd."));
+        assertTrue(instance.isUsernameValid("a@b.c"));
+        assertTrue(instance.isUsernameValid("gpurdell3@gatech.edu"));
+        assertTrue(instance.isUsernameValid("cs2340@t2.gatech.edu"));
+    }
 }
