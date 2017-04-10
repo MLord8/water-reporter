@@ -1,11 +1,9 @@
 package com.example.noahrickles.waterreporterteam14_harambelovedwaters;
 
-<<<<<<< HEAD
 import android.annotation.SuppressLint;
-=======
+
 import android.location.Geocoder;
 import android.content.Context;
->>>>>>> 41546516191c16897066c49c09aa263e1caed93b
 
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Singleton;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.WaterPurityReport;
@@ -20,11 +18,6 @@ import org.junit.Test;
 
 import java.util.HashMap;
 
-/**
- * Created by Noah Rickles on 4/5/2017.
- */
-
-@SuppressWarnings("DefaultFileTemplate")
 public class JUnitTests {
     private final Singleton instance = Singleton.getInstance();
 
