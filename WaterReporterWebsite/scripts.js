@@ -9,7 +9,22 @@ var config = {
 };
 firebase.initializeApp(config);
 
+var db = firebase.database();
 var instance = new singleton();
+
+
+var users = db.ref('users')
+users.on('value', function(snapshot) {
+	snapshot.forEach(function(childSnapshot) {
+		var childData = childSnapshot.val();
+		instance.registeredUserSet.add(childData);
+	});
+});
+
+function getUsers() {
+	console.log(instance.registeredUserSet)
+	return users;
+}
 
 function singleton() {
 	this.registeredUserSet = new Set([]);
@@ -19,7 +34,7 @@ function singleton() {
 	this.currUser = {};
 }
 
-getCurrUser() { return instance.getCurrUser; }
+// getCurrUser() { return instance.getCurrUser; }
 
-setCurrUser(var user) { instance.currUser = user; }
+// setCurrUser(var user) { instance.currUser = user; }
 
