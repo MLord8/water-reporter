@@ -6,6 +6,19 @@
 
 <body>
   <h1>Login</h1>
+  <h2>Enter username:</h2>
+  <input type="text" id="username">
+  <h2>Enter password:</h2>
+  <input type="text" id="password">
   <button onclick="attemptLogin()">Login</button>
+  <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
+  <script src="scripts.js"></script>
+  <script>
+    function attemptLogin() {
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+      alert("Username is " + username + "\nPassword is " + password);
+  }
+  </script>
 </body>
 </html>
