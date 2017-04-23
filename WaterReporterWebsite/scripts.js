@@ -9,12 +9,29 @@ firebase.initializeApp(config);
 var db = firebase.database();
 var instance = new singleton();
 var usersDB = db.ref('users');
-var waterReportsDB = db.ref('waterReports')
-var purityReportsDB = db.ref('waterPurityReports')
+var waterReportsDB = db.ref('waterReports');
+var purityReportsDB = db.ref('waterPurityReports');
+var usertypes = ['USER', 'WORKER', 'MANAGER', 'ADMINISTRATOR'];
 
-instance.registeredUserSet = getUsers();
-instance.reportList = getWaterReports();
-instance.purityReportList = getPurityReports();
+// function initializeSingleton() {
+// 	instance.registeredUserSet = getUsers();
+// 	instance.reportList = getWaterReports();
+// 	instance.purityReportList = getPurityReports();
+// }
+
+function singleton() {
+	this.users = getUsers();
+	// this.users = new Set([]);
+	// this.registeredUserSet = new Set([]);
+	// this.registeredUserMap = [];
+	this.reportList = getWaterReports();
+	this.purityReportList = getPurityReports();
+	this.user = {};
+}
+
+function getInstance() {
+	return instance;
+}
 
 // usersDB.on('value', function(snapshot) {
 // 	snapshot.forEach(function(childSnapshot) {
@@ -22,18 +39,52 @@ instance.purityReportList = getPurityReports();
 // 		instance.registeredUserSet.add(childData);
 // 	});
 // });
+function getUser() {
+	return instance.user;
+}
 
+function setUserOnSignup(user) {
+	if (checkSignup(user)) {
+		instance.user = user;
+		return true;
+	}
+	return false;
+}
+
+function checkSignup(user) {
+	return isEmailValid(user['email'])
+		&& Number.isInteger(user['id'])
+		&& isPasswordValid(user['password'])
+		&& isUsertypeValid(user['userType'])
+		&& isUsernameValid(user['username'])
+		&& userExists(user);
+}
+
+function userExists(user) {
+	users.forEach(function(u) {
+		if (user['email'] === u['email']
+			&& user['id'] === u['id']
+			&& user['password'] === u['password']
+			&& user['userType'] === u['userType']
+			&& user['username'] === u['username']) {
+			return true;
+		}
+	});
+	return false;
+}
 
 function getUsers() {
-	var newUsers = new Set([]);
+	var newUsers = [];
 	usersDB.on('value', function(snapshot) {
 		snapshot.forEach(function(childSnapshot) {
 			var childData = childSnapshot.val();
-			newUsers.add(childData);
+			newUsers.push(childData);
 		});
 	});
-	instance.registeredUserSet = newUsers;
-	return instance.registeredUserSet;
+	instance.users = newUsers;
+	return instance.users;
+	// instance.registeredUserSet = newUsers;
+	// return instance.registeredUserSet;
 }
 
 function getWaterReports() {
@@ -77,7 +128,7 @@ function addUser(eMail, usrn, pswd, addr, typeOfUser, iD) {
 	usersDB.update(updates);
 }
 
-function addPurityReport(dateTime, addressStr, usrn,
+function addWaterPurityReport(dateTime, addressStr, usrn,
 				reportNum, ppmVirus, ppmContam, waterCondition) {
 	var newPurity = { dateAndTime: dateTime,
 					address: addressStr,
@@ -112,10 +163,43 @@ function addWaterReport(dateTime, address, usrn,
 	waterReportsDB.update(updates);
 }
 
-function singleton() {
-	this.registeredUserSet = new Set([]);
-	this.registeredUserMap = [];
-	this.reportList = [];
-	this.purityReportList = [];
-	this.currUser = {};
+function isEmailValid(email) {
+	return (email != null && email.includes("@") && email.includes(".") && email.length >= 4);
 }
+
+function isUsernameValid(username) {
+    return (username != null && username != "" && username.length >= 5);
+}
+
+function isUserTypeValid(usertype) {
+	return (usertypes.indexOf(usertype) != -1);
+}
+
+function isPasswordValid(password) {
+	return (password.length >= 4 && password.test(".*\\d+.*") && password != password.toLowerCase());
+}
+
+function findWaterReportById(id) {
+	if (id < 0) {
+	    return null;
+	}
+
+	getWaterReports().forEach(function(report) {
+		if (report != null && report['reportNumber'] === id) {
+			return report;
+		}
+	});
+
+	return null;
+}
+
+// public Address findAddressFromName(String address, Geocoder geocoder) throws IOException {
+//     List<Address> addrList = geocoder.getFromLocationName(address, 1);
+//     if (addrList.size() > 0) {
+//         return addrList.get(0);
+//     }
+//     throw new IOException();
+// }
+
+// public HashMap<Integer, Double> getCPPMGraphPoints(String location, String year) { };
+// public HashMap<Integer, Double> getVPPMGraphPoints(String location, String year) { };
