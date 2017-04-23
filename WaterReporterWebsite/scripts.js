@@ -7,12 +7,13 @@ var config = {
 firebase.initializeApp(config);
 
 var db = firebase.database();
-var instance = new singleton();
+
 var usersDB = db.ref('users');
 var waterReportsDB = db.ref('waterReports');
 var purityReportsDB = db.ref('waterPurityReports');
 var usertypes = ['USER', 'WORKER', 'MANAGER', 'ADMINISTRATOR'];
 
+var instance = new singleton();
 // function initializeSingleton() {
 // 	instance.registeredUserSet = getUsers();
 // 	instance.reportList = getWaterReports();
@@ -20,12 +21,12 @@ var usertypes = ['USER', 'WORKER', 'MANAGER', 'ADMINISTRATOR'];
 // }
 
 function singleton() {
-	this.users = getUsers();
+	this.users = [];
 	// this.users = new Set([]);
 	// this.registeredUserSet = new Set([]);
 	// this.registeredUserMap = [];
-	this.reportList = getWaterReports();
-	this.purityReportList = getPurityReports();
+	this.reportList = [];
+	this.purityReportList = [];
 	this.user = {};
 }
 
@@ -211,7 +212,7 @@ function findWaterReportById(id) {
 function attemptLogin() {
 	var username = document.getElementById('username').value;
 	var password = document.getElementById('password').value;
-	var users = getUsers();
+	// var users = getUsers();
 	var userFound = 0;
 	users.forEach(function(user) {
 		if (user.username == username && !userFound) {
