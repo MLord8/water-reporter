@@ -52,7 +52,9 @@ public class SubmitReportActivity extends AppCompatActivity {
         Address address = null;
 
         try {
-            List<Address> addrList = new Geocoder(getBaseContext()).getFromLocationName(locationField.getText().toString(), 1);
+            List<Address> addrList =
+                    new Geocoder(getBaseContext())
+                            .getFromLocationName(locationField.getText().toString(), 1);
             if (addrList.size() > 0) {
                 address = addrList.get(0);
             } else {
