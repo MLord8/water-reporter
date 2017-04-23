@@ -33,7 +33,7 @@
       var type = document.getElementById('type').value;
       var addr = document.getElementById('address').value;
 
-      var added = addUser(email, username, password, addr, typeOfUser);
+      var added = addUser(email, username, password, addr, type);
       if (!added) {
         alert("User not added.");
       } else {

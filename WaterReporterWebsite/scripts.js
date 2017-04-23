@@ -212,7 +212,7 @@ function findWaterReportById(id) {
 function attemptLogin() {
 	var username = document.getElementById('username').value;
 	var password = document.getElementById('password').value;
-	// var users = getUsers();
+	var users = getUsers();
 	var userFound = 0;
 	users.forEach(function(user) {
 		if (user.username == username && !userFound) {
