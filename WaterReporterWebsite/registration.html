@@ -6,10 +6,22 @@
 
 <body>
   <h1>Register</h1>
+  <h2>Enter email:</h2>
+  <input type="text" id="email">
   <h2>Enter username:</h2>
   <input type="text" id="username">
   <h2>Enter password:</h2>
   <input type="text" id="password">
+  <h2>Enter address:</h2>
+  <input type="text" id="address">
+  <h2>
+    <select name="User type" id="type">
+      <option value="user">User</option>
+      <option value="worker">Worker</option>
+      <option value="manager">Manager</option>
+      <option value="admin">Administrator</option>
+    </select>
+  </h2>
   <button onclick="attemptRegistration()">Register</button>
   <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
   <script src="scripts.js"></script>
@@ -17,7 +29,14 @@
     function attemptRegistration() {
       var username = document.getElementById('username').value;
       var password = document.getElementById('password').value;
-      alert("Username is " + username + "\nPassword is " + password);
+      var email = document.getElementById('email').value;
+      var type = document.getElementById('type').value;
+      var addr = document.getElementById('address').value;
+
+      var added = addUser(email, username, password, addr, typeOfUser);
+      if (!added) {
+        alert("User not added.");
+      }
   }
   </script>
 </body>
