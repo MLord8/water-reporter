@@ -16,42 +16,47 @@ instance.registeredUserSet = getUsers();
 instance.reportList = getWaterReports();
 instance.purityReportList = getPurityReports();
 
-usersDB.on('value', function(snapshot) {
-	snapshot.forEach(function(childSnapshot) {
-		var childData = childSnapshot.val();
-		instance.registeredUserSet.add(childData);
-	});
-});
+// usersDB.on('value', function(snapshot) {
+// 	snapshot.forEach(function(childSnapshot) {
+// 		var childData = childSnapshot.val();
+// 		instance.registeredUserSet.add(childData);
+// 	});
+// });
 
-waterReportsDB.on('value', function(snapshot) {
-	snapshot.forEach(function(childSnapshot) {
-		var childData = childSnapshot.val();
-		instance.reportList.push(childData);
-	});
-});
-
-purityReportsDB.on('value', function(snapshot) {
-	snapshot.forEach(function(childSnapshot) {
-		var childData = childSnapshot.val();
-		instance.purityReportList.push(childData);
-	});
-});
 
 function getUsers() {
+	var newUsers = new Set([]);
 	usersDB.on('value', function(snapshot) {
 		snapshot.forEach(function(childSnapshot) {
 			var childData = childSnapshot.val();
-			instance.registeredUserSet.add(childData);
+			newUsers.add(childData);
 		});
 	});
+	instance.registeredUserSet = newUsers;
 	return instance.registeredUserSet;
 }
 
 function getWaterReports() {
+	var newWater = [];
+	waterReportsDB.on('value', function(snapshot) {
+		snapshot.forEach(function(childSnapshot) {
+			var childData = childSnapshot.val();
+			newWater.push(childData);
+		});
+	});
+	instance.reportList = newWater;
 	return instance.reportList;
 }
 
 function getPurityReports() {
+	var newPurity = [];
+	purityReportsDB.on('value', function(snapshot) {
+		snapshot.forEach(function(childSnapshot) {
+			var childData = childSnapshot.val();
+			newPurity.push(childData);
+		});
+	});
+	instance.purityReportList = newPurity;
 	return instance.purityReportList;
 }
 
@@ -63,10 +68,11 @@ function addUser(eMail, usrn, pswd, addr, typeOfUser, iD) {
 					userType: typeOfUser,
 					id: iD };
 
-	var newPostKey = usersDB.push().key;
+	// var newPostKey = usersDB.push().key;
 
 	var updates = {};
-	updates['/waterReports/' + newPostKey] = newReport;
+	updates[iD] = newUser;
+
 
 	usersDB.update(updates);
 }
@@ -81,10 +87,10 @@ function addPurityReport(dateTime, addressStr, usrn,
 					contaminantPPM: ppmContam,
 					conditionOfWater: waterCondition };
 
-	var newPostKey = purityReportsDB.push().key;
+	// var newPostKey = purityReportsDB.push().key;
 
 	var updates = {};
-	updates['/waterReports/' + newPostKey] = newPurity;
+	updates[reportNum] = newPurity;
 
 	purityReportsDB.update(updates);
 }
@@ -98,10 +104,10 @@ function addWaterReport(dateTime, address, usrn,
 					typeOfWater: waterType,
 					conditionOfWater: waterCondition };
 
-	var newPostKey = waterReportsDB.push().key;
+	// var newPostKey = waterReportsDB.push().key;
 
 	var updates = {};
-	updates['/waterReports/' + newPostKey] = newWater;
+	updates[reportNum] = newWater;
 
 	waterReportsDB.update(updates);
 }
