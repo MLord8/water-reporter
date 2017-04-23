@@ -116,7 +116,7 @@ function addUser(eMail, usrn, pswd, addr, typeOfUser) {
 					password: pswd,
 					homeAddress: addr,
 					userType: typeOfUser,
-					id: users.length };
+					id: instance.users.length };
 	if (checkSignup(newUser)) {
 		var updates = {};
 		updates[iD] = newUser;
