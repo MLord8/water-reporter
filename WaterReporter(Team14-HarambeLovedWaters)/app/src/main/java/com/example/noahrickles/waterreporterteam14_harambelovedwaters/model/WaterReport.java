@@ -1,21 +1,10 @@
 package com.example.noahrickles.waterreporterteam14_harambelovedwaters.model;
-import com.example.noahrickles.waterreporterteam14_harambelovedwaters.controllers.MainActivity;
-import com.example.noahrickles.waterreporterteam14_harambelovedwaters.controllers.SubmitReportActivity;
-import com.google.android.gms.maps.model.LatLng;
-
-import android.content.Context;
-import android.location.Address;
-import android.location.Geocoder;
-import android.test.mock.MockContext;
-
-import java.io.IOError;
-import java.io.IOException;
-import java.util.List;
 
 /**
  * Created by Matt on 2/27/2017.
  */
 
+@SuppressWarnings("DefaultFileTemplate")
 public class WaterReport {
 
     private String dateAndTime;
@@ -39,8 +28,7 @@ public class WaterReport {
      * @param conditionOfWater  The drinking condition of the water
      */
     public WaterReport(String dateAndTime, String addressStr, String username,
-                       int reportNumber, String typeOfWater, String conditionOfWater)
-                        throws IOException {
+                       int reportNumber, String typeOfWater, String conditionOfWater) {
         this.dateAndTime = dateAndTime;
         this.addressStr = addressStr;
         this.username = username;
@@ -75,11 +63,11 @@ public class WaterReport {
         //return output.toString();
     //}
 
-    /**
-     *
-     * Gets the location of a WaterReport
-     * @return the WaterReport's location
-     */
+//    /**
+//     *
+//     * Gets the location of a WaterReport
+//     * @return the WaterReport's location
+//     */
     //public LatLng findLocation() throws IOException {
     //    Address address = findAddress();
     //    LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());

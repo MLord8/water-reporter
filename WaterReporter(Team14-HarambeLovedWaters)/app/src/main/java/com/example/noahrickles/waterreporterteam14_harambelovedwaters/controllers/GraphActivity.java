@@ -4,11 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,7 +13,6 @@ import android.widget.Toast;
 
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.R;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Singleton;
-import com.google.android.gms.vision.text.Text;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
@@ -31,9 +27,6 @@ public class GraphActivity extends AppCompatActivity {
     private EditText yearField;
     private Singleton instance;
     private GraphView graph;
-    private TextView keyText;
-    private TextView contText;
-    private TextView virusText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +38,11 @@ public class GraphActivity extends AppCompatActivity {
         yearField = (EditText) findViewById(R.id.yearField);
         graph = (GraphView) findViewById(R.id.graph);
         instance = Singleton.getInstance();
-        keyText = (TextView) findViewById(R.id.keyText);
+        TextView keyText = (TextView) findViewById(R.id.keyText);
         keyText.setTextColor(Color.BLACK);
-        contText = (TextView) findViewById(R.id.contText);
+        TextView contText = (TextView) findViewById(R.id.contText);
         contText.setTextColor(Color.GREEN);
-        virusText = (TextView) findViewById(R.id.virusText);
+        TextView virusText = (TextView) findViewById(R.id.virusText);
         virusText.setTextColor(Color.RED);
     }
 

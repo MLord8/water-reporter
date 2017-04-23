@@ -5,15 +5,12 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.test.mock.MockContext;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.R;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Singleton;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.WaterReport;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -22,9 +19,9 @@ import java.util.List;
 
 public class SubmitReportActivity extends AppCompatActivity {
 
-    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a (z)");
+    private final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a (z)",
+            java.util.Locale.getDefault());
     private EditText locationField;
-    private int reportNum;
     private Singleton instance;
 
     /**
@@ -33,7 +30,6 @@ public class SubmitReportActivity extends AppCompatActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        reportNum = 0;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_report);
         instance = Singleton.getInstance();
@@ -45,7 +41,7 @@ public class SubmitReportActivity extends AppCompatActivity {
      * reports.
      * @param view The view of the button
      */
-    public void submitReport(View view) throws IOException {
+    public void submitReport(View view) {
         String currentUser = instance.getCurrUser().getUsername();
         boolean cancel = false;
         View focusView = null;

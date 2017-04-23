@@ -19,14 +19,14 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:hint="Location" />
+        android:hint="@string/location" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView3"
         android:layout_marginTop="20dp"
-        android:text="Type of Water"
+        android:text="@string/type_of_water"
         android:layout_below="@+id/locEdit"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -34,7 +34,7 @@
         android:layout_marginStart="16dp" />
 
     <TextView
-        android:text="Condition of Water"
+        android:text="@string/condition_of_water"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="88dp"
@@ -55,20 +55,22 @@
         android:layout_alignParentStart="true">
 
         <Button
-            android:text="Cancel"
+            android:text="@string/cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/button5"
             android:layout_weight="1"
-            android:onClick="cancelReport"/>
+            android:onClick="cancelReport"
+            tools:ignore="ButtonStyle" />
 
         <Button
-            android:text="Submit"
+            android:text="@string/submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/button4"
             android:layout_weight="1"
-            android:onClick="submitReport"/>
+            android:onClick="submitReport"
+            tools:ignore="ButtonStyle" />
     </LinearLayout>
 
     <RadioGroup
@@ -81,13 +83,13 @@
         android:layout_alignEnd="@+id/textView3">
 
         <RadioButton
-            android:text="Bottled"
+            android:text="@string/bottled"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/bottled" />
 
         <RadioButton
-            android:text="Well"
+            android:text="@string/well"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/well"
@@ -98,24 +100,24 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/stream"
-            android:text="Stream" />
+            android:text="@string/stream" />
 
         <RadioButton
-            android:text="Lake"
+            android:text="@string/lake"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/lake"
             android:layout_weight="1" />
 
         <RadioButton
-            android:text="Spring"
+            android:text="@string/spring"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/spring"
             android:layout_weight="1" />
 
         <RadioButton
-            android:text="Other"
+            android:text="@string/other"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/other"
@@ -131,7 +133,7 @@
         android:layout_alignStart="@+id/textView4">
 
         <RadioButton
-            android:text="Treatable-Clear"
+            android:text="@string/treatable_clear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/treatableclear"
@@ -142,17 +144,17 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/treatablemuddy"
-            android:text="Treatable-Muddy" />
+            android:text="@string/treatable_muddy" />
 
         <RadioButton
-            android:text="Potable"
+            android:text="@string/potable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/potable"
             android:layout_weight="1" />
 
         <RadioButton
-            android:text="Waste"
+            android:text="@string/waste"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/waste" />

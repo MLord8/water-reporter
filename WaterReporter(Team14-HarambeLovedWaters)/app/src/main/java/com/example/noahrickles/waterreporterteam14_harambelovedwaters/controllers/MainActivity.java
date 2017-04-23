@@ -28,13 +28,11 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
+@SuppressWarnings("IfCanBeSwitch")
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private Singleton instance;
-    private GoogleMap mMap;
 
     /**
     * Actions that occur when MainActivity is prompted.
@@ -129,8 +127,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-//        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+        //        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
 //            /**
 //             * Called when window is ready
 //             * @param marker
@@ -143,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        });
 
 //        instance.getMap().setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
-        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+        googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
 
             @Override
             public View getInfoWindow(Marker marker) {
@@ -169,13 +166,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 ImageView infoImageView = new ImageView(MainActivity.this);
 
                 int icon;
-                if (condition == "Treatable-Clear") {
+                if (condition.equals("Treatable-Clear")) {
                     icon = android.R.drawable.presence_online;
-                } else if (condition == "Treatable-Muddy") {
+                } else if (condition.equals("Treatable-Muddy")) {
                     icon = android.R.drawable.presence_away;
-                } else if (condition == "Potable") {
+                } else if (condition.equals("Potable")) {
                     icon = android.R.drawable.presence_offline;
-                } else if (condition == "Waste") {
+                } else if (condition.equals("Waste")) {
                     icon = android.R.drawable.presence_busy;
                 } else {
                     icon = android.R.drawable.ic_dialog_map;
@@ -206,7 +203,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 if (report != null) {
                     Address address = instance.
                             findAddressFromName(report.getAddressStr(), new Geocoder(getBaseContext()));
-                    Marker temp = mMap.
+                    Marker temp = googleMap.
                             addMarker(new MarkerOptions().position(new LatLng(address.getLatitude(),
                                     address.getLongitude())));
                     temp.setTag(report.getReportNumber());
@@ -226,6 +223,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         LatLngBounds bounds = builder.build();
 
         CameraUpdate camUpdate = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding);
-        mMap.animateCamera(camUpdate);
+        googleMap.animateCamera(camUpdate);
     }
 }

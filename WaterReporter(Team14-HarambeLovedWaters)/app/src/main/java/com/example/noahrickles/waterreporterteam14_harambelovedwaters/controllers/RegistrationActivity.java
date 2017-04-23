@@ -2,6 +2,7 @@ package com.example.noahrickles.waterreporterteam14_harambelovedwaters.controlle
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -46,9 +47,9 @@ public class RegistrationActivity extends AppCompatActivity {
     private View mProgressView;
     private View mLoginFormView;
 
-    private Singleton instance = Singleton.getInstance();
-    private Map<String, String> registeredUserMap = instance.getRegisteredUserMap();
-    private Set<User> registeredUserSet = instance.getRegisteredUserSet();
+    private final Singleton instance = Singleton.getInstance();
+    private final Map<String, String> registeredUserMap = instance.getRegisteredUserMap();
+    private final Set<User> registeredUserSet = instance.getRegisteredUserSet();
 
     /**
      * Actions that occur when RegistrationActivity is prompted.
@@ -198,6 +199,7 @@ public class RegistrationActivity extends AppCompatActivity {
      * Shows the progress UI and hides the login form.
      * @param show  boolean for whether or not to show progress
      */
+    @SuppressLint("ObsoleteSdkInt")
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow

@@ -52,8 +52,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_email"
                 android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:singleLine="true" />
+                android:maxLines="1" />
 
             <EditText
                 android:id="@+id/username"
@@ -64,8 +63,7 @@
                 android:imeOptions="actionUnspecified"
                 android:inputType="textPersonName"
                 android:maxLines="1"
-                android:singleLine="true"
-                android:hint="Username" />
+                android:hint="@string/usrn" />
 
             <EditText
                 android:id="@+id/password"
@@ -76,32 +74,29 @@
                 android:imeActionLabel="@string/action_sign_in_short"
                 android:imeOptions="actionUnspecified"
                 android:inputType="textPassword"
-                android:maxLines="1"
-                android:singleLine="true" />
+                android:maxLines="1" />
 
             <RadioGroup
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:id="@+id/radioGroup"
-                android:layout_below="@+id/classStandingTextView"
-                android:layout_alignParentStart="true">
+                android:id="@+id/radioGroup">
                 <RadioButton android:id="@+id/user_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="User"/>
+                    android:text="@string/user"/>
                 <RadioButton android:id="@+id/worker_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Worker"/>
+                    android:text="@string/worker"/>
                 <RadioButton android:id="@+id/manager_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Manager"/>
+                    android:text="@string/manager"/>
                 <RadioButton android:id="@+id/administrator_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Administrator"/>
+                    android:text="@string/administrator"/>
             </RadioGroup>
 
             <Button

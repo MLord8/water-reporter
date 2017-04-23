@@ -3,9 +3,7 @@
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
-    <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email is invalid.</string>
     <string name="error_invalid_username">This username is invalid.</string>
@@ -22,14 +20,53 @@
     <string name="error_field_required">This field is required.</string>
     <string name="error_email_taken">This email is already taken.</string>
     <string name="error_username_taken">This username is already taken.</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+    <string name="login">Login</string>
     <string name="register">Register</string>
-    <string name="title_activity_main">MainActivity</string>
     <string name="cancel">Cancel</string>
-    <string name="title_activity_submit_report">SubmitReportActivity</string>
     <string name="error_invalid_location">Please enter a valid location.</string>
     <string name="error_invalid_double">Please enter a number.</string>
     <string name="title_activity_graph">GraphActivity</string>
+    <string name="usrn">Username</string>
+    <string name="profile">Profile</string>
+    <string name="submit_report">Submit a Report</string>
+    <string name="submit_purity_report">Submit a Purity Report</string>
+    <string name="create_graph">Create \n Graph</string>
+    <string name="logout">Logout</string>
+    <string name="home_address">Home Address</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="user">User</string>
+    <string name="worker">Worker</string>
+    <string name="manager">Manager</string>
+    <string name="administrator">Administrator</string>
+    <string name="submit">Submit</string>
+    <string name="virus_ppm">Virus PPM</string>
+    <string name="contamination_ppm">Contamination PPM</string>
+    <string name="location">Location</string>
+    <string name="safe">Safe</string>
+    <string name="treatable">Treatable</string>
+    <string name="unsafe">Unsafe</string>
+    <string name="condition_of_water">Condition of Water</string>
+    <string name="type_of_water">Type of Water</string>
+    <string name="treatable_clear">Treatable-Clear</string>
+    <string name="treatable_muddy">Treatable-Muddy</string>
+    <string name="bottled">Bottled</string>
+    <string name="well">Well</string>
+    <string name="stream">Stream</string>
+    <string name="lake">Lake</string>
+    <string name="spring">Spring</string>
+    <string name="other">Other</string>
+    <string name="potable">Potable</string>
+    <string name="waste">Waste</string>
+    <string name="contaminant_and_virus_ppm_by_month">Contaminant and Virus PPM by Month</string>
+    <string name="year">Year</string>
+    <string name="key">Key</string>
+    <string name="welcome_text">Welcome to Water Reporter!</string>
 </resources>
+
+    <!--<string name="prompt_username">Username</string>-->
+    <!--<string name="action_sign_in">Sign in or register</string>-->
+    <!--<string name="permission_rationale">"Contacts permissions are needed for providing email-->
+        <!--completions."-->
+    <!--</string>-->
+    <!--<string name="title_activity_main">MainActivity</string>-->
+    <!--<string name="title_activity_submit_report">SubmitReportActivity</string>-->

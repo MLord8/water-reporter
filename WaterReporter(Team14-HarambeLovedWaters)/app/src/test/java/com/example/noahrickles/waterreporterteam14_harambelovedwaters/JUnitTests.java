@@ -1,22 +1,22 @@
 package com.example.noahrickles.waterreporterteam14_harambelovedwaters;
 
+import android.annotation.SuppressLint;
+
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.Singleton;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.WaterPurityReport;
 import com.example.noahrickles.waterreporterteam14_harambelovedwaters.model.WaterReport;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 
 import java.util.HashMap;
 
-/**
- * Created by Noah Rickles on 4/5/2017.
- */
-
 public class JUnitTests {
-    Singleton instance = Singleton.getInstance();
+    private final Singleton instance = Singleton.getInstance();
 
     //Noah Rickles
     @Test
@@ -65,7 +65,7 @@ public class JUnitTests {
         assertNull(instance.getCPPMGraphPoints("Tokyo, Japan", null));
         assertNull(instance.getCPPMGraphPoints(null, null));
 
-        HashMap<Integer, Double> graphPoints = new HashMap<>();
+        @SuppressLint("UseSparseArrays") HashMap<Integer, Double> graphPoints = new HashMap<>();
         assertEquals(instance.getCPPMGraphPoints("Tokyo, Japan", "2015"), graphPoints);
 
         WaterPurityReport wp1 = new WaterPurityReport("06/10/2010 02:15:15 PM (EDT)",
@@ -104,7 +104,7 @@ public class JUnitTests {
         assertNull(instance.getVPPMGraphPoints("Charleston, West Virginia", null));
         assertNull(instance.getVPPMGraphPoints(null, null));
 
-        HashMap<Integer, Double> graphPoints = new HashMap<>();
+        @SuppressLint("UseSparseArrays") HashMap<Integer, Double> graphPoints = new HashMap<>();
         WaterPurityReport wp1 = new WaterPurityReport("04/01/2017 02:15:15 PM (EDT)",
                 "Atlanta, Georgia", "BoolinBob420", 1, 3.0, 3.0, "Treatable");
         instance.getWaterPurityReports().add(wp1);
@@ -122,5 +122,43 @@ public class JUnitTests {
         instance.getWaterPurityReports().add(wp3);
         graphPoints.put(4, 6.0);
         assertEquals(graphPoints, instance.getCPPMGraphPoints("Atlanta, Georgia", "2017"));
+    }
+
+    // Manoaj Kandiakounder
+    @Test
+    public void testIsEmailValid() throws Exception {
+        assertFalse(instance.isEmailValid(null));
+        assertFalse(instance.isEmailValid(""));
+        assertFalse(instance.isEmailValid("@"));
+        assertFalse(instance.isEmailValid("."));
+        assertFalse(instance.isEmailValid("a"));
+        assertFalse(instance.isEmailValid("abc"));
+        assertFalse(instance.isEmailValid("abcd"));
+        assertFalse(instance.isEmailValid("a@bcd"));
+        assertFalse(instance.isEmailValid(".@"));
+        assertFalse(instance.isEmailValid("abcd."));
+        assertTrue(instance.isEmailValid("a@b.c"));
+        assertTrue(instance.isEmailValid("gpurdell3@gatech.edu"));
+        assertTrue(instance.isEmailValid("cs2340@t2.gatech.edu"));
+    }
+
+
+    // Renner Brown
+    @Test
+    public void testIsUsernameValid() throws Exception {
+        assertFalse(instance.isUsernameValid(null));
+        assertFalse(instance.isUsernameValid(""));
+        assertFalse(instance.isUsernameValid("@"));
+        assertFalse(instance.isUsernameValid("."));
+        assertFalse(instance.isUsernameValid("a"));
+        assertFalse(instance.isUsernameValid("abc"));
+        assertFalse(instance.isUsernameValid("abcd"));
+        assertTrue(instance.isUsernameValid("abcde"));
+        assertTrue(instance.isUsernameValid("a@bcd"));
+        assertFalse(instance.isUsernameValid(".@"));
+        assertTrue(instance.isUsernameValid("abcd."));
+        assertTrue(instance.isUsernameValid("a@b.c"));
+        assertTrue(instance.isUsernameValid("gpurdell3@gatech.edu"));
+        assertTrue(instance.isUsernameValid("cs2340@t2.gatech.edu"));
     }
 }

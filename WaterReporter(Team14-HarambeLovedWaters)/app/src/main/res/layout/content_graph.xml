@@ -12,8 +12,11 @@
         android:layout_width="344dp"
         android:layout_height="495dp"
         android:orientation="vertical"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+        tools:layout_editor_absoluteY="8dp"
+        tools:ignore="RtlHardcoded">
 
         <com.jjoe64.graphview.GraphView
             android:id="@+id/graph"
@@ -27,35 +30,37 @@
             android:id="@+id/textView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Contaminant and Virus PPM by Month"
+            android:text="@string/contaminant_and_virus_ppm_by_month"
             android:gravity="center"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingLeft="20dp">
+            android:paddingLeft="20dp"
+            android:paddingRight="0dp"
+            tools:ignore="RtlHardcoded">
 
             <TextView
                 android:id="@+id/keyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Key" />
+                android:text="@string/key" />
 
             <TextView
                 android:id="@+id/contText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Contaminant PPM" />
+                android:text="@string/contamination_ppm" />
 
             <TextView
                 android:id="@+id/virusText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Virus PPM" />
+                android:text="@string/virus_ppm" />
         </LinearLayout>
 
         <EditText
@@ -63,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Location"
+            android:hint="@string/location"
             android:inputType="textPersonName" />
 
         <EditText
@@ -71,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Year"
+            android:hint="@string/year"
             android:inputType="textPersonName" />
 
         <Button
@@ -79,14 +84,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="graphCreate"
-            android:text="Create \n Graph" />
+            android:text="@string/create_graph" />
 
         <Button
             android:id="@+id/cancelButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="cancel"
-            android:text="Cancel" />
+            android:text="@string/cancel" />
 
 
     </LinearLayout>
