@@ -55,18 +55,17 @@ function checkSignup(user) {
 	return isEmailValid(user['email'])
 		&& Number.isInteger(user['id'])
 		&& isPasswordValid(user['password'])
+		&& isAddressValid(user['address'])
 		&& isUsertypeValid(user['userType'])
 		&& isUsernameValid(user['username'])
-		&& userExists(user);
+		&& !userExists(user);
 }
 
 function userExists(user) {
 	users.forEach(function(u) {
 		if (user['email'] === u['email']
-			&& user['id'] === u['id']
-			&& user['password'] === u['password']
-			&& user['userType'] === u['userType']
-			&& user['username'] === u['username']) {
+			|| user['id'] === u['id']
+			|| user['username'] === u['username']) {
 			return true;
 		}
 	});
@@ -111,21 +110,22 @@ function getPurityReports() {
 	return instance.purityReportList;
 }
 
-function addUser(eMail, usrn, pswd, addr, typeOfUser, iD) {
+function addUser(eMail, usrn, pswd, addr, typeOfUser) {
 	var newUser = { email: eMail,
 					username: usrn,
 					password: pswd,
 					homeAddress: addr,
 					userType: typeOfUser,
-					id: iD };
+					id: users.length };
+	if (checkSignup(newUser)) {
+		var updates = {};
+		updates[iD] = newUser;
 
+		usersDB.update(updates);
+		return true;
+	}
+	return false;
 	// var newPostKey = usersDB.push().key;
-
-	var updates = {};
-	updates[iD] = newUser;
-
-
-	usersDB.update(updates);
 }
 
 function addWaterPurityReport(dateTime, addressStr, usrn,
@@ -165,6 +165,10 @@ function addWaterReport(dateTime, address, usrn,
 
 function isEmailValid(email) {
 	return (email != null && email.includes("@") && email.includes(".") && email.length >= 4);
+}
+
+function isAddressValid(address) {
+	return true;
 }
 
 function isUsernameValid(username) {
