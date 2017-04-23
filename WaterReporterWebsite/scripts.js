@@ -207,3 +207,25 @@ function findWaterReportById(id) {
 
 // public HashMap<Integer, Double> getCPPMGraphPoints(String location, String year) { };
 // public HashMap<Integer, Double> getVPPMGraphPoints(String location, String year) { };
+
+function attemptLogin() {
+	var username = document.getElementById('username').value;
+	var password = document.getElementById('password').value;
+	var users = getUsers();
+	var userFound = 0;
+	users.forEach(function(user) {
+		if (user.username == username && !userFound) {
+			if (String(user.password) == String(password)) {
+				window.location.href = 'home.html';
+				userFound = 1;
+				setUser(user);
+			} else {
+				alert("Password does not match. Please try again.");
+				userFound = 1;
+			}
+		}
+	});
+	if (userFound == 0) {
+		alert("User not found.");
+	}
+}
