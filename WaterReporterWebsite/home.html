@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Main</title>
+	<title>Water Reporter</title>
 	<meta name="viewport" content="initial-scale=1.0">
 	<meta charset="utf-8">
 	<!-- <style>
@@ -29,7 +29,15 @@
 
 <!-- <body onload="getWaterReports()"> -->
 <body>
-  <h1>Main</h1>
+  <h1>Welcome to Water Reporter!</h1>
+  <div>
+  	<button>View Profile</button>
+  	<button onclick="window.location.href='waterreport.html'">Submit Water Report</button>
+  	<button onclick="window.location.href='purityreport.html'">Submit Water Purity Report</button>
+  	<button onclick="window.location.href='graph.html'">Purity Trends</button>
+  	<button onclick="window.location.href='login.html'">Logout</button>
+  </div>
+  <br>
 	<div id="map"></div>
 	<!-- <script>
 		var map;
