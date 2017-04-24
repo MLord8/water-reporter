@@ -19,9 +19,9 @@ var purityConditions = ['Safe', 'Treatable', 'Unsafe'];
 var instance = new singleton();
 
 // function initializeSingleton() {
-// 	instance.registeredUserSet = getUsers();
-// 	instance.reportList = getWaterReports();
-// 	instance.purityReportList = getPurityReports();
+instance.registeredUserSet = getUsers();
+instance.reportList = getWaterReports();
+instance.purityReportList = getPurityReports();
 // }
 
 function singleton() {
@@ -54,6 +54,11 @@ function setUserOnSignup(user) {
 		return true;
 	}
 	return false;
+}
+
+function setUser(user) {
+	instance.user = user;
+	console.log("User set! " + user + "\n");
 }
 
 function checkSignup(user) {
@@ -127,6 +132,7 @@ function addUser(eMail, usrn, pswd, addr, typeOfUser) {
 		updates[newUser['id']] = newUser;
 
 		usersDB.update(updates);
+		alert("Added a user!");
 		return true;
 	}
 	return false;
@@ -150,6 +156,7 @@ function addWaterReport(address, waterType, waterCondition) {
 		updates[newWater['reportNumber']] = newWater;
 
 		waterReportsDB.update(updates);
+		alert("Added a water report!");
 		return true;
 	}
 	return false;
@@ -175,6 +182,7 @@ function addWaterPurityReport(addressStr, ppmVirus, ppmContam, waterCondition) {
 		updates[newPurity['reportNumber']] = newPurity;
 
 		purityReportsDB.update(updates);
+		alert("Added a purity report!");
 		return true;
 	}
 	return false;
@@ -206,7 +214,15 @@ function isEmailValid(email) {
 }
 
 function isAddressValid(address) {
-	return true;
+	geocoder = new google.maps.Geocoder();
+	geocoder.geocode({address: address}, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+			return (results.length > 0);
+		} else {
+			console.log("Could not very " + address + " with Google Maps Geocoder API at this time...");
+			return false;
+		}
+	});
 }
 
 function isUsernameValid(username) {
@@ -263,6 +279,34 @@ function findWaterReportById(id) {
 // public HashMap<Integer, Double> getCPPMGraphPoints(String location, String year) { };
 // public HashMap<Integer, Double> getVPPMGraphPoints(String location, String year) { };
 
+// function tryToAddUser() {
+// 	instance.users.forEach(function(user) {
+// 		if (user.username === username && !userFound) {
+// 			alert("here");
+// 			if (String(user.password) === String(password)) {
+// 				setUserOnLogin(user);
+// 				window.location.href = 'home.html';
+// 				return true;
+// 			} else {
+// 				alert("Password does not match. Please try again.");
+// 				userFound = 1;
+// 				return false;
+// 			}
+// 		}
+// 	});
+// 	return false;
+// }
+
+// function attemptLogin() {
+// 	var username = document.getElementById('username').value;
+// 	var password = document.getElementById('password').value;
+// 	var users = getUsers();
+// 	alert("Hello");
+// 	if (tryToAddUser() != true) {
+// 		alert("User not found.");
+// 	}
+// }
+
 function attemptLogin() {
 	var username = document.getElementById('username').value;
 	var password = document.getElementById('password').value;
@@ -271,9 +315,11 @@ function attemptLogin() {
 	users.forEach(function(user) {
 		if (user.username == username && !userFound) {
 			if (String(user.password) == String(password)) {
-				window.location.href = 'home.html';
 				userFound = 1;
-				setUser(user);
+				console.log(user);
+				sessionStorage.setItem('currentUser', JSON.stringify(user));
+				// console.log(JSON.parse(sessionStorage.getItem('currentUser')));
+				window.location.href = 'home.html';
 			} else {
 				alert("Password does not match. Please try again.");
 				userFound = 1;
@@ -284,3 +330,4 @@ function attemptLogin() {
 		alert("User not found.");
 	}
 }
+

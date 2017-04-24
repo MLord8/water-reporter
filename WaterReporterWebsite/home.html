@@ -50,80 +50,77 @@
 	</script> -->
 	
 	<script>
-      function initMap() {
-      	var map = new google.maps.Map(document.getElementById('map'), {
-      		zoom: 2,
-      		center: {lat: 0, lng: 0}
-      	});
-      	var strictBounds = new google.maps.LatLngBounds(
-			new google.maps.LatLng(-45, -90),
-			new google.maps.LatLng(45, 90) 
-		);
-		map.fitBounds(strictBounds);
-      	// map.fitBounds(new google.maps.LatLng(-45, -90), new google.maps.LatLng(45,90));
-      	var waterReports = [];
-      	var geocoder = new google.maps.Geocoder();
+		setUser(JSON.parse(sessionStorage.getItem('currentUser')));
+	    function initMap() {
+	      	var map = new google.maps.Map(document.getElementById('map'), {
+	      		zoom: 2,
+	      		center: {lat: 0, lng: 0}
+	      	});
+	      	var strictBounds = new google.maps.LatLngBounds(
+				new google.maps.LatLng(-45, -90),
+				new google.maps.LatLng(45, 90) 
+			);
+			map.fitBounds(strictBounds);
+	      	// map.fitBounds(new google.maps.LatLng(-45, -90), new google.maps.LatLng(45,90));
+	      	var waterReports = [];
+	      	var geocoder = new google.maps.Geocoder();
 
-      	var getWaterReps = function(otherStuff) {
-      		var interval = setInterval(function() {
-      			waterReports = getWaterReports();
-      			if (waterReports.length != 0) {
-      				clearInterval(interval);
-      				otherStuff(waterReports);
-      			}
-      		});
-      	}
+	      	var getWaterReps = function(otherStuff) {
+	      		var interval = setInterval(function() {
+	      			waterReports = getWaterReports();
+	      			if (waterReports.length != 0) {
+	      				clearInterval(interval);
+	      				otherStuff(waterReports);
+	      			}
+	      		});
+	      	}
 
-      	getWaterReps(function() {
-      		waterReports.forEach(function(report) {
-				geocoder.geocode({address: report['addressStr']}, function(results, status) {
-					if (status == google.maps.GeocoderStatus.OK) {
-						// console.log(results.length);
-						console.log(results[0].geometry.location);
-						var marker = new google.maps.Marker({
-							map: map,
-							title: "Title",
-							position: results[0].geometry.location
-						})
-					} else {
-						console.log("Unsuccessful address for reportNumber: " + report['reportNumber']);
-					}
-				});
-      			// console.log(report['reportNumber']);
-      			// console.log(report);
-      		});
-      	});
+	      	getWaterReps(function() {
+	      		waterReports.forEach(function(report) {
+					geocoder.geocode({address: report['addressStr']}, function(results, status) {
+						if (status == google.maps.GeocoderStatus.OK) {
+							// console.log(results.length);
+							// console.log(results[0].geometry.location);
+							var marker = new google.maps.Marker({
+								map: map,
+								title: "Title",
+								position: results[0].geometry.location
+							})
+						} else {
+							console.log("Unsuccessful address for reportNumber: " + report['reportNumber']);
+						}
+					});
+	      			// console.log(report['reportNumber']);
+	      			// console.log(report);
+	      		});
+	      	});
 
-      	// waterReports.forEach(function(report) {
-      	// 	console.log("hi");
-      	// });
+	      	// waterReports.forEach(function(report) {
+	      	// 	console.log("hi");
+	      	// });
 
-      	// function getCoordinates(report) {
-	      // 	var geocoder = new google.maps.Geocoder();
-	      // 	geocoder.gecode({address: address}, function(results, status) {
-	      // 		if (status == google.maps.GeocoderStatus.OK) {
-	      // 			console.log(results[0]);
-	      // 		} else {
-	      // 			console.log("Unsuccessful address for reportNum: " + report['reportNum']);
-	      // 		}
-	      // 	});
-      	// }
+	      	// function getCoordinates(report) {
+		      // 	var geocoder = new google.maps.Geocoder();
+		      // 	geocoder.gecode({address: address}, function(results, status) {
+		      // 		if (status == google.maps.GeocoderStatus.OK) {
+		      // 			console.log(results[0]);
+		      // 		} else {
+		      // 			console.log("Unsuccessful address for reportNum: " + report['reportNum']);
+		      // 		}
+		      // 	});
+	      	// }
 
-      	
-        // var uluru = {lat: -25.363, lng: 131.044};
-        // var map = new google.maps.Map(document.getElementById('map'), {
-        //   zoom: 2,
-        //   center: uluru
-        // });
-        // var marker = new google.maps.Marker({
-        //   position: uluru,
-        //   map: map
-        // });
+	      	
+	        // var uluru = {lat: -25.363, lng: 131.044};
+	        // var map = new google.maps.Map(document.getElementById('map'), {
+	        //   zoom: 2,
+	        //   center: uluru
+	        // });
+	        // var marker = new google.maps.Marker({
+	        //   position: uluru,
+	        //   map: map
+	        // });
 
-      }
-
-      function getWaterReps() {
-      	return getWaterReports();
       }
     </script>
 
