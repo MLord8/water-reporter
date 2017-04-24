@@ -186,8 +186,9 @@ function isUserTypeValid(usertype) {
 }
 
 function isPasswordValid(password) {
+	var pattern = new RegExp(".*\\d+.*");
 	return (password.length >= 4
-		&& password.test(new RegExp(".*\\d+.*"))
+		&& password.test(pattern)
 		&& password != password.toLowerCase());
 }
 
