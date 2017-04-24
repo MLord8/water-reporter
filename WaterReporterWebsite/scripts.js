@@ -165,7 +165,10 @@ function addWaterReport(dateTime, address, usrn,
 }
 
 function isEmailValid(email) {
-	return (email != null && email.includes("@") && email.includes(".") && email.length >= 4);
+	return (email != null
+		&& email.includes("@")
+		&& email.includes(".")
+		&& email.length >= 4);
 }
 
 function isAddressValid(address) {
@@ -173,7 +176,9 @@ function isAddressValid(address) {
 }
 
 function isUsernameValid(username) {
-    return (username != null && username != "" && username.length >= 5);
+    return (username != null
+    	&& username != ""
+    	&& username.length >= 5);
 }
 
 function isUserTypeValid(usertype) {
@@ -181,7 +186,9 @@ function isUserTypeValid(usertype) {
 }
 
 function isPasswordValid(password) {
-	return (password.length >= 4 && password.test(".*\\d+.*") && password != password.toLowerCase());
+	return (password.length >= 4
+		&& password.test(new RegExp(".*\\d+.*"))
+		&& password != password.toLowerCase());
 }
 
 function findWaterReportById(id) {
