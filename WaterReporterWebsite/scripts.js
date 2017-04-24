@@ -63,10 +63,17 @@ function resetUser() {
 }
 
 function checkSignup(user) {
+	console.log(isEmailValid(user['email'])
+		+ ", " + Number.isInteger(user['id'])
+		+ ", " + isPasswordValid(user['password'])
+		// + ", " + isAddressValid(user['address'])
+		+ ", " + isUserTypeValid(user['userType'])
+		+ ", " + isUsernameValid(user['username'])
+		+ ", " + !userExists(user));
 	return isEmailValid(user['email'])
 		&& Number.isInteger(user['id'])
 		&& isPasswordValid(user['password'])
-		&& isAddressValid(user['address'])
+		// && isAddressValid(user['address'])
 		&& isUserTypeValid(user['userType'])
 		&& isUsernameValid(user['username'])
 		&& !userExists(user);
@@ -128,6 +135,7 @@ function addUser(eMail, usrn, pswd, addr, typeOfUser) {
 					homeAddress: addr,
 					userType: typeOfUser,
 					id: instance.users.length };
+	console.log("in here");
 	if (checkSignup(newUser)) {
 		var updates = {};
 		updates[newUser['id']] = newUser;
