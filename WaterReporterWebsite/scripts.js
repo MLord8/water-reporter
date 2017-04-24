@@ -57,9 +57,9 @@ function setUserOnSignup(user) {
 	return false;
 }
 
-function setUser(user) {
-	instance.user = user;
-	console.log("User set! " + user + "\n");
+function resetUser() {
+	// instance.user = user;
+	sessionStorage.setItem('currentUser', JSON.stringify({}));
 }
 
 function checkSignup(user) {
@@ -144,7 +144,7 @@ function addWaterReport(address, waterType, waterCondition) {
 	var reps = getWaterReports();
 	var newWater = { dateAndTime: getCurrentDateTime(),
 					addressStr: address,
-					username: getUser(),
+					username: 'manager9', // getUser()['username'],
 					reportNumber: reps[reps.length - 1]['reportNumber'] + 1,
 					typeOfWater: waterType,
 					conditionOfWater: waterCondition };
@@ -157,33 +157,32 @@ function addWaterReport(address, waterType, waterCondition) {
 	// if (isAddressValid(address) && 
 	if (isWaterTypeValid(waterType)
 		&& isWaterConditionValid(waterCondition)) {
-		console.log("in here");
 		var updates = {};
 		updates[newWater['reportNumber']] = newWater;
 		console.log('new num: ' + newWater['reportNumber']);
 		waterReportsDB.update(updates);
-		alert("Added a water report!");
+		console.log("Added a water report!");
 		return true;
 	}
 	return false;
 }
 
 function addWaterPurityReport(addressStr, ppmVirus, ppmContam, waterCondition) {
-
+	var reps = getPurityReports();
 	var newPurity = { dateAndTime: getCurrentDateTime(),
 					address: addressStr,
-					username: getUser(),
-					reportNumber: instance.purityReportList,
-					virusPPM: ppmVirus,
-					contaminantPPM: ppmContam,
+					username: 'manager9', //getUser()['username'],
+					reportNumber: reps[reps.length - 1]['reportNumber'] + 1,
+					virusPPM: parseFloat(ppmVirus),
+					contaminantPPM: parseFloat(ppmContam),
 					conditionOfWater: waterCondition };
 
 	// var newPostKey = purityReportsDB.push().key;
-	if (isAddressValid(addressStr)
-		&& isPurityConditionValid(waterCondition)
+	console.log("Outside");
+	if (isPurityConditionValid(waterCondition)
 		&& isNumeric(ppmVirus)
 		&& isNumeric(ppmContam)) {
-
+		console.log("In here");
 		var updates = {};
 		updates[newPurity['reportNumber']] = newPurity;
 
@@ -201,11 +200,13 @@ function getCurrentDateTime() {
 		dateTime = "0" + dateTime;
 	}
 	console.log("Datetime after day: " + dateTime);
+	console.log(d.toLocaleTimeString());
 	var time = d.toLocaleTimeString();
-	if (dateTime.length != 11) {
-		dateTime.concat("0");
+	if (time.length != 11) {
+		time.concat("0");
 	}
-	dateTime.concat(time.concat(" (EDT)"));
+	time.concat(" (EDT)")
+	dateTime.concat(time);
 	console.log("Datetime after time: " + dateTime);
 	return dateTime;
 }
@@ -262,6 +263,9 @@ function isWaterConditionValid(waterCondition) {
 }
 
 function isPurityConditionValid(purityCondition) {
+		console.log(purityCondition);
+		console.log(purityConditions);
+		console.log("bool: " + (purityConditions.indexOf(purityCondition) != -1));
 		return (purityConditions.indexOf(purityCondition) != -1);
 }
 

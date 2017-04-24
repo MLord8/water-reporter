@@ -2,34 +2,218 @@
 <html>
 <head>
   <title>Submit Water Purity Report</title>
+  <style>
+       #map {
+        height: 600px;
+        width: 840px;
+       }
+    </style>
 </head>
 
 <body>
-  <h1>Submit Water Report</h1>
+  <h1>Submit Water Purity Report</h1>
 
   <h2>Enter Location:</h2>
   <input type="text" id="puritylocation">
+  <button onclick="updateLocationOnMap(map)">Check Location on Map</button>
+  <button onclick="currentLocationMarker(map)">Use Current Location</button>
 
   <h2>Select Water's Overall Condition:</h2>
-  <form action="" id="puritycondition">
-	  <input type="radio" name="purcondition" value="Safe"> Safe<br>
-	  <input type="radio" name="purcondition" value="Treatable"> Treatable<br>
-	  <input type="radio" name="purcondition" value="Unsafe"> Unsafe<br>
-  </form>
+  <h2>
+    <select id="puritycondition">
+      <option value="Default">(Select purity condition)</option>
+      <option value="Safe">Safe</option>
+      <option value="Treatable">Treatable</option>
+      <option value="Unsafe">Unsafe</option>
+<!--       <option value="Stream">Stream</option>
+      <option value="Lake">Lake</option>
+      <option value="Spring">Spring</option>
+      <option value="Other">Other</option> -->
+    </select>
+  </h2>
+  
+  <!-- <form action="" id="puritycondition">
+    <input type="radio" name="purcondition" value="Safe">Safe<br>
+    <input type="radio" name="purcondition" value="Treatable">Treatable<br>
+    <input type="radio" name="purcondition" value="Unsafe">Unsafe<br>
+  </form> -->
 
   <h2>Enter Virus PPM:</h2>
   <input type="text" id="virusppm">
 
   <h2>Enter Contaminant PPM:</h2>
   <input type="text" id="contaminantppm">
-
-
   <br>
+  <div id="map"></div>
   <br>
-  <button>Submit Water Purity Report</button>
+  <button onclick="submitPurityReport()">Submit Water Purity Report</button>
   <button onclick="window.location.href='home.html'">Back to Home</button>
+  <script>
+    var map;
+    var marker;
+    var geocoder;
 
+    function dropMarker(map, pos) {
+      window.setTimeout(function() {
+        if (marker !== 'undefined') {
+          marker.setMap(null);
+        }
+        marker = new google.maps.Marker({
+          map: map,
+          position: pos,
+          animation: google.maps.Animation.DROP
+        });
+      }, 100);
+    }
 
-  
+    function currentLocationMarker(map) {
+      // Try HTML5 geolocation.
+      if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+              var pos = {
+                  lat: position.coords.latitude,
+                  lng: position.coords.longitude
+              };
+
+              // infoWindow.setPosition(pos);
+              // infoWindow.setContent('Location found.');
+              // marker.setMap(null);
+              // marker = new google.maps.Marker({
+              //   map: map,
+              //   title: "Title",
+              //   position: pos
+              // });
+
+              geocoder.geocode({location: pos}, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                  // console.log(results.length);
+                  // console.log(results[0].geometry.location);
+                    map.setCenter(pos);
+                    map.setZoom(16);
+                    console.log(results);
+                    document.getElementById('puritylocation').value = results[0]['formatted_address'];
+                    if (marker !== 'undefined') {
+                      marker.setMap(null);
+                    }
+                    marker = new google.maps.Marker({
+                      map: map,
+                      position: pos
+                    });
+                } else {
+                  console.log("Unsuccessful address for reportNumber: " + report['reportNumber']);
+                }
+              });
+          }, function() {
+              handleLocationError(true, infoWindow, map.getCenter());
+          });
+      } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+      }
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+          infoWindow.setPosition(pos);
+          infoWindow.setContent(browserHasGeolocation ?
+                                'Error: The Geolocation service failed.' :
+                                'Error: Your browser doesn\'t support geolocation.');
+      }
+    }
+
+    function initMap() {
+      geocoder = new google.maps.Geocoder();
+      map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 2,
+        center: {lat: 0, lng: 0}
+      });
+      marker = new google.maps.Marker({
+        map: map,
+        position: {lat: 0, lng: 0}
+      })
+
+    // var strictBounds = new google.maps.LatLngBounds(
+    //   new google.maps.LatLng(-45, -90),
+    //   new google.maps.LatLng(45, 90) 
+    // );
+      // map.fitBounds(strictBounds);
+      // map.fitBounds(new google.maps.LatLng(-45, -90), new google.maps.LatLng(45,90));
+      
+      // var infoWindow = new google.maps.InfoWindow({map: map});
+      // var marker = new google.maps.Marker({
+      //   map: map,
+      //   title: "Title",
+      //   position: {lat: 0, lng: 0}
+      // });
+      // currentLocationMarker(map);
+    }
+
+    function updateLocationOnMap(map) {
+      geocoder.geocode({address: document.getElementById('puritylocation').value}, function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+            // console.log(results[0]);
+            if (marker !== 'undefined') {
+              marker.setMap(null);
+            }
+            marker = new google.maps.Marker({
+              map: map,
+              title: "Title",
+              position: results[0].geometry.location
+            })
+            map.setZoom(6);
+            map.setCenter(results[0].geometry.location)
+          } else {
+            console.log("Unsuccessful address for reportNumber: " + report['reportNumber']);
+          }
+        });
+    }
+
+    function submitPurityReport() {
+      var location = document.getElementById('puritylocation').value;
+      var puritycondition = document.getElementById('puritycondition').value;
+      var virusppm = document.getElementById('virusppm').value;
+      var contaminantppm = document.getElementById('contaminantppm').value;
+      // console.log(puritycondition);
+      if (location != "" && puritycondition != "Default" && isNumeric(virusppm) && isNumeric(contaminantppm)) {
+        // console.log(location + ", " + puritycondition + ", " + virusppm + ", " + contaminantppm);
+        var addReportToDB = function(otherStuff) {
+          var interval = setInterval(function() {
+            var added = addWaterPurityReport(location, virusppm, contaminantppm, puritycondition);
+            if (added !== 'undefined') {
+              clearInterval(interval);
+              otherStuff(added);
+            }
+          });
+        }
+
+        addReportToDB(function(add) {
+        //     console.log("ADDED!");
+          if (add) {
+            window.location.href = 'home.html';
+          } else {
+            alert("Water purity report not added.");
+          }
+        });
+        //       console.log("ADDED A PURITY REPORT!");
+        //       window.location.href = 'home.html';
+        //     } else {
+        //       alert("Water purity report not added.");
+        //     }
+        //   });
+        // }
+
+        // addReportToDB(function(add) {
+        //   console.log("Check to see if added. added: " + add);
+        //   if (add) {
+        //     console.log("ADDED!");
+        //     window.location.href = 'home.html';
+        //   } else {
+        //     alert("Water report not added.");
+        //   }
+        // });
+      }
+    }
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
+  <script src="scripts.js"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKI3rpMb8mTAen_Hae3ZcO1uUeI0g-lLA&callback=initMap"></script>
 </body>
 </html>

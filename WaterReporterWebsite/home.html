@@ -35,7 +35,7 @@
   	<button onclick="window.location.href='waterreport.html'">Submit Water Report</button>
   	<button onclick="window.location.href='purityreport.html'">Submit Water Purity Report</button>
   	<button onclick="window.location.href='graph.html'">Purity Trends</button>
-  	<button onclick="window.location.href='login.html'">Logout</button>
+  	<button onclick="logout()">Logout</button>
   </div>
   <br>
 	<div id="map"></div>
@@ -50,7 +50,13 @@
 	</script> -->
 	
 	<script>
-		setUser(JSON.parse(sessionStorage.getItem('currentUser')));
+		// setUser(JSON.parse(sessionStorage.getItem('currentUser')));
+		getUser();
+		function logout() {
+			resetUser();
+			window.location.href='login.html';
+		}
+
 	    function initMap() {
 	      	var map = new google.maps.Map(document.getElementById('map'), {
 	      		zoom: 2,
