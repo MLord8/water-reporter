@@ -53,17 +53,24 @@ function setUserOnSignup(user) {
 }
 
 function checkSignup(user) {
+	console.log(isEmailValid(user['email'])
+		 + "\n" + Number.isInteger(user['id'])
+		 + "\n" + isPasswordValid(user['password'])
+		 + "\n" + isAddressValid(user['address'])
+		 + "\n" + isUserTypeValid(user['userType'])
+		 + "\n" + isUsernameValid(user['username'])
+		 + "\n" + !userExists(user));
 	return isEmailValid(user['email'])
 		&& Number.isInteger(user['id'])
 		&& isPasswordValid(user['password'])
 		&& isAddressValid(user['address'])
-		&& isUsertypeValid(user['userType'])
+		&& isUserTypeValid(user['userType'])
 		&& isUsernameValid(user['username'])
 		&& !userExists(user);
 }
 
 function userExists(user) {
-	users.forEach(function(u) {
+	instance.users.forEach(function(u) {
 		if (user['email'] === u['email']
 			|| user['id'] === u['id']
 			|| user['username'] === u['username']) {
@@ -120,7 +127,7 @@ function addUser(eMail, usrn, pswd, addr, typeOfUser) {
 					id: instance.users.length };
 	if (checkSignup(newUser)) {
 		var updates = {};
-		updates[iD] = newUser;
+		updates[newUser['id']] = newUser;
 
 		usersDB.update(updates);
 		return true;
@@ -165,7 +172,10 @@ function addWaterReport(dateTime, address, usrn,
 }
 
 function isEmailValid(email) {
-	return (email != null && email.includes("@") && email.includes(".") && email.length >= 4);
+	return (email != null
+		&& email.includes("@")
+		&& email.includes(".")
+		&& email.length >= 4);
 }
 
 function isAddressValid(address) {
@@ -173,7 +183,9 @@ function isAddressValid(address) {
 }
 
 function isUsernameValid(username) {
-    return (username != null && username != "" && username.length >= 5);
+    return (username != null
+    	&& username != ""
+    	&& username.length >= 5);
 }
 
 function isUserTypeValid(usertype) {
@@ -181,7 +193,10 @@ function isUserTypeValid(usertype) {
 }
 
 function isPasswordValid(password) {
-	return (password.length >= 4 && password.test(".*\\d+.*") && password != password.toLowerCase());
+	var pattern = new RegExp(".*\\d+.*");
+	return (password.length >= 4
+		&& pattern.test(password)
+		&& password != password.toLowerCase());
 }
 
 function findWaterReportById(id) {

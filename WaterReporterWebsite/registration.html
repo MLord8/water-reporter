@@ -4,7 +4,7 @@
   <title>Register</title>
 </head>
 
-<body>
+<body onload="getUsers()">
   <h1>Register</h1>
   <h2>Enter email:</h2>
   <input type="text" id="email">
@@ -30,7 +30,7 @@
       var username = document.getElementById('username').value;
       var password = document.getElementById('password').value;
       var email = document.getElementById('email').value;
-      var type = document.getElementById('type').value;
+      var type = document.getElementById('type').value.toUpperCase();
       var addr = document.getElementById('address').value;
 
       var added = addUser(email, username, password, addr, type);
