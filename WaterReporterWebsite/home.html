@@ -92,13 +92,18 @@
 							console.log(report);
 							console.log(results[0]);
 							contentString =
-								'Address: ' + report['addressStr'] + '\n'
-								+ '(Google Maps Address): ' + results[0]['formatted_address'] + '\n'
-								+ 'Condition: ' + report['conditionOfWater'] + '\n'
-								+ 'Time: ' + report['dateAndTime'] + '\n'
-								+ 'Report Number: ' + report['reportNumber'] + '\n'
-								+ 'Type of Water: ' + report['typeOfWater'] + '\n'
-								+ 'Username: ' + report['username'] + '\n'
+								'<div id="content">'+
+					            '<div id="siteNotice">'+
+					            '</div>'+
+					            '<h1 id="firstHeading" class="firstHeading">' + 'Address: ' + report['addressStr'] + '</h1>'+
+								'<h2>'+ '(Google Maps Address): ' + results[0]['formatted_address'] + '</h2>' + '\n'
+								+ '<p>' + '<b>'+ 'Condition: ' + '</b>' + report['conditionOfWater'] + '</p>' + '\n'
+								+ '<p>' + '<b>'+ 'Time: ' + '</b>' + report['dateAndTime'] + '</p>' + '\n'
+								+ '<p>' + '<b>'+ 'Report Number: ' + '</b>' + report['reportNumber'] + '</p>' + '\n'
+								+ '<p>' + '<b>'+ 'Type of Water: ' + '</b>' + report['typeOfWater'] + '</p>' + '\n'
+								+ '<p>' + '<b>'+ 'Username: ' + '</b>' + report['username'] + '</p>' + '\n'
+								+ '</div>'+
+					            '</div>'
 								// '<div id="content">'+
 					   //          '<div id="siteNotice">'+
 					   //          '</div>'+
