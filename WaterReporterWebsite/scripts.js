@@ -57,7 +57,7 @@ function checkSignup(user) {
 		&& Number.isInteger(user['id'])
 		&& isPasswordValid(user['password'])
 		&& isAddressValid(user['address'])
-		&& isUsertypeValid(user['userType'])
+		&& isUserTypeValid(user['userType'])
 		&& isUsernameValid(user['username'])
 		&& !userExists(user);
 }
