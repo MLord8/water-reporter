@@ -53,6 +53,13 @@ function setUserOnSignup(user) {
 }
 
 function checkSignup(user) {
+	console.log(isEmailValid(user['email'])
+		 + "\n" + Number.isInteger(user['id'])
+		 + "\n" + isPasswordValid(user['password'])
+		 + "\n" + isAddressValid(user['address'])
+		 + "\n" + isUserTypeValid(user['userType'])
+		 + "\n" + isUsernameValid(user['username'])
+		 + "\n" + !userExists(user));
 	return isEmailValid(user['email'])
 		&& Number.isInteger(user['id'])
 		&& isPasswordValid(user['password'])
@@ -63,7 +70,7 @@ function checkSignup(user) {
 }
 
 function userExists(user) {
-	users.forEach(function(u) {
+	instance.users.forEach(function(u) {
 		if (user['email'] === u['email']
 			|| user['id'] === u['id']
 			|| user['username'] === u['username']) {
@@ -120,7 +127,7 @@ function addUser(eMail, usrn, pswd, addr, typeOfUser) {
 					id: instance.users.length };
 	if (checkSignup(newUser)) {
 		var updates = {};
-		updates[iD] = newUser;
+		updates[newUser['id']] = newUser;
 
 		usersDB.update(updates);
 		return true;
