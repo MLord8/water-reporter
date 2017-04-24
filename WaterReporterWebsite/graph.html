@@ -3,18 +3,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Graph</title>
- 
+
 <style type="text/css">
 body { font-family: Verdana, Arial, sans-serif; font-size: 12px; }
 #graph { width: 600px; height: 300px; }
+#div1 {
+    float: right;
+    display: inline-block;
+}
 </style>
- 
+
 <!--[if lte IE 8]><script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.2/excanvas.min.js"></script><![endif]-->
 <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.2/jquery.flot.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
 <script src="scripts.js"></script>
- 
+
 <script type="text/javascript">
 //$(document).ready(function () {
 //    $.plot($("#graph"), [d1]);
@@ -86,8 +90,9 @@ function getCPPMGraphPoints(year, location) {
 
 </script>
 </head>
- 
+
 <body onload="getPurityReports()">
+    <div id="div1"><img src="images/harambe.png" alt="Harambe" style="width:500px;height:600px;"></div>
     <div id="graph"></div>
     <br>
     <h3>Enter Location:</h3>
