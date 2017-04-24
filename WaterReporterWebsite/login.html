@@ -4,7 +4,7 @@
   <title>Login</title>
 </head>
 
-<body>
+<body onload="getUsers()">
   <h1>Login</h1>
   <h2>Enter username:</h2>
   <input type="text" id="username">
@@ -14,28 +14,5 @@
   <button onclick="addUser('matt@lor','mateo','lorrrd', '123 ABC Dr', 'MANAGER', 28)">Add a random User</button>
   <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
   <script src="scripts.js"></script>
-  <!-- <script>
-    function attemptLogin() {
-      var username = document.getElementById('username').value;
-      var password = document.getElementById('password').value;
-      var users = getUsers();
-      var userFound = 0;
-      users.forEach(function(user) {
-        if (user.username == username && !userFound) {
-          if (String(user.password) == String(password)) {
-            window.location.href = 'home.html';
-            userFound = 1;
-            setUser(user);
-          } else {
-            alert("Password does not match. Please try again.");
-            userFound = 1;
-          }
-        }
-      });
-      if (userFound == 0) {
-        alert("User not found.");
-      }
-    }
-  </script> -->
 </body>
 </html>
