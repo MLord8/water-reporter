@@ -12,8 +12,12 @@ var usersDB = db.ref('users');
 var waterReportsDB = db.ref('waterReports');
 var purityReportsDB = db.ref('waterPurityReports');
 var usertypes = ['USER', 'WORKER', 'MANAGER', 'ADMINISTRATOR'];
+var waterTypes = ['Bottled', 'Well', 'Stream', 'Lake', 'Spring'];
+var waterConditions = ['Treatable-Clear', 'Treatable-Muddy', 'Potable', 'Waste'];
+var purityConditions = ['Safe', 'Treatable', 'Unsafe'];
 
 var instance = new singleton();
+
 // function initializeSingleton() {
 // 	instance.registeredUserSet = getUsers();
 // 	instance.reportList = getWaterReports();
@@ -60,14 +64,6 @@ function checkSignup(user) {
 		&& isUserTypeValid(user['userType'])
 		&& isUsernameValid(user['username'])
 		&& !userExists(user);
-}
-
-function checkReport(report) {
-
-}
-
-function checkPurity(purity) {
-
 }
 
 function userExists(user) {
@@ -137,24 +133,6 @@ function addUser(eMail, usrn, pswd, addr, typeOfUser) {
 	// var newPostKey = usersDB.push().key;
 }
 
-function addWaterPurityReport(addressStr, ppmVirus, ppmContam, waterCondition) {
-	
-	var newPurity = { dateAndTime: getCurrentDateTime(),
-					address: addressStr,
-					username: getUser(),
-					reportNumber: instance.purityReportList,
-					virusPPM: ppmVirus,
-					contaminantPPM: ppmContam,
-					conditionOfWater: waterCondition };
-
-	// var newPostKey = purityReportsDB.push().key;
-
-	var updates = {};
-	updates[newPurity['reportNumber']] = newPurity;
-
-	purityReportsDB.update(updates);
-}
-
 function addWaterReport(address, waterType, waterCondition) {
 	var newWater = { dateAndTime: getCurrentDateTime(),
 					addressStr: address,
@@ -164,11 +142,42 @@ function addWaterReport(address, waterType, waterCondition) {
 					conditionOfWater: waterCondition };
 
 	// var newPostKey = waterReportsDB.push().key;
+	if (isAddressValid(water['address'])
+		&& isWaterTypeValid(water['typeOfWater'])
+		&& isWaterConditionValid(water['conditionOfWater'])) {
+		
+		var updates = {};
+		updates[newWater['reportNumber']] = newWater;
 
-	var updates = {};
-	updates[newWater['reportNumber']] = newWater;
+		waterReportsDB.update(updates);
+		return true;
+	}
+	return false;
+}
 
-	waterReportsDB.update(updates);
+function addWaterPurityReport(addressStr, ppmVirus, ppmContam, waterCondition) {
+
+	var newPurity = { dateAndTime: getCurrentDateTime(),
+					address: addressStr,
+					username: getUser(),
+					reportNumber: instance.purityReportList,
+					virusPPM: ppmVirus,
+					contaminantPPM: ppmContam,
+					conditionOfWater: waterCondition };
+
+	// var newPostKey = purityReportsDB.push().key;
+	if (isAddressValid(addressStr)
+		&& isPurityConditionValid(waterCondition)
+		&& isNumeric(ppmVirus)
+		&& isNumeric(ppmContam)) {
+
+		var updates = {};
+		updates[newPurity['reportNumber']] = newPurity;
+
+		purityReportsDB.update(updates);
+		return true;
+	}
+	return false;
 }
 
 function getCurrentDateTime() {
@@ -183,6 +192,10 @@ function getCurrentDateTime() {
 	}
 	dateTime.concat(time.concat(" (EDT)"));
 	return dateTime;
+}
+
+function isNumeric(num) {
+	return (!isNaN(parseFloat(num)) && isFinite(num));
 }
 
 function isEmailValid(email) {
@@ -211,6 +224,18 @@ function isPasswordValid(password) {
 	return (password.length >= 4
 		&& pattern.test(password)
 		&& password != password.toLowerCase());
+}
+
+function isWaterTypeValid(waterType) {
+	return (waterTypes.indexOf(waterType) != -1);
+}
+
+function isWaterConditionValid(waterCondition) {
+	return (waterConditions.indexOf(waterCondition) != -1);
+}
+
+function isPurityConditionValid(purityCondition) {
+		return (purityConditions.indexOf(purityCondition) != -1);
 }
 
 function findWaterReportById(id) {
