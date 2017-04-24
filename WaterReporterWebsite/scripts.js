@@ -45,6 +45,7 @@ function getInstance() {
 // 	});
 // });
 function getUser() {
+	instance.user = JSON.parse(sessionStorage.getItem('currentUser'));
 	return instance.user;
 }
 
@@ -143,15 +144,18 @@ function addWaterReport(address, waterType, waterCondition) {
 	var newWater = { dateAndTime: getCurrentDateTime(),
 					addressStr: address,
 					username: getUser(),
-					reportNumber: instance.reportList.length,
+					reportNumber: getWaterReports().length,
 					typeOfWater: waterType,
 					conditionOfWater: waterCondition };
-
+	var bool = isAddressValid(address);
+		// && isWaterTypeValid(waterType)
+		// && isWaterConditionValid(waterCondition);
+	console.log(bool);
 	// var newPostKey = waterReportsDB.push().key;
-	if (isAddressValid(water['address'])
-		&& isWaterTypeValid(water['typeOfWater'])
-		&& isWaterConditionValid(water['conditionOfWater'])) {
-		
+	if (isAddressValid(address)
+		&& isWaterTypeValid(waterType)
+		&& isWaterConditionValid(waterCondition)) {
+		alert("in here");
 		var updates = {};
 		updates[newWater['reportNumber']] = newWater;
 
@@ -217,6 +221,7 @@ function isAddressValid(address) {
 	geocoder = new google.maps.Geocoder();
 	geocoder.geocode({address: address}, function(results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {
+			console.log(results);
 			return (results.length > 0);
 		} else {
 			console.log("Could not very " + address + " with Google Maps Geocoder API at this time...");
@@ -243,10 +248,12 @@ function isPasswordValid(password) {
 }
 
 function isWaterTypeValid(waterType) {
+	console.log(waterTypes.indexOf(waterType));
 	return (waterTypes.indexOf(waterType) != -1);
 }
 
 function isWaterConditionValid(waterCondition) {
+	console.log(waterConditions.indexOf(waterCondition));
 	return (waterConditions.indexOf(waterCondition) != -1);
 }
 
