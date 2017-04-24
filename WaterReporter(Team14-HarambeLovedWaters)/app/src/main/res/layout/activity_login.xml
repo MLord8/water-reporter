@@ -76,11 +76,11 @@
                 android:textStyle="bold" />
 
             <Button
-                android:text="@string/cancel"
+                android:id="@+id/button"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/button"
-                android:onClick="cancel" />
+                android:onClick="cancel"
+                android:text="@string/cancel" />
 
         </LinearLayout>
     </ScrollView>
