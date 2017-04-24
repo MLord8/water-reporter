@@ -2,6 +2,7 @@ package com.example.noahrickles.waterreporterteam14_harambelovedwaters.model;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,6 +14,8 @@ import android.util.Log;
 
 import java.util.List;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -136,6 +139,7 @@ public class Singleton {
         getFirebaseInstance().getReference("waterReports")
                 .child(Integer.toString(reportList.size()))
                 .setValue(w);
+        reportList.add(w);
     }
 
     public void addUser(User u) {
@@ -150,6 +154,7 @@ public class Singleton {
         getFirebaseInstance().getReference("waterPurityReports")
                 .child(Integer.toString(purityReportList.size()))
                 .setValue(w);
+        purityReportList.add(w);
     }
 
     /**
@@ -199,6 +204,22 @@ public class Singleton {
             return addrList.get(0);
         }
         throw new IOException();
+    }
+
+    /**
+     * Returns address based on location name
+     * @param latitude double representation of the latitude
+     * @param longitude double representation of the longitude
+     * @param geocoder gives address using location name
+     * @return address based on location provided
+     * @throws IOException throws exception if address cannot be found
+     */
+    public Address findAddressFromLatLong(double latitude, double longitude, Geocoder geocoder) throws IOException {
+        List<Address> addrList = geocoder.getFromLocation(latitude, longitude, 1);
+        if (addrList.size() > 0) {
+            return addrList.get(0);
+        }
+        return null;
     }
 
     /**
@@ -323,14 +344,9 @@ public class Singleton {
                     for (WaterReport r : reportListDB) {
                         reportList.add(r);
                     }
-                } else {
-                    for (WaterReport r : reportListDB) {
-                        if (!reportList.contains(r)) {
-                            reportList.add(r);
-                        }
-                    }
                 }
                 Log.d("Success", "Value is: " + reportListDB);
+                Log.d("asdf", "size: " + reportList.size());
             }
 
             @Override
@@ -351,12 +367,6 @@ public class Singleton {
                 if (purityReportList.size() == 0) {
                     for (WaterPurityReport r : purityReportListDB) {
                         purityReportList.add(r);
-                    }
-                } else {
-                    for (WaterPurityReport r : purityReportListDB) {
-                        if (!purityReportList.contains(r)) {
-                            purityReportList.add(r);
-                        }
                     }
                 }
                 Log.d("Success", "Value is: " + purityReportListDB);

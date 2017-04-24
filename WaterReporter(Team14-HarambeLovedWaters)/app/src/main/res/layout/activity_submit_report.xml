@@ -160,4 +160,13 @@
             android:id="@+id/waste" />
 
     </RadioGroup>
+
+    <CheckBox
+        android:id="@+id/autoLocCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/locEdit"
+        android:layout_toRightOf="@+id/locEdit"
+        android:text="Use Current Location" />
 </RelativeLayout>
