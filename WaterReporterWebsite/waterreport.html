@@ -15,7 +15,7 @@
 
   <h2>Enter Location:</h2>
   <input type="text" id="reportlocation">
-  <button onclick="updateLocationOnMap()">Check Location on Map</button>
+  <button onclick="updateLocationOnMap(map)">Check Location on Map</button>
   <button onclick="currentLocationMarker(map)">Use Current Location</button>
   <h2>Select Water Type:</h2>
   <h2>
@@ -93,7 +93,7 @@
                   // console.log(results.length);
                   // console.log(results[0].geometry.location);
                     map.setCenter(pos);
-                    map.setZoom(2);
+                    map.setZoom(16);
                     console.log(results);
                     document.getElementById('reportlocation').value = results[0]['formatted_address'];
                     if (marker !== 'undefined') {
@@ -156,7 +156,7 @@
     function updateLocationOnMap(map) {
       geocoder.geocode({address: document.getElementById('reportlocation').value}, function(results, status) {
           if (status == google.maps.GeocoderStatus.OK) {
-            console.log(results[0]);
+            // console.log(results[0]);
             if (marker !== 'undefined') {
               marker.setMap(null);
             }
@@ -165,6 +165,8 @@
               title: "Title",
               position: results[0].geometry.location
             })
+            map.setZoom(16);
+            map.setCenter(results[0].geometry.location)
           } else {
             console.log("Unsuccessful address for reportNumber: " + report['reportNumber']);
           }
@@ -177,13 +179,58 @@
       var wCondition = document.getElementById('watercondition').value;
 
       console.log(location + ", " + wType + ", " + wCondition);
-      if (wType != "Default" && wCondition != "Default") {
-        var added = addWaterReport(location, wType, wCondition);
-        if (added) {
-          window.location.href = home.html;
-        } else {
-          alert("Water report not added.");
+      console.log(checkAddr(location) + ", " + wType != "Default" + ", " + wCondition != "Default");
+      if (location != "" && wType != "Default" && wCondition != "Default") {
+        console.log("Did we make it?!")
+        // var seeIfAdded = addReportToDB(function(add) {
+        //   console.log("Check to see if added. added: " + add);
+        // });
+        var addReportToDB = function(otherStuff) {
+          var interval = setInterval(function() {
+            var added = addWaterReport(location, wType, wCondition);
+            console.log("'Added' in HTML: " + added);
+            if (added !== 'undefined') {
+              clearInterval(interval);
+              otherStuff(added);
+            }
+          });
         }
+
+        addReportToDB(function(add) {
+          console.log("Check to see if added. added: " + add);
+          if (add) {
+            console.log("ADDED!");
+            window.location.href = 'home.html';
+          } else {
+            alert("Water report not added.");
+          }
+        });
+        // console.log("seeIfAdded: " + seeIfAdded);
+        // if (seeIfAdded) {
+        //   window.location.href = home.html;
+        // } else {
+        //   alert("Water report not added.");
+        // }
+
+        // var added = addWaterReport(location, wType, wCondition);
+        // if (added) {
+        //   window.location.href = home.html;
+        // } else {
+        //   alert("Water report not added.");
+        // }
+      }
+
+      function checkAddr(address) {
+        geocoder = new google.maps.Geocoder();
+        geocoder.geocode({address: address}, function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+            // console.log(results);
+            return (results.length > 0);
+          } else {
+            console.log("Could not very " + address + " with Google Maps Geocoder API at this time...");
+            return false;
+          }
+        });
       }
     }
   </script>
