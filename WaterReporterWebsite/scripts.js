@@ -141,24 +141,26 @@ function addUser(eMail, usrn, pswd, addr, typeOfUser) {
 }
 
 function addWaterReport(address, waterType, waterCondition) {
+	var reps = getWaterReports();
 	var newWater = { dateAndTime: getCurrentDateTime(),
 					addressStr: address,
 					username: getUser(),
-					reportNumber: getWaterReports().length,
+					reportNumber: reps[reps.length - 1]['reportNumber'] + 1,
 					typeOfWater: waterType,
 					conditionOfWater: waterCondition };
-	var bool = isAddressValid(address);
+	console.log("In water report adder");
+	// var bool = isAddressValid(address);
 		// && isWaterTypeValid(waterType)
 		// && isWaterConditionValid(waterCondition);
-	console.log(bool);
+	// console.log(bool);
 	// var newPostKey = waterReportsDB.push().key;
-	if (isAddressValid(address)
-		&& isWaterTypeValid(waterType)
+	// if (isAddressValid(address) && 
+	if (isWaterTypeValid(waterType)
 		&& isWaterConditionValid(waterCondition)) {
-		alert("in here");
+		console.log("in here");
 		var updates = {};
 		updates[newWater['reportNumber']] = newWater;
-
+		console.log('new num: ' + newWater['reportNumber']);
 		waterReportsDB.update(updates);
 		alert("Added a water report!");
 		return true;
@@ -198,11 +200,13 @@ function getCurrentDateTime() {
 	if (dateTime.length != 10) {
 		dateTime = "0" + dateTime;
 	}
+	console.log("Datetime after day: " + dateTime);
 	var time = d.toLocaleTimeString();
 	if (dateTime.length != 11) {
 		dateTime.concat("0");
 	}
 	dateTime.concat(time.concat(" (EDT)"));
+	console.log("Datetime after time: " + dateTime);
 	return dateTime;
 }
 
