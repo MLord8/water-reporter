@@ -53,13 +53,6 @@ function setUserOnSignup(user) {
 }
 
 function checkSignup(user) {
-	console.log(isEmailValid(user['email'])
-		 + "\n" + Number.isInteger(user['id'])
-		 + "\n" + isPasswordValid(user['password'])
-		 + "\n" + isAddressValid(user['address'])
-		 + "\n" + isUserTypeValid(user['userType'])
-		 + "\n" + isUsernameValid(user['username'])
-		 + "\n" + !userExists(user));
 	return isEmailValid(user['email'])
 		&& Number.isInteger(user['id'])
 		&& isPasswordValid(user['password'])
@@ -67,6 +60,14 @@ function checkSignup(user) {
 		&& isUserTypeValid(user['userType'])
 		&& isUsernameValid(user['username'])
 		&& !userExists(user);
+}
+
+function checkReport(report) {
+
+}
+
+function checkPurity(purity) {
+
 }
 
 function userExists(user) {
@@ -136,12 +137,12 @@ function addUser(eMail, usrn, pswd, addr, typeOfUser) {
 	// var newPostKey = usersDB.push().key;
 }
 
-function addWaterPurityReport(dateTime, addressStr, usrn,
-				reportNum, ppmVirus, ppmContam, waterCondition) {
-	var newPurity = { dateAndTime: dateTime,
+function addWaterPurityReport(addressStr, ppmVirus, ppmContam, waterCondition) {
+	
+	var newPurity = { dateAndTime: getCurrentDateTime(),
 					address: addressStr,
-					username: usrn,
-					reportNumber: reportNum,
+					username: getUser(),
+					reportNumber: instance.purityReportList,
 					virusPPM: ppmVirus,
 					contaminantPPM: ppmContam,
 					conditionOfWater: waterCondition };
@@ -149,26 +150,39 @@ function addWaterPurityReport(dateTime, addressStr, usrn,
 	// var newPostKey = purityReportsDB.push().key;
 
 	var updates = {};
-	updates[reportNum] = newPurity;
+	updates[newPurity['reportNumber']] = newPurity;
 
 	purityReportsDB.update(updates);
 }
 
-function addWaterReport(dateTime, address, usrn,
-				reportNum, waterType, waterCondition) {
-	var newWater = { dateAndTime: dateTime,
+function addWaterReport(address, waterType, waterCondition) {
+	var newWater = { dateAndTime: getCurrentDateTime(),
 					addressStr: address,
-					username: usrn,
-					reportNumber: reportNum,
+					username: getUser(),
+					reportNumber: instance.reportList.length,
 					typeOfWater: waterType,
 					conditionOfWater: waterCondition };
 
 	// var newPostKey = waterReportsDB.push().key;
 
 	var updates = {};
-	updates[reportNum] = newWater;
+	updates[newWater['reportNumber']] = newWater;
 
 	waterReportsDB.update(updates);
+}
+
+function getCurrentDateTime() {
+	var d = new Date();
+	var dateTime = d.toLocaleDateString();
+	if (dateTime.length != 10) {
+		dateTime = "0" + dateTime;
+	}
+	var time = d.toLocaleTimeString();
+	if (dateTime.length != 11) {
+		dateTime.concat("0");
+	}
+	dateTime.concat(time.concat(" (EDT)"));
+	return dateTime;
 }
 
 function isEmailValid(email) {
