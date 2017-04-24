@@ -6,7 +6,7 @@
  
 <style type="text/css">
 body { font-family: Verdana, Arial, sans-serif; font-size: 12px; }
-#graph { width: 450px; height: 200px; }
+#graph { width: 800px; height: 400px; }
 </style>
  
 <!--[if lte IE 8]><script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.2/excanvas.min.js"></script><![endif]-->
@@ -16,30 +16,83 @@ body { font-family: Verdana, Arial, sans-serif; font-size: 12px; }
 <script src="scripts.js"></script>
  
 <script type="text/javascript">
- 
-$(document).ready(function () {
-    $.plot($("#graph"), [d1]);
-});
+//$(document).ready(function () {
+//    $.plot($("#graph"), [d1]);
+//});
 
 function createGraph() {
-	var month = document.getElementById('month').value;
+	var grlocation = document.getElementById('grlocation').value;
 	var year = document.getElementById('year').value;
-	var points = getVPPMGraphPoints(month, year);
+	var points1 = getVPPMGraphPoints(year, grlocation);
+	var points2 = getCPPMGraphPoints(year, grlocation);
+	var data = [
+		{label: "Virus PPM", data: points1},
+		{label: "Contaminant PPM", data: points2}
+	]
+	//console.log(points);
+	$.plot($("#graph"), data);
+	//$.plot($("#graph"), [points2]);
 }
 
-function getVPPMGraphPoints(month, year) {
+function getVPPMGraphPoints(year, location) {
+	var l = location;
+	var y = year;
 	var reports = getPurityReports();
+	console.log(reports);
+	var points = [];
+	for (i = 1; i < 12; i++) {
+		var entryCount = 0;
+		var monthlySum = 0;
+		reports.forEach(function(report) {
+			if (report['address'] == location && report['dateAndTime'].substring(6, 10) == year && report['dateAndTime'].substring(0, 2) == i) {
+				monthlySum += report['virusPPM'];
+				entryCount++;
+			}
+		});
 
+		var monthlyAvg = monthlySum / entryCount;
+		if (monthlyAvg > 0) {
+			var toAdd = [i, monthlyAvg];
+			points.push(toAdd);
+		}
+	}
+	return points;
 }
+
+function getCPPMGraphPoints(year, location) {
+	var l = location;
+	var y = year;
+	var reports = getPurityReports();
+	console.log(reports);
+	var points = [];
+	for (i = 1; i < 12; i++) {
+		var entryCount = 0;
+		var monthlySum = 0;
+		reports.forEach(function(report) {
+			if (report['address'] == location && report['dateAndTime'].substring(6, 10) == year && report['dateAndTime'].substring(0, 2) == i) {
+				monthlySum += report['contaminantPPM'];
+				entryCount++;
+			}
+		});
+
+		var monthlyAvg = monthlySum / entryCount;
+		if (monthlyAvg > 0) {
+			var toAdd = [i, monthlyAvg];
+			points.push(toAdd);
+		}
+	}
+	return points;
+}
+
 </script>
 </head>
  
 <body onload="getPurityReports()">
     <div id="graph"></div>
     <br>
-    <h3>Enter Month:</h3>
-    <input type="text" id="month">
-    <h3>Enter Month:</h3>
+    <h3>Enter Location:</h3>
+    <input type="text" id="grlocation">
+    <h3>Enter Year:</h3>
     <input type="text" id="year">
     <button onclick="createGraph()" id="create">Create Graph</button>
 </body>
