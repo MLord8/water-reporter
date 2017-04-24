@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Graph</title>
+ 
+<style type="text/css">
+body { font-family: Verdana, Arial, sans-serif; font-size: 12px; }
+#graph { width: 450px; height: 200px; }
+</style>
+ 
+<!--[if lte IE 8]><script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.2/excanvas.min.js"></script><![endif]-->
+<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.2/jquery.flot.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
+<script src="scripts.js"></script>
+ 
+<script type="text/javascript">
+ 
+$(document).ready(function () {
+    $.plot($("#graph"), [d1]);
+});
+
+function createGraph() {
+	var month = document.getElementById('month').value;
+	var year = document.getElementById('year').value;
+	var points = getVPPMGraphPoints(month, year);
+}
+
+function getVPPMGraphPoints(month, year) {
+	var reports = getPurityReports();
+
+}
+</script>
+</head>
+ 
+<body onload="getPurityReports()">
+    <div id="graph"></div>
+    <br>
+    <h3>Enter Month:</h3>
+    <input type="text" id="month">
+    <h3>Enter Month:</h3>
+    <input type="text" id="year">
+    <button onclick="createGraph()" id="create">Create Graph</button>
+</body>
+</html>
